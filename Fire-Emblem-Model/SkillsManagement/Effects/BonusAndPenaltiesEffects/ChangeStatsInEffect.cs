@@ -17,6 +17,7 @@ public class ChangeStatsInEffect : Effect
     public override void ApplyEffect(Unit myUnit, Unit opponentsUnit)
 
     {
+        Console.WriteLine("aplicando change stats in");
         switch (_stat)
         {
             case StatType.Atk:

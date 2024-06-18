@@ -24,6 +24,7 @@ public class ExtraDamageReductionConsideringMyTotalStatPercentageEffect : Effect
     public override void ApplyEffect(Unit myUnit, Unit opponentsUnit)
     {
         var amount = CalculateAmount(myUnit);
+        Console.WriteLine(amount);
         AddAmountToDamage(myUnit, amount);
     }
     

@@ -16,6 +16,8 @@ public class ScendscaleSkill : Skill
         Conditions = new Condition[2];
         Conditions[0] = new AlwaysTrueCondition();
         Conditions[1] = new AlwaysTrueCondition();
+        Conditions[0].ChangePriorityBecauseEffectPriorityIsBigger(
+            ConditionPriority.PriorityOfConditionsThatRequireBonusAndPenaltiesInformation);
 
         Effects = new Effect[2];
 
