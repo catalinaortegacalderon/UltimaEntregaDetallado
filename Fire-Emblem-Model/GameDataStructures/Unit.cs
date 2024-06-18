@@ -1,3 +1,4 @@
+using System.Runtime.CompilerServices;
 using ConsoleApp1.DataTypes;
 using ConsoleApp1.EncapsulatedLists;
 
@@ -10,15 +11,15 @@ public class Unit : IUnit
     
     public string Name { get; }
     public string Weapon { get; }
-    public int Hp { get; }
+    public int MaxHp { get; set; }
+    
+    public int Hp { get; set; }
     public int Atk { get; }
     public int Spd { get; }
     public int Def { get; }
     public int Res { get; }
     
     public string[] Skills { get; }
-    
-    public int CurrentHp;
     
     public readonly SkillsList SkillsList = new();
     
@@ -43,7 +44,7 @@ public class Unit : IUnit
     }
 
     public Unit(string name, string weapon, string gender,
-        int currentHp, int hp, int atk, int spd, int def, int res)
+        int hp, int maxHp, int atk, int spd, int def, int res)
     {
         Name = name;
         WeaponType = ConvertWeaponStringToWeaponType(weapon);
@@ -52,9 +53,9 @@ public class Unit : IUnit
         else
             GenderType = GenderType.Female;
         Weapon = weapon;
+        MaxHp = maxHp;
+        MaxHp = maxHp;
         Hp = hp;
-        Hp = hp;
-        CurrentHp = currentHp;
         Atk = atk;
         Spd = spd;
         Def = def;
@@ -72,6 +73,11 @@ public class Unit : IUnit
             "Sword" => WeaponType.Sword,
             _ => WeaponType.Empty
         };
+    }
+
+    private void ChangeBaseHp(int amount)
+    {
+        MaxHp += amount;
     }
     
 }

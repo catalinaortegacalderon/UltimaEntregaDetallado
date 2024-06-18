@@ -114,16 +114,16 @@ public class GameAttacksController
         _damageCalculator = new DamageCalculator(_currentAttackingUnit, _currentDefensiveUnit, typeOfCurrentAttack);
         _attackValue = _damageCalculator.CalculateAttack();
 
-        if (_attackValue >= _currentDefensiveUnit.CurrentHp)
+        if (_attackValue >= _currentDefensiveUnit.Hp)
         {
             _roundIsTerminated = true;
-            _currentDefensiveUnit.CurrentHp = 0;
+            _currentDefensiveUnit.Hp = 0;
             ReduceUnitAmount();
             CheckIfGameIsTerminated();
         }
         else
         {
-            _currentDefensiveUnit.CurrentHp -= _attackValue;
+            _currentDefensiveUnit.Hp -= _attackValue;
         }
     }
 

@@ -7,7 +7,7 @@ public class WrathEffect : Effect
     public override void ApplyEffect(Unit myUnit, Unit opponentsUnit)
 
     {
-        var amount = myUnit.Hp - myUnit.CurrentHp;
+        var amount = myUnit.MaxHp - myUnit.Hp;
         if (amount > 30) amount = 30;
         myUnit.ActiveBonus.Atk += amount;
         myUnit.ActiveBonus.Spd += amount;

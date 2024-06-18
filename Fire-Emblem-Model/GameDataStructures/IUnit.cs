@@ -4,7 +4,7 @@ public interface IUnit
 {
     string Name { get ; }
     string Weapon { get ; }
-    int Hp { get ; }
+    int MaxHp { get ; }
     int Atk { get ; }
     int Spd { get ; }
     int Def { get ; }

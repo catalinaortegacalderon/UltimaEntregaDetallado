@@ -128,7 +128,7 @@ public class FollowUpController
 
     private bool ThereAreNoLoosers()
     {
-        return _unitThatStartedTheRound.CurrentHp != 0 
-               && _unitThatDidNotStartTheRound.CurrentHp != 0;
+        return _unitThatStartedTheRound.Hp != 0 
+               && _unitThatDidNotStartTheRound.Hp != 0;
     }
 }

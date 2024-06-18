@@ -97,7 +97,7 @@ public class GameView : IView
     public void AnnounceDamageBeforeCombat(Unit unitThatRecievesDamage, int damage)
     {
         _view.WriteLine(unitThatRecievesDamage.Name + " recibe " + damage 
-                        + " de daño antes de iniciar el combate y queda con " + unitThatRecievesDamage.CurrentHp
+                        + " de daño antes de iniciar el combate y queda con " + unitThatRecievesDamage.Hp
                         + " HP");
     }
     
@@ -128,9 +128,9 @@ public class GameView : IView
     public void ShowHp(Unit roundStarterUnit, Unit opponentsUnit)
     {
         _view.WriteLine(roundStarterUnit.Name +
-                        " (" + roundStarterUnit.CurrentHp +
+                        " (" + roundStarterUnit.Hp +
                         ") : " + opponentsUnit.Name +
-                        " (" + opponentsUnit.CurrentHp +
+                        " (" + opponentsUnit.Hp +
                         ")");
     }
 

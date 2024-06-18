@@ -22,15 +22,15 @@ public class OutOfCombatDamageManager
             var amountOfHpRecuperated = (int)(attackingUnit.CombatEffects.HpRecuperationAtEveryAttack 
                                               * attackValue);
             int finalAmountOfHpRecuperated = amountOfHpRecuperated;
-            if (attackingUnit.CurrentHp + amountOfHpRecuperated > attackingUnit.Hp)
+            if (attackingUnit.Hp + amountOfHpRecuperated > attackingUnit.MaxHp)
             {
-                finalAmountOfHpRecuperated = attackingUnit.Hp - attackingUnit.CurrentHp;
+                finalAmountOfHpRecuperated = attackingUnit.MaxHp - attackingUnit.Hp;
             }
-            attackingUnit.CurrentHp += finalAmountOfHpRecuperated;
+            attackingUnit.Hp += finalAmountOfHpRecuperated;
             if (amountOfHpRecuperated > 0)
             {
                 _view.AnnounceHpRecuperation(attackingUnit, amountOfHpRecuperated , 
-                    attackingUnit.CurrentHp);
+                    attackingUnit.Hp);
             }
         }
     }
@@ -47,13 +47,13 @@ public class OutOfCombatDamageManager
     {
         if (unit.CombatEffects.DamageBeforeCombat > 0 )
         {
-            if (unit.CurrentHp <= unit.CombatEffects.DamageBeforeCombat)
+            if (unit.Hp <= unit.CombatEffects.DamageBeforeCombat)
             {
-                unit.CurrentHp = 1;
+                unit.Hp = 1;
             }
             else
             {
-                unit.CurrentHp -= unit.CombatEffects.DamageBeforeCombat;
+                unit.Hp -= unit.CombatEffects.DamageBeforeCombat;
             }
             _view.AnnounceDamageBeforeCombat(unit, 
                 unit.CombatEffects.DamageBeforeCombat);
@@ -62,58 +62,59 @@ public class OutOfCombatDamageManager
 
     public void ManageHpChangeAtTheEndOfTheCombat(Unit firstUnitToProcess, Unit secondUnitToProcess)
     {
-        ManageCurationAtTheEndOfTheCombat(firstUnitToProcess, secondUnitToProcess);
-        ManageDamageAtTheEndOfTheCombat(firstUnitToProcess, secondUnitToProcess);
+        ManageCurationAndDamageAtTheEndOfTheCombat(firstUnitToProcess, secondUnitToProcess);
+        //ManageDamageAtTheEndOfTheCombat(firstUnitToProcess, secondUnitToProcess);
     }
     
-    private void ManageCurationAtTheEndOfTheCombat(Unit firstUnitToProcess, Unit secondUnitToProcess)
+    private void ManageCurationAndDamageAtTheEndOfTheCombat(Unit firstUnitToProcess, Unit secondUnitToProcess)
     { 
-        ApplyCurationAtTheEndOfTheCombat(firstUnitToProcess);
-        ApplyCurationAtTheEndOfTheCombat(secondUnitToProcess);
+        ApplyCurationOrDamageAtTheEndOfTheCombat(firstUnitToProcess);
+        ApplyCurationOrDamageAtTheEndOfTheCombat(secondUnitToProcess);
     }
 
-    private void ApplyCurationAtTheEndOfTheCombat(Unit unit)
+    private void ApplyCurationOrDamageAtTheEndOfTheCombat(Unit unit)
     {
-        if (unit.CombatEffects.HpRecuperationAtTheEndOfTheCombat > 0 
-            && unit.CurrentHp > 0)
-        { 
-            if (unit.CurrentHp + unit.CombatEffects.HpRecuperationAtTheEndOfTheCombat
-                > unit.Hp)
-                unit.CurrentHp = unit.Hp;
-            else
-            {
-                unit.CurrentHp += unit.CombatEffects.HpRecuperationAtTheEndOfTheCombat;
-            }
-            _view.AnnounceCurationAfterCombat(unit, 
-                unit.CombatEffects.HpRecuperationAtTheEndOfTheCombat);
-        }
-    }
-
-
-    private void ManageDamageAtTheEndOfTheCombat(Unit firstUnitToProcess, Unit secondUnitToProcess)
-    { 
-        ApplyDamageAfterCombat(firstUnitToProcess);
-        ApplyDamageAfterCombat(secondUnitToProcess);
-    }
-
-    private void ApplyDamageAfterCombat(Unit unit)
-    {
+        // todo: poner mas bonito
+        
         if (unit.HasAttackedThisRound)
             unit.CombatEffects.DamageAfterCombat
                 += unit.CombatEffects.DamageAfterCombatIfUnitAttacks;
         
-        if (unit.CombatEffects.DamageAfterCombat > 0 && unit.CurrentHp > 0)
+        var totalDamageOrCuration = unit.CombatEffects.HpRecuperationAtTheEndOfTheCombat
+                                    - unit.CombatEffects.DamageAfterCombat;
+        
+        if (totalDamageOrCuration > 0 && unit.Hp > 0)
+            ApplyCuration(unit, totalDamageOrCuration);
+        if (totalDamageOrCuration < 0 && unit.Hp > 0) 
+            ApplyDamage(unit, totalDamageOrCuration);
+    }
+
+    private void ApplyDamage(Unit unit, int totalDamageOrCuration)
+    {
+        if (unit.Hp <= -totalDamageOrCuration)
         {
-            if (unit.CurrentHp <= unit.CombatEffects.DamageAfterCombat)
-            {
-                unit.CurrentHp = 1;
-            }
-            else
-            {
-                unit.CurrentHp -= unit.CombatEffects.DamageAfterCombat;
-            }
-            _view.AnnounceDamageAfterCombat(unit, 
-                unit.CombatEffects.DamageAfterCombat);
+            unit.Hp = 1;
         }
+        else
+        {
+            unit.Hp += totalDamageOrCuration;
+        }
+
+        _view.AnnounceDamageAfterCombat(unit, 
+            -totalDamageOrCuration);
+    }
+
+    private void ApplyCuration(Unit unit, int totalDamageOrCuration)
+    {
+        if (unit.Hp + totalDamageOrCuration
+            > unit.MaxHp)
+            unit.Hp = unit.MaxHp;
+        else
+        {
+            unit.Hp += totalDamageOrCuration;
+        }
+
+        _view.AnnounceCurationAfterCombat(unit, 
+            totalDamageOrCuration);
     }
 }

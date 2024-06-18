@@ -14,6 +14,6 @@ public class MyHpIsLessThanOpponentsHpPlusCondition : Condition
 
     public override bool DoesItHold(Unit myUnit, Unit opponentsUnit)
     {
-        return myUnit.CurrentHp >= opponentsUnit.CurrentHp + _increaseAmountIn;
+        return myUnit.Hp >= opponentsUnit.Hp + _increaseAmountIn;
     }
 }

@@ -7,7 +7,7 @@ public class BackAtYouEffect : Effect
 {
     public override void ApplyEffect(Unit myUnit, Unit opponentsUnit)
     {
-        var amount = Convert.ToInt32(Math.Truncate((myUnit.Hp - myUnit.CurrentHp) * 0.5));
+        var amount = Convert.ToInt32(Math.Truncate((myUnit.MaxHp - myUnit.Hp) * 0.5));
         myUnit.DamageEffects.ExtraDamage += amount;
     }
 }

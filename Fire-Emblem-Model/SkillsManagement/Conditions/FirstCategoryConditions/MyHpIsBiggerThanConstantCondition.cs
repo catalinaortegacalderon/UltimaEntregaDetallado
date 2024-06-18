@@ -14,6 +14,6 @@ public class MyHpIsBiggerThanConstantCondition : Condition
 
     public override bool DoesItHold(Unit myUnit, Unit opponentsUnit)
     {
-        return myUnit.CurrentHp >= _amount;
+        return myUnit.Hp >= _amount;
     }
 }

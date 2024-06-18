@@ -195,7 +195,7 @@ public class Game
         
         foreach (var unit in unitsOfThePlayer)
         {
-            if (unit.CurrentHp > 0 && unit.WeaponType == WeaponType.Magic  && counter != playersUnitNumber)
+            if (unit.Hp > 0 && unit.WeaponType == WeaponType.Magic  && counter != playersUnitNumber)
                 hasAllyWithMagic = true;
             counter++;
         }
@@ -353,6 +353,6 @@ public class Game
 
     private bool IsUnitDead(Unit unit)
     {
-        return unit.CurrentHp == 0;
+        return unit.Hp == 0;
     }
 }
