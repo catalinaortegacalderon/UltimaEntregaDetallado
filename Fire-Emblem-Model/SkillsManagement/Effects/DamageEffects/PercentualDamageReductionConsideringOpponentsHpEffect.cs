@@ -15,7 +15,7 @@ public class PercentualDamageReductionConsideringOpponentsHpEffect : Effect
 
     public override void ApplyEffect(Unit myUnit, Unit opponentsUnit)
     {
-        var percentualReduction = opponentsUnit.CurrentHp / (double)opponentsUnit.HpMax / 2;
+        var percentualReduction = opponentsUnit.CurrentHp / (double)opponentsUnit.Hp / 2;
         percentualReduction = Math.Truncate(100.0 * percentualReduction) / 100.0;
         var finalPercentage = 1 - percentualReduction;
 

@@ -8,18 +8,18 @@ public class MyUnitHasWeaponAdvantageCondition : Condition
 {
     public override bool DoesItHold(Unit myUnit, Unit opponentsUnit)
     {
-        var attackingWeapon = myUnit.Weapon;
-        var defensiveWeapon = opponentsUnit.Weapon;
+        var attackingWeapon = myUnit.WeaponType;
+        var defensiveWeapon = opponentsUnit.WeaponType;
         return HasWeaponAdvantage(attackingWeapon, defensiveWeapon);
     }
 
     // todo: ver si hacer funcion con las 2 armas, son muchos casos
     // capaz un switch
-    private bool HasWeaponAdvantage(Weapon attackingWeapon, Weapon defensiveWeapon)
+    private bool HasWeaponAdvantage(WeaponType attackingWeaponType, WeaponType defensiveWeaponType)
     {
-        var hasWeaponAdvantage = (attackingWeapon == Weapon.Sword) & (defensiveWeapon == Weapon.Axe) ||
-                                 (attackingWeapon == Weapon.Lance) & (defensiveWeapon == Weapon.Sword) ||
-                                 (attackingWeapon == Weapon.Axe) & (defensiveWeapon == Weapon.Lance);
+        var hasWeaponAdvantage = (attackingWeaponType == WeaponType.Sword) & (defensiveWeaponType == WeaponType.Axe) ||
+                                 (attackingWeaponType == WeaponType.Lance) & (defensiveWeaponType == WeaponType.Sword) ||
+                                 (attackingWeaponType == WeaponType.Axe) & (defensiveWeaponType == WeaponType.Lance);
         return hasWeaponAdvantage;
     }
 }

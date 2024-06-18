@@ -14,8 +14,8 @@ public class LunarBraceSkill : Skill
         Conditions = new Condition[1];
         Conditions[0] = new AndCondition([
             new MyUnitUsesCertainWeaponsCondition([
-                Weapon.Sword, Weapon.Bow,
-                Weapon.Axe, Weapon.Lance
+                WeaponType.Sword, WeaponType.Bow,
+                WeaponType.Axe, WeaponType.Lance
             ]),
             new MyUnitStartsCombatCondition()
         ]);

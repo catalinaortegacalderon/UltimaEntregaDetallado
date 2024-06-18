@@ -9,10 +9,10 @@ namespace ConsoleApp1.SkillsManagement.Skills.AbsolutDamageReductionSkills;
 
 public class Guard : Skill
 {
-    public Guard(Weapon weapon)
+    public Guard(WeaponType weaponType)
     {
         Conditions = new Condition[1];
-        Conditions[0] = new OpponentUsesCertainWeaponCondition([weapon]);
+        Conditions[0] = new OpponentUsesCertainWeaponCondition([weaponType]);
 
         Effects = new Effect[1];
         Effects[0] = new AbsolutDamageReductionEffect(5);

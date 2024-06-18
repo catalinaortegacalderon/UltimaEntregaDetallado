@@ -16,7 +16,7 @@ public class ChangeHpInEffect : Effect
         if (!myUnit.ActiveBonus.HpBonusActivated)
         {
             myUnit.CurrentHp = myUnit.CurrentHp + Amount;
-            myUnit.HpMax = myUnit.HpMax + Amount;
+            myUnit.CurrentHp = myUnit.CurrentHp + Amount;
             myUnit.ActiveBonus.HpBonusActivated = true;
         }
     }

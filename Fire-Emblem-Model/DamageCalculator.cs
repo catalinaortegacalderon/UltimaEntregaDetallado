@@ -86,9 +86,9 @@ public class DamageCalculator
     private double CalculateWtb()
     {
         double wtb;
-        if (IsNoAdvantage(_currentAttackingUnit.Weapon, _currentDefensiveUnit.Weapon))
+        if (IsNoAdvantage(_currentAttackingUnit.WeaponType, _currentDefensiveUnit.WeaponType))
             wtb = WtbValueForNoAdvantage;
-        else if (DoesAttackerHaveAdvantage(_currentAttackingUnit.Weapon, _currentDefensiveUnit.Weapon))
+        else if (DoesAttackerHaveAdvantage(_currentAttackingUnit.WeaponType, _currentDefensiveUnit.WeaponType))
             wtb = WtbValueForAttackersAdvantage;
         else
             wtb = WtbValueForDefensorsAdvantage;
@@ -97,10 +97,10 @@ public class DamageCalculator
 
     private int CalculateOpponentsDefOrRes()
     {
-        var attackingWeapon = _currentAttackingUnit.Weapon;
+        var attackingWeapon = _currentAttackingUnit.WeaponType;
 
         int rivalsDefOrRes;
-        if (attackingWeapon == Weapon.Magic)
+        if (attackingWeapon == WeaponType.Magic)
         {
             rivalsDefOrRes = _currentDefensiveUnit.Res + _currentDefensiveUnit.ActiveBonus.Res
                                                        * _currentDefensiveUnit.ActiveBonusNeutralizer.Res
@@ -170,19 +170,19 @@ public class DamageCalculator
         return damage;
     }
 
-    public static bool DoesAttackerHaveAdvantage(Weapon attackingWeapon, Weapon defensiveWeapon)
+    public static bool DoesAttackerHaveAdvantage(WeaponType attackingWeaponType, WeaponType defensiveWeaponType)
     {
-        return (attackingWeapon == Weapon.Sword) & (defensiveWeapon == Weapon.Axe) ||
-               (attackingWeapon == Weapon.Lance) & (defensiveWeapon == Weapon.Sword) ||
-               (attackingWeapon == Weapon.Axe) & (defensiveWeapon == Weapon.Lance);
+        return (attackingWeaponType == WeaponType.Sword) & (defensiveWeaponType == WeaponType.Axe) ||
+               (attackingWeaponType == WeaponType.Lance) & (defensiveWeaponType == WeaponType.Sword) ||
+               (attackingWeaponType == WeaponType.Axe) & (defensiveWeaponType == WeaponType.Lance);
     }
 
-    public static bool IsNoAdvantage(Weapon attackingWeapon, Weapon defensiveWeapon)
+    public static bool IsNoAdvantage(WeaponType attackingWeaponType, WeaponType defensiveWeaponType)
     {
-        return defensiveWeapon == attackingWeapon
-               || attackingWeapon == Weapon.Magic
-               || defensiveWeapon == Weapon.Magic
-               || defensiveWeapon == Weapon.Bow
-               || attackingWeapon == Weapon.Bow;
+        return defensiveWeaponType == attackingWeaponType
+               || attackingWeaponType == WeaponType.Magic
+               || defensiveWeaponType == WeaponType.Magic
+               || defensiveWeaponType == WeaponType.Bow
+               || attackingWeaponType == WeaponType.Bow;
     }
 }

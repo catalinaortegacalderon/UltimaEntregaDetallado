@@ -13,11 +13,11 @@ public class DeadlyBladeSkill : Skill
         Conditions = new Condition[2];
         Conditions[0] = new AndCondition([
             new MyUnitStartsCombatCondition(),
-            new MyUnitUsesCertainWeaponsCondition([Weapon.Sword])
+            new MyUnitUsesCertainWeaponsCondition([WeaponType.Sword])
         ]);
         Conditions[1] = new AndCondition([
             new MyUnitStartsCombatCondition(),
-            new MyUnitUsesCertainWeaponsCondition([Weapon.Sword])
+            new MyUnitUsesCertainWeaponsCondition([WeaponType.Sword])
         ]);
 
         Effects = new Effect[2];

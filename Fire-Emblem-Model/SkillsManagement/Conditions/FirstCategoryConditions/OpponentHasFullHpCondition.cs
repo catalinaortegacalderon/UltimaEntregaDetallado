@@ -7,6 +7,6 @@ public class OpponentHasFullHpCondition : Condition
 {
     public override bool DoesItHold(Unit myUnit, Unit opponentsUnit)
     {
-        return opponentsUnit.CurrentHp == opponentsUnit.HpMax;
+        return opponentsUnit.CurrentHp == opponentsUnit.Hp;
     }
 }

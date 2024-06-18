@@ -86,8 +86,8 @@ public class GameAttacksController
     
     private void ShowAdvantages()
     {
-        var attackingWeapon = _currentAttackingUnit.Weapon;
-        var defensiveWeapon = _currentDefensiveUnit.Weapon;
+        var attackingWeapon = _currentAttackingUnit.WeaponType;
+        var defensiveWeapon = _currentDefensiveUnit.WeaponType;
 
         if (DamageCalculator.IsNoAdvantage(defensiveWeapon, attackingWeapon))
         {

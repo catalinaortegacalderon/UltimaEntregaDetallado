@@ -12,13 +12,13 @@ public class ChaosStyleCondition : Condition
 
         if (myUnit.IsAttacking)
         {
-            if (myUnit.Weapon == Weapon.Magic && (opponentsUnit.Weapon == Weapon.Bow ||
-                                                  opponentsUnit.Weapon == Weapon.Axe ||
-                                                  opponentsUnit.Weapon == Weapon.Sword ||
-                                                  opponentsUnit.Weapon == Weapon.Lance)) return true;
-            if (opponentsUnit.Weapon == Weapon.Magic && (myUnit.Weapon == Weapon.Bow || myUnit.Weapon == Weapon.Axe ||
-                                                         myUnit.Weapon == Weapon.Sword ||
-                                                         myUnit.Weapon == Weapon.Lance)) return true;
+            if (myUnit.WeaponType == WeaponType.Magic && (opponentsUnit.WeaponType == WeaponType.Bow ||
+                                                  opponentsUnit.WeaponType == WeaponType.Axe ||
+                                                  opponentsUnit.WeaponType == WeaponType.Sword ||
+                                                  opponentsUnit.WeaponType == WeaponType.Lance)) return true;
+            if (opponentsUnit.WeaponType == WeaponType.Magic && (myUnit.WeaponType == WeaponType.Bow || myUnit.WeaponType == WeaponType.Axe ||
+                                                         myUnit.WeaponType == WeaponType.Sword ||
+                                                         myUnit.WeaponType == WeaponType.Lance)) return true;
         }
 
         return false;

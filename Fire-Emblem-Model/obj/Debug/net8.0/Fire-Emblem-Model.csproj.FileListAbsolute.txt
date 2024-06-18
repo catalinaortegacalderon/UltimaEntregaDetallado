@@ -42,3 +42,4 @@ C:\Users\catal\Desktop\Fire-Emblem-With-Gui\Fire-Emblem-Model\obj\Debug\net8.0\r
 C:\Users\catal\Desktop\Fire-Emblem-With-Gui\Fire-Emblem-Model\obj\Debug\net8.0\Fire-Emblem-Model.pdb
 C:\Users\catal\Desktop\Fire-Emblem-With-Gui\Fire-Emblem-Model\obj\Debug\net8.0\Fire-Emblem-Model.genruntimeconfig.cache
 C:\Users\catal\Desktop\Fire-Emblem-With-Gui\Fire-Emblem-Model\obj\Debug\net8.0\ref\Fire-Emblem-Model.dll
+C:\Users\catal\Desktop\Fire-Emblem-With-Gui\Fire-Emblem-Model\obj\Debug\net8.0\Fire-Emblem-Model.sourcelink.json

@@ -16,25 +16,25 @@ public class BewitchingTomeSkill : Skill
     {
         Conditions = new Condition[9];
         Conditions[0] = new OrCondition([ new MyUnitStartsCombatCondition(), 
-            new OpponentUsesCertainWeaponCondition([ Weapon.Magic, Weapon.Bow])]);
+            new OpponentUsesCertainWeaponCondition([ WeaponType.Magic, WeaponType.Bow])]);
         Conditions[0].ChangePriorityBecauseEffectPriorityIsBigger(
             ConditionPriority.PriorityOfConditionsThatRequireBonusAndPenaltiesInformation);
         Conditions[1] = new OrCondition([ new MyUnitStartsCombatCondition(), 
-            new OpponentUsesCertainWeaponCondition([ Weapon.Magic, Weapon.Bow])]);
+            new OpponentUsesCertainWeaponCondition([ WeaponType.Magic, WeaponType.Bow])]);
         Conditions[2] = new OrCondition([ new MyUnitStartsCombatCondition(), 
-            new OpponentUsesCertainWeaponCondition([ Weapon.Magic, Weapon.Bow])]);
+            new OpponentUsesCertainWeaponCondition([ WeaponType.Magic, WeaponType.Bow])]);
         Conditions[3] = new OrCondition([ new MyUnitStartsCombatCondition(), 
-            new OpponentUsesCertainWeaponCondition([ Weapon.Magic, Weapon.Bow])]);
+            new OpponentUsesCertainWeaponCondition([ WeaponType.Magic, WeaponType.Bow])]);
         Conditions[4] = new OrCondition([ new MyUnitStartsCombatCondition(), 
-            new OpponentUsesCertainWeaponCondition([ Weapon.Magic, Weapon.Bow])]);
+            new OpponentUsesCertainWeaponCondition([ WeaponType.Magic, WeaponType.Bow])]);
         Conditions[5] = new OrCondition([ new MyUnitStartsCombatCondition(), 
-            new OpponentUsesCertainWeaponCondition([ Weapon.Magic, Weapon.Bow])]);
+            new OpponentUsesCertainWeaponCondition([ WeaponType.Magic, WeaponType.Bow])]);
         Conditions[6] = new OrCondition([ new MyUnitStartsCombatCondition(), 
-            new OpponentUsesCertainWeaponCondition([ Weapon.Magic, Weapon.Bow])]);
+            new OpponentUsesCertainWeaponCondition([ WeaponType.Magic, WeaponType.Bow])]);
         Conditions[7] = new OrCondition([ new MyUnitStartsCombatCondition(), 
-            new OpponentUsesCertainWeaponCondition([ Weapon.Magic, Weapon.Bow])]);
+            new OpponentUsesCertainWeaponCondition([ WeaponType.Magic, WeaponType.Bow])]);
         Conditions[8] = new OrCondition([ new MyUnitStartsCombatCondition(), 
-            new OpponentUsesCertainWeaponCondition([ Weapon.Magic, Weapon.Bow])]);
+            new OpponentUsesCertainWeaponCondition([ WeaponType.Magic, WeaponType.Bow])]);
 
         Effects = new Effect[9];
         Effects[0] = new BewitchingTomeEffect();

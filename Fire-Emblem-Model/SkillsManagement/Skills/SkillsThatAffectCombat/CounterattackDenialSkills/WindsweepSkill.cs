@@ -13,8 +13,8 @@ public class WindsweepSkill : Skill
     {
         Conditions = new Condition[1];
         Conditions[0] = new AndCondition([ new MyUnitStartsCombatCondition(), 
-            new MyUnitUsesCertainWeaponsCondition([Weapon.Sword]), 
-            new OpponentUsesCertainWeaponCondition([Weapon.Sword])]);
+            new MyUnitUsesCertainWeaponsCondition([WeaponType.Sword]), 
+            new OpponentUsesCertainWeaponCondition([WeaponType.Sword])]);
 
         Effects = new Effect[1];
         Effects[0] = new CounterAttackDenialOnOpponentEffect();

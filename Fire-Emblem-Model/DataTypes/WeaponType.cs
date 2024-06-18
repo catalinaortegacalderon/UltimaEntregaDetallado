@@ -1,6 +1,6 @@
 namespace ConsoleApp1.DataTypes;
 
-public enum Weapon
+public enum WeaponType
 {
     Axe,
     Sword,

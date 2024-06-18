@@ -15,22 +15,22 @@ public class CloseDefSkill : Skill
         Conditions = new Condition[3];
         Conditions[0] = new AndCondition([
             new OpponentUsesCertainWeaponCondition([
-                Weapon.Sword,
-                Weapon.Lance, Weapon.Axe
+                WeaponType.Sword,
+                WeaponType.Lance, WeaponType.Axe
             ]),
             new OpponentStartsCombatCondition()
         ]);
         Conditions[1] = new AndCondition([
             new OpponentUsesCertainWeaponCondition([
-                Weapon.Sword,
-                Weapon.Lance, Weapon.Axe
+                WeaponType.Sword,
+                WeaponType.Lance, WeaponType.Axe
             ]),
             new OpponentStartsCombatCondition()
         ]);
         Conditions[2] = new AndCondition([
             new OpponentUsesCertainWeaponCondition([
-                Weapon.Sword,
-                Weapon.Lance, Weapon.Axe
+                WeaponType.Sword,
+                WeaponType.Lance, WeaponType.Axe
             ]),
             new OpponentStartsCombatCondition()
         ]);

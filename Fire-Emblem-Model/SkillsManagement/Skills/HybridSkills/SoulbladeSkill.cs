@@ -11,7 +11,7 @@ public class SoulbladeSkill : Skill
     public SoulbladeSkill()
     {
         Conditions = new Condition[1];
-        Conditions[0] = new MyUnitUsesCertainWeaponsCondition([Weapon.Sword]);
+        Conditions[0] = new MyUnitUsesCertainWeaponsCondition([WeaponType.Sword]);
 
         Effects = new Effect[1];
         Effects[0] = new SoulbladeEffect();

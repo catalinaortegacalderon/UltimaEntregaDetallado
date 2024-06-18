@@ -15,10 +15,10 @@ public class ResonanceSkill : Skill
     {
         Conditions = new Condition[2];
         Conditions[0] = new AndCondition([
-            new MyUnitUsesCertainWeaponsCondition([Weapon.Magic]),
+            new MyUnitUsesCertainWeaponsCondition([WeaponType.Magic]),
             new MyHpIsBiggerThanConstantCondition(2)]);
         Conditions[1] = new AndCondition([
-            new MyUnitUsesCertainWeaponsCondition([Weapon.Magic]),
+            new MyUnitUsesCertainWeaponsCondition([WeaponType.Magic]),
             new MyHpIsBiggerThanConstantCondition(2)]);
 
         Effects = new Effect[2];

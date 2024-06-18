@@ -13,8 +13,8 @@ public class GoldenLotusSkill : Skill
     {
         Conditions = new Condition[1];
         Conditions[0] = new OpponentUsesCertainWeaponCondition([
-            Weapon.Sword, Weapon.Axe, Weapon.Lance,
-            Weapon.Bow
+            WeaponType.Sword, WeaponType.Axe, WeaponType.Lance,
+            WeaponType.Bow
         ]);
 
         Effects = new Effect[1];

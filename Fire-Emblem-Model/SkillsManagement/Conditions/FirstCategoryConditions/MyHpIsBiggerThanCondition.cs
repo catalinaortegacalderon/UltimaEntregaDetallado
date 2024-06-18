@@ -14,6 +14,6 @@ public class MyHpIsBiggerThanCondition : Condition
 
     public override bool DoesItHold(Unit myUnit, Unit opponentsUnit)
     {
-        return Math.Round((double)myUnit.CurrentHp / myUnit.HpMax, 2) >= _amount;
+        return Math.Round((double)myUnit.CurrentHp / myUnit.Hp, 2) >= _amount;
     }
 }

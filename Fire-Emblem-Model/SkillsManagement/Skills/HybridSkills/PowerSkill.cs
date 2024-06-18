@@ -9,11 +9,11 @@ namespace ConsoleApp1.SkillsManagement.Skills.HybridSkills;
 
 public class PowerSkill : Skill
 {
-    public PowerSkill(Weapon weapon)
+    public PowerSkill(WeaponType weaponType)
     {
         Conditions = new Condition[2];
-        Conditions[0] = new MyUnitUsesCertainWeaponsCondition([weapon]);
-        Conditions[1] = new MyUnitUsesCertainWeaponsCondition([weapon]);
+        Conditions[0] = new MyUnitUsesCertainWeaponsCondition([weaponType]);
+        Conditions[1] = new MyUnitUsesCertainWeaponsCondition([weaponType]);
 
         Effects = new Effect[2];
         Effects[0] = new ChangeStatsInEffect(StatType.Atk, 10);

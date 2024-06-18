@@ -157,3 +157,4 @@ C:\Users\catal\Desktop\Fire-Emblem-With-Gui\Fire-Emblem.Tests\bin\Debug\net8.0\F
 C:\Users\catal\Desktop\Fire-Emblem-With-Gui\Fire-Emblem.Tests\bin\Debug\net8.0\Fire-Emblem-Model.exe
 C:\Users\catal\Desktop\Fire-Emblem-With-Gui\Fire-Emblem.Tests\bin\Debug\net8.0\Fire-Emblem-Model.dll
 C:\Users\catal\Desktop\Fire-Emblem-With-Gui\Fire-Emblem.Tests\bin\Debug\net8.0\Fire-Emblem-Model.pdb
+C:\Users\catal\Desktop\Fire-Emblem-With-Gui\Fire-Emblem.Tests\obj\Debug\net8.0\Fire-Emblem.Tests.sourcelink.json

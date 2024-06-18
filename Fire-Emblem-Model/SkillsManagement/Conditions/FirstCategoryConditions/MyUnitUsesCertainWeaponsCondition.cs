@@ -6,15 +6,15 @@ namespace ConsoleApp1.SkillsManagement.Conditions.FirstCategoryConditions;
 
 public class MyUnitUsesCertainWeaponsCondition : Condition
 {
-    private readonly Weapon[] _usedWeapon;
+    private readonly WeaponType[] _usedWeapon;
 
-    public MyUnitUsesCertainWeaponsCondition(Weapon[] weapon)
+    public MyUnitUsesCertainWeaponsCondition(WeaponType[] weapon)
     {
         _usedWeapon = weapon;
     }
 
     public override bool DoesItHold(Unit myUnit, Unit opponentsUnit)
     {
-        return _usedWeapon.Contains(myUnit.Weapon);
+        return _usedWeapon.Contains(myUnit.WeaponType);
     }
 }

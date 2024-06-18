@@ -20,7 +20,7 @@ public class LawsOfSacae : Skill
         Conditions[3] = new MyUnitStartsCombatCondition();
         Conditions[4] = new AndCondition([ new MyUnitStartsCombatCondition(),
             new CompareTotalSpdAddingSpdToTheOpponent(5), 
-            new OpponentUsesCertainWeaponCondition([Weapon.Sword, Weapon.Axe, Weapon.Lance])]); 
+            new OpponentUsesCertainWeaponCondition([WeaponType.Sword, WeaponType.Axe, WeaponType.Lance])]); 
         
         Effects = new Effect[5];
         Effects[0] = new ChangeStatsInEffect(StatType.Atk, 6);

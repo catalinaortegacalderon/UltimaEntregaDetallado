@@ -22,9 +22,9 @@ public class OutOfCombatDamageManager
             var amountOfHpRecuperated = (int)(attackingUnit.CombatEffects.HpRecuperationAtEveryAttack 
                                               * attackValue);
             int finalAmountOfHpRecuperated = amountOfHpRecuperated;
-            if (attackingUnit.CurrentHp + amountOfHpRecuperated > attackingUnit.HpMax)
+            if (attackingUnit.CurrentHp + amountOfHpRecuperated > attackingUnit.Hp)
             {
-                finalAmountOfHpRecuperated = attackingUnit.HpMax - attackingUnit.CurrentHp;
+                finalAmountOfHpRecuperated = attackingUnit.Hp - attackingUnit.CurrentHp;
             }
             attackingUnit.CurrentHp += finalAmountOfHpRecuperated;
             if (amountOfHpRecuperated > 0)
@@ -78,8 +78,8 @@ public class OutOfCombatDamageManager
             && unit.CurrentHp > 0)
         { 
             if (unit.CurrentHp + unit.CombatEffects.HpRecuperationAtTheEndOfTheCombat
-                > unit.HpMax)
-                unit.CurrentHp = unit.HpMax;
+                > unit.Hp)
+                unit.CurrentHp = unit.Hp;
             else
             {
                 unit.CurrentHp += unit.CombatEffects.HpRecuperationAtTheEndOfTheCombat;

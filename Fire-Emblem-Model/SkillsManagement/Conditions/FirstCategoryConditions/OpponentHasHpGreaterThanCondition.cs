@@ -14,6 +14,6 @@ public class OpponentHasHpGreaterThanCondition : Condition
 
     public override bool DoesItHold(Unit myUnit, Unit opponentsUnit)
     {
-        return opponentsUnit.CurrentHp >= opponentsUnit.HpMax * _percentage;
+        return opponentsUnit.CurrentHp >= opponentsUnit.Hp * _percentage;
     }
 }

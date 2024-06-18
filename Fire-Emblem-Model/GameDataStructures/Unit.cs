@@ -3,20 +3,24 @@ using ConsoleApp1.EncapsulatedLists;
 
 namespace ConsoleApp1.GameDataStructures;
 
-public class Unit
+public class Unit : IUnit
 {
-    public readonly Gender Gender;
-    public readonly string Name = "";
-    public readonly Weapon Weapon;
+    public readonly GenderType GenderType;
+    public readonly WeaponType WeaponType;
     
-    public readonly int Atk;
-    public readonly int Def;
-    public readonly int Res;
-    public readonly int Spd;
+    public string Name { get; }
+    public string Weapon { get; }
+    public int Hp { get; }
+    public int Atk { get; }
+    public int Spd { get; }
+    public int Def { get; }
+    public int Res { get; }
+    
+    public string[] Skills { get; }
+    
     public int CurrentHp;
-    public int HpMax;
     
-    public readonly SkillsList Skills = new();
+    public readonly SkillsList SkillsList = new();
     
     public readonly BonusPenaltiesAndNeutralizers ActiveBonus = new(0);
     public readonly BonusPenaltiesAndNeutralizers ActiveBonusNeutralizer = new(1);
@@ -35,18 +39,21 @@ public class Unit
 
     public Unit()
     {
+        Name = "";
     }
 
     public Unit(string name, string weapon, string gender,
-        int currentHp, int maxHp, int atk, int spd, int def, int res)
+        int currentHp, int hp, int atk, int spd, int def, int res)
     {
         Name = name;
-        Weapon = ConvertWeaponStringToWeaponType(weapon);
+        WeaponType = ConvertWeaponStringToWeaponType(weapon);
         if (gender == "Male")
-            Gender = Gender.Male;
+            GenderType = GenderType.Male;
         else
-            Gender = Gender.Female;
-        HpMax = maxHp;
+            GenderType = GenderType.Female;
+        Weapon = weapon;
+        Hp = hp;
+        Hp = hp;
         CurrentHp = currentHp;
         Atk = atk;
         Spd = spd;
@@ -54,16 +61,17 @@ public class Unit
         Res = res;
     }
 
-    private static Weapon ConvertWeaponStringToWeaponType(string weapon)
+    private static WeaponType ConvertWeaponStringToWeaponType(string weapon)
     {
         return weapon switch
         {
-            "Magic" => Weapon.Magic,
-            "Axe" => Weapon.Axe,
-            "Lance" => Weapon.Lance,
-            "Bow" => Weapon.Bow,
-            "Sword" => Weapon.Sword,
-            _ => Weapon.Empty
+            "Magic" => WeaponType.Magic,
+            "Axe" => WeaponType.Axe,
+            "Lance" => WeaponType.Lance,
+            "Bow" => WeaponType.Bow,
+            "Sword" => WeaponType.Sword,
+            _ => WeaponType.Empty
         };
     }
+    
 }

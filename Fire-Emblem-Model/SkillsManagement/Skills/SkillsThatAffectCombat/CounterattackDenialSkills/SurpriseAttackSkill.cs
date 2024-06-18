@@ -13,8 +13,8 @@ public class SurpriseAttackSkill : Skill
     {
         Conditions = new Condition[1];
         Conditions[0] = new AndCondition([ new MyUnitStartsCombatCondition(), 
-            new MyUnitUsesCertainWeaponsCondition([Weapon.Bow]), 
-            new OpponentUsesCertainWeaponCondition([Weapon.Bow])]);
+            new MyUnitUsesCertainWeaponsCondition([WeaponType.Bow]), 
+            new OpponentUsesCertainWeaponCondition([WeaponType.Bow])]);
 
         Effects = new Effect[1];
         Effects[0] = new CounterAttackDenialOnOpponentEffect();

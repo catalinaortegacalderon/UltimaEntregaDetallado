@@ -15,8 +15,8 @@ public class BewitchingTomeEffect : Effect
         var myTotalSpd = TotalStatGetter.GetTotal(StatType.Spd, myUnit);
         var opponentsTotalSpd  = TotalStatGetter.GetTotal(StatType.Spd, opponentsUnit);
 
-        var myUnitHasWeaponAdvantage = DamageCalculator.DoesAttackerHaveAdvantage(myUnit.Weapon,
-            opponentsUnit.Weapon);
+        var myUnitHasWeaponAdvantage = DamageCalculator.DoesAttackerHaveAdvantage(myUnit.WeaponType,
+            opponentsUnit.WeaponType);
         
         int amount;
         

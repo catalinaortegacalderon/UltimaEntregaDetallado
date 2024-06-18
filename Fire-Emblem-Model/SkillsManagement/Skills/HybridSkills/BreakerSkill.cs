@@ -9,7 +9,7 @@ namespace ConsoleApp1.SkillsManagement.Skills.HybridSkills;
 
 public class BreakerSkill : Skill
 {
-    public BreakerSkill(Weapon[] weapons)
+    public BreakerSkill(WeaponType[] weapons)
     {
         Conditions = new Condition[2];
         Conditions[0] = new AndCondition([new MyHpIsBiggerThanCondition(0.5), 

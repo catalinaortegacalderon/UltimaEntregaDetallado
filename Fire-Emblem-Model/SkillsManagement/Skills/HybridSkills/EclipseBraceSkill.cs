@@ -14,7 +14,7 @@ public class EclipseBraceSkill : Skill
     {
         Conditions = new Condition[2];
         Conditions[0] = new  AndCondition([ new MyUnitStartsCombatCondition(), 
-            new MyUnitUsesCertainWeaponsCondition([Weapon.Axe,Weapon.Lance, Weapon.Bow, Weapon.Sword])]);
+            new MyUnitUsesCertainWeaponsCondition([WeaponType.Axe,WeaponType.Lance, WeaponType.Bow, WeaponType.Sword])]);
         Conditions[0].ChangePriorityBecauseEffectPriorityIsBigger(
             ConditionPriority.PriorityOfConditionsThatRequireBonusAndPenaltiesInformation);
         Conditions[1] = new MyUnitStartsCombatCondition();

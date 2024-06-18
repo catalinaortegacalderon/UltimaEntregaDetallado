@@ -112,21 +112,21 @@ public class SkillConstructor
         else if (skillString == "Agnea's Arrow")
             skills.AddSkill(skillsCounter, new AgneasArrowSkill());
         else if (skillString == "Sword Agility")
-            skills.AddSkill(skillsCounter, new AgilitySkill(Weapon.Sword));
+            skills.AddSkill(skillsCounter, new AgilitySkill(WeaponType.Sword));
         else if (skillString == "Lance Power")
-            skills.AddSkill(skillsCounter, new PowerSkill(Weapon.Lance));
+            skills.AddSkill(skillsCounter, new PowerSkill(WeaponType.Lance));
         else if (skillString == "Sword Power")
-            skills.AddSkill(skillsCounter, new PowerSkill(Weapon.Sword));
+            skills.AddSkill(skillsCounter, new PowerSkill(WeaponType.Sword));
         else if (skillString == "Bow Focus")
-            skills.AddSkill(skillsCounter, new FocusSkill(Weapon.Bow));
+            skills.AddSkill(skillsCounter, new FocusSkill(WeaponType.Bow));
         else if (skillString == "Lance Agility")
-            skills.AddSkill(skillsCounter, new AgilitySkill(Weapon.Lance));
+            skills.AddSkill(skillsCounter, new AgilitySkill(WeaponType.Lance));
         else if (skillString == "Axe Power")
-            skills.AddSkill(skillsCounter, new PowerSkill(Weapon.Axe));
+            skills.AddSkill(skillsCounter, new PowerSkill(WeaponType.Axe));
         else if (skillString == "Bow Agility")
-            skills.AddSkill(skillsCounter, new AgilitySkill(Weapon.Bow));
+            skills.AddSkill(skillsCounter, new AgilitySkill(WeaponType.Bow));
         else if (skillString == "Sword Focus")
-            skills.AddSkill(skillsCounter, new FocusSkill(Weapon.Sword));
+            skills.AddSkill(skillsCounter, new FocusSkill(WeaponType.Sword));
         else if (skillString == "Close Def")
             skills.AddSkill(skillsCounter, new CloseDefSkill());
         else if (skillString == "Distant Def")
@@ -378,15 +378,15 @@ public class SkillConstructor
     {
         // todo: arreglar esto, tengo convertidor para stat pero no para weapon
         
-        var weapon = Weapon.Empty;
+        var weapon = WeaponType.Empty;
         var weaponString = skillString.Split(" ")[0];
         weapon = weaponString switch
         {
-            "Magic" => Weapon.Magic,
-            "Axe" => Weapon.Axe,
-            "Lance" => Weapon.Lance,
-            "Bow" => Weapon.Bow,
-            "Sword" => Weapon.Sword,
+            "Magic" => WeaponType.Magic,
+            "Axe" => WeaponType.Axe,
+            "Lance" => WeaponType.Lance,
+            "Bow" => WeaponType.Bow,
+            "Sword" => WeaponType.Sword,
             _ => weapon
         };
         skills.AddSkill(skillsCounter, new Guard(weapon));
@@ -424,10 +424,10 @@ public class SkillConstructor
         switch (impactType)
         {
             case "Melee":
-                skill = new BreakerSkill([Weapon.Sword, Weapon.Lance, Weapon.Axe]);
+                skill = new BreakerSkill([WeaponType.Sword, WeaponType.Lance, WeaponType.Axe]);
                 break;
             case "Range":
-                skill = new BreakerSkill([Weapon.Magic, Weapon.Bow]);
+                skill = new BreakerSkill([WeaponType.Magic, WeaponType.Bow]);
                 break;
         }
 

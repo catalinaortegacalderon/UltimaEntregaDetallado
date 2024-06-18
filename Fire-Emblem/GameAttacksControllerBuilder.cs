@@ -59,7 +59,7 @@ public class GameAttacksControllerBuilder
         var currentPlayersUnits = _units[_currentPlayerNumber];
         var currentUnit = currentPlayersUnits[currentPlayersUnitNumber];
 
-        CreateSkills(currentUnit.Skills, unitInfo);
+        CreateSkills(currentUnit.SkillsList, unitInfo);
 
         _unitCounters[_currentPlayerNumber]++;
     }

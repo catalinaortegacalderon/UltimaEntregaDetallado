@@ -24,7 +24,7 @@ public static class SkillsActivator
 
     private static void AddConditionEffectPairs(Unit sourceUnit, Unit opponentsUnit, ConditionEffectPairsList list)
     {
-        foreach (var skill in sourceUnit.Skills)
+        foreach (var skill in sourceUnit.SkillsList)
         {
             for (int i = 0; i < skill.GetConditionLength(); i++)
             {

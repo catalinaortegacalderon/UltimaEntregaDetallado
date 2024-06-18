@@ -195,7 +195,7 @@ public class Game
         
         foreach (var unit in unitsOfThePlayer)
         {
-            if (unit.CurrentHp > 0 && unit.Weapon == Weapon.Magic  && counter != playersUnitNumber)
+            if (unit.CurrentHp > 0 && unit.WeaponType == WeaponType.Magic  && counter != playersUnitNumber)
                 hasAllyWithMagic = true;
             counter++;
         }

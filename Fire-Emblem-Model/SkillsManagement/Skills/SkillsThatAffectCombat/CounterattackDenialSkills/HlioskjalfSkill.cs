@@ -13,8 +13,8 @@ public class HlioskjalfSkill : Skill
     {
         Conditions = new Condition[1];
         Conditions[0] = new AndCondition([ new MyUnitStartsCombatCondition(), 
-            new MyUnitUsesCertainWeaponsCondition([Weapon.Magic]), 
-            new OpponentUsesCertainWeaponCondition([Weapon.Magic])]);
+            new MyUnitUsesCertainWeaponsCondition([WeaponType.Magic]), 
+            new OpponentUsesCertainWeaponCondition([WeaponType.Magic])]);
 
         Effects = new Effect[1];
         Effects[0] = new CounterAttackDenialOnOpponentEffect();

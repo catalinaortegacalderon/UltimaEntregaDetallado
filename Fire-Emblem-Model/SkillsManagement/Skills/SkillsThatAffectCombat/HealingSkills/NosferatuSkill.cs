@@ -12,7 +12,7 @@ public class NosferatuSkill: Skill
     public NosferatuSkill()
     {
         Conditions = new Condition[1];
-        Conditions[0] = new MyUnitUsesCertainWeaponsCondition([Weapon.Magic]);
+        Conditions[0] = new MyUnitUsesCertainWeaponsCondition([WeaponType.Magic]);
 
         Effects = new Effect[1];
         Effects[0] = new HealingEffect(0.5);
