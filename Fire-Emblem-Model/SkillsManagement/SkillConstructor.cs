@@ -270,7 +270,7 @@ public class SkillConstructor
             skills.AddSkill(skillsCounter, new BindingShieldSkill());
         else if (skillString == "Sun-Twin Wing")
             skills.AddSkill(skillsCounter, new SunTwinWingSkill());
-        else if (skillString == "Dragon’s Ire")
+        else if (skillString == "Dragon's Ire")
             skills.AddSkill(skillsCounter, new DragonsIreSkill());
         else if (skillString == "Black Eagle Rule")
             skills.AddSkill(skillsCounter, new BlackEagleRuleSkill());

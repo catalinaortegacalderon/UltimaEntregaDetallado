@@ -22,8 +22,8 @@ public class DragonsIreSkill : Skill
         ]);
 
         Effects = new Effect[4];
-        Effects[0] = new ChangeOpponentsStatsInEffect(StatType.Atk, -5);
-        Effects[1] = new ChangeOpponentsStatsInEffect(StatType.Res, -5);
+        Effects[0] = new ChangeOpponentsStatsInEffect(StatType.Atk, -4);
+        Effects[1] = new ChangeOpponentsStatsInEffect(StatType.Res, -4);
         Effects[2] = new GuaranteeFollowUpEffect();
         Effects[3] = new NeutralizationOfFollowUpDenialEffect();
 
