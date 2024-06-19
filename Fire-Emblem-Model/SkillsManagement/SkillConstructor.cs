@@ -264,6 +264,8 @@ public class SkillConstructor
             skills.AddSkill(skillsCounter, new BrashAssaultSkill());
         else if (skillString == "Null Follow-Up")
             skills.AddSkill(skillsCounter, new NullFollowUpSkill());
+        else if (skillString == "Flow Flight")
+            skills.AddSkill(skillsCounter, new FlowFlight());
         else if (skillString == "Binding Shield")
             skills.AddSkill(skillsCounter, new BindingShieldSkill());
         else if (skillString == "Sun-Twin Wing")

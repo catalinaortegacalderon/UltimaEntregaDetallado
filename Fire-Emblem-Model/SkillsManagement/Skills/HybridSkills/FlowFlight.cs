@@ -9,9 +9,9 @@ using ConsoleApp1.SkillsManagement.Skills.BonusSkills;
 
 namespace ConsoleApp1.SkillsManagement.Skills.HybridSkills;
 
-public class MagNullFollowSkill : Skill
+public class FlowFlight : Skill
 {
-    public MagNullFollowSkill()
+    public FlowFlight()
     {
         Conditions = new Condition[2];
         Conditions[0] = new CompareTotalStatCondition(StatType.Def);

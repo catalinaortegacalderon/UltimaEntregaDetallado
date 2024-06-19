@@ -15,14 +15,11 @@ public class BlueLionRuleSkill : Skill
     {
         Conditions = new Condition[2];
         Conditions[0] = new CompareTotalStatCondition(StatType.Def);
-        Conditions[1] = new AndCondition([
-            new MyHpIsBiggerThanCondition(0.25),
-            new OpponentStartsCombatCondition()
-        ]);
+        Conditions[1] = new OpponentStartsCombatCondition();
 
         Effects = new Effect[2];
-        Effects[0] = new PercentualDamageReductionDeterminedByResDifferenceEffect();
-        Effects[0] = new GuaranteeFollowUpEffect();
-        Effects[1] = new PercentualDamageReductionEffect(0.2, DamageEffectCategory.FollowUp);
+        Effects[0] = new PercentualDamageReductionDeterminedByDefDifferenceEffect(4, 0.6, 
+            DamageEffectCategory.All);
+        Effects[1] = new GuaranteeFollowUpEffect();
     }
 }
