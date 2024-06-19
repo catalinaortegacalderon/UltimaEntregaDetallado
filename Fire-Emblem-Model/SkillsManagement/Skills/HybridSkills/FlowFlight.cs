@@ -1,3 +1,4 @@
+using ConsoleApp1.DataTypes;
 using ConsoleApp1.SkillsManagement.Conditions.BaseConditions;
 using ConsoleApp1.SkillsManagement.Conditions.FirstCategoryConditions;
 using ConsoleApp1.SkillsManagement.Conditions.SecondCategoryConditions;
@@ -19,6 +20,6 @@ public class FlowFlight : Skill
 
         Effects = new Effect[2];
         Effects[0] = new NeutralizationOfFollowUpDenialEffect();
-        Effects[1] = new FlowFlightEffect();
+        Effects[1] = new FlowEffect(StatType.Def);
     }
 }

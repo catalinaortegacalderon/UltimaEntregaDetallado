@@ -182,6 +182,7 @@ public class Game
     private void CheckPlayerAlliesConditions(int playerId)
     {
         // todo: aca queda desatualizado el param siempre, solo esta actualizado el de la unit actual
+        // tal vez tiene mas sentido actualziar solo la unit actual y no todas
         var playersUnitNumber = _currentUnitNumberOfPlayer2;
         if (playerId == IdOfPlayer1)
         {

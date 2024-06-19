@@ -1,3 +1,4 @@
+using ConsoleApp1.DataTypes;
 using ConsoleApp1.SkillsManagement.Conditions.BaseConditions;
 using ConsoleApp1.SkillsManagement.Conditions.FirstCategoryConditions;
 using ConsoleApp1.SkillsManagement.Conditions.SecondCategoryConditions;
@@ -11,17 +12,15 @@ public class FlowFeatherSkill : Skill
 {
     public FlowFeatherSkill()
     {
-        Conditions = new Condition[3];
+        Conditions = new Condition[2];
         Conditions[0] = new MyUnitStartsCombatCondition();
         Conditions[1] = new AndCondition([new MyUnitStartsCombatCondition(), 
             new CompareTotalSpdAddingSpdToTheOpponent(-10)]);
         Conditions[1] = new AndCondition([new MyUnitStartsCombatCondition(), 
             new CompareTotalSpdAddingSpdToTheOpponent(-10)]);
 
-        Effects = new Effect[3];
+        Effects = new Effect[2];
         Effects[0] = new NeutralizationOfFollowUpDenialEffect();
-        // todo: voy aca
-        //Effects[1] = new ExtraDamageEffect();
-        //Effects[2] = new PercentualDamageReductionEffect();
+        Effects[1] = new FlowEffect(StatType.Res);
     }
 }
