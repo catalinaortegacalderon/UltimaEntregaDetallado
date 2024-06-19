@@ -13,6 +13,7 @@ public class FairFightSkill : Skill
         Conditions = new Condition[2];
         Conditions[0] = new MyUnitStartsCombatCondition();
         Conditions[1] = new MyUnitStartsCombatCondition();
+        
         Effects = new Effect[2];
         Effects[0] = new ChangeStatsInEffect(StatType.Atk, 6);
         Effects[1] = new ChangeOpponentsStatsInEffect(StatType.Atk, 6);

@@ -26,12 +26,10 @@ public class SkillConstructor
             skills.AddSkill(skillsCounter, new HpPlus15Skill());
         else if (skillString == "Speed +5")
             skills.AddSkill(skillsCounter, new SpeedPlus5Skill());
-
         else if (skillString == "Resolve")
             skills.AddSkill(skillsCounter, new ResolveSkill());
         else if (skillString == "Armored Blow")
             skills.AddSkill(skillsCounter, new ArmoredBlowSkill());
-
         else if (skillString == "Fair Fight")
             skills.AddSkill(skillsCounter, new FairFightSkill());
         else if (skillString == "Atk/Def +5")

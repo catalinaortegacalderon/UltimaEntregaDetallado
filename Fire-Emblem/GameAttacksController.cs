@@ -8,7 +8,7 @@ namespace Fire_Emblem;
 
 public class GameAttacksController
 {
-    // tal vez tenga mas sentido que players este en game y no aca
+    // todo: tal vez tenga mas sentido que players este en game y no aca
     private readonly PlayersList _players = new();
     private readonly GameView _view;
     private DamageCalculator _damageCalculator;
