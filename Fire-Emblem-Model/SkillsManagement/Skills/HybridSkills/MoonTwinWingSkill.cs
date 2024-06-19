@@ -17,7 +17,7 @@ public class MoonTwinWingSkill : Skill
         Conditions[0] = new MyHpIsBiggerThanCondition(0.25);
         Conditions[1] = new MyHpIsBiggerThanCondition(0.25);
         Conditions[2] = new AndCondition([
-            new CompareTotalSpdCondition(),
+            new CompareTotalStatCondition(StatType.Spd),
             new MyHpIsBiggerThanCondition(0.25)
         ]);
         Conditions[2].ChangePriorityBecauseEffectPriorityIsBigger(ConditionPriority

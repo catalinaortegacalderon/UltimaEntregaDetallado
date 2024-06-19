@@ -12,7 +12,7 @@ public class DragonWallSkill : Skill
     public DragonWallSkill()
     {
         Conditions = new Condition[1];
-        Conditions[0] = new CompareTotalResCondition();
+        Conditions[0] = new CompareTotalStatCondition(StatType.Res);
 
         Effects = new Effect[1];
         Effects[0] = new PercentualDamageReductionDeterminedByResDifferenceEffect(

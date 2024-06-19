@@ -5,13 +5,13 @@ using Fire_Emblem;
 
 namespace ConsoleApp1.SkillsManagement.Effects.DamageEffects;
 
-public class PercentualDamageReductionDeterminedByResDifferenceEffect : Effect
+public class PercentualDamageReductionDeterminedByDefDifferenceEffect : Effect
 {
     private readonly int _multiplicator;
     private readonly double _max;
     private readonly DamageEffectCategory _category;
     
-    public PercentualDamageReductionDeterminedByResDifferenceEffect( int multiplicator, 
+    public PercentualDamageReductionDeterminedByDefDifferenceEffect( int multiplicator, 
         double max, DamageEffectCategory category)
     {
         _multiplicator = multiplicator;
@@ -43,9 +43,9 @@ public class PercentualDamageReductionDeterminedByResDifferenceEffect : Effect
 
     private double CalculateReductionPercentage(Unit myUnit, Unit opponentsUnit)
     {
-        double myTotalRes = TotalStatGetter.GetTotal(StatType.Res, myUnit);
-        double opponentsTotalRes = TotalStatGetter.GetTotal(StatType.Res, opponentsUnit);
-        double reductionPercentage = 1 - (myTotalRes - opponentsTotalRes) * _multiplicator / 100;
+        double myTotalDef = TotalStatGetter.GetTotal(StatType.Def, myUnit);
+        double opponentsTotalDef = TotalStatGetter.GetTotal(StatType.Def, opponentsUnit);
+        double reductionPercentage = 1 - (myTotalDef - opponentsTotalDef) * _multiplicator / 100;
         if (reductionPercentage < _max) 
             reductionPercentage = _max;
         return reductionPercentage;
