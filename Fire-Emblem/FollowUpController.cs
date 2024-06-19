@@ -42,6 +42,8 @@ public class FollowUpController
         _unitThatStartedTheRound = unitThatStartedTheRound;
         _unitThatDidNotStartTheRound = unitThatDidNotStartTheRound;
         
+        // flujo normal
+        
         if (CanDoAFollowup(unitThatStartedTheRound, unitThatDidNotStartTheRound))
         {
             _attackController.SetCurrentAttacker(_idOfTheRoundStarter);
@@ -67,10 +69,13 @@ public class FollowUpController
             _view.AnnounceNoUnitCanDoAFollowup();
         }
         
-        // todo: FIRST CHECK IF ROUND STARTED DID THE FOLLOWUP
+        // si uno ya lo hizo pero le toca al otro
+        
+        // todo: FIRST CHECK IF ROUND STARTED DID THE FOLLOWUP, EL OTRO HARA EL FOLLOWUP
         // los dos metodos de abajo se parecen mucho
         if (CanDoAFollowup(unitThatStartedTheRound, unitThatDidNotStartTheRound) &&
-            _unitThatDidNotStartTheRound.CombatEffects.HasGuaranteedFollowUp)
+            (_unitThatDidNotStartTheRound.CombatEffects.HasGuaranteedFollowUp || 
+             CanDoAFollowup(unitThatDidNotStartTheRound, unitThatStartedTheRound)))
         {
             Console.WriteLine("PASO POR AQUI");
             _attackController.SetCurrentAttacker(_otherPlayersId);
@@ -80,13 +85,14 @@ public class FollowUpController
         }
         
         if (CanDoAFollowup(unitThatStartedTheRound, unitThatDidNotStartTheRound) &&
-            CanDoAFollowup(unitThatDidNotStartTheRound, unitThatStartedTheRound))
+            CanDoAFollowup(unitThatDidNotStartTheRound, unitThatStartedTheRound)
+            )
         {
-            Console.WriteLine("PASO POR AQUI");
+            Console.WriteLine("PASO POR AQUI 2");
             _attackController.SetCurrentAttacker(_otherPlayersId);
-            _attackController.GenerateAnAttackBetweenTwoUnits(AttackType.FollowUp, 
-                _unitThatDidNotStartTheRound, 
-                _unitThatStartedTheRound);
+            //_attackController.GenerateAnAttackBetweenTwoUnits(AttackType.FollowUp, 
+            //    _unitThatDidNotStartTheRound, 
+            //    _unitThatStartedTheRound);
         }
     }
     
