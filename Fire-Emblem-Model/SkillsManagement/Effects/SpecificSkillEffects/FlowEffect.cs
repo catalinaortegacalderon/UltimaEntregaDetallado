@@ -20,9 +20,7 @@ public class FlowEffect : Effect
         var amount = CalculateAmount(myTotalStat, opponentsTotalStat);
 
         myUnit.DamageEffects.ExtraDamage += amount; 
-        // reduce el
-        //daño de los ataques del rival en un 70% de esa diferencia (Min:0, Max:7), ES PORCENTUAL O ABSOLUTO??
-        myUnit.DamageEffects.PercentageReduction *= (1-amount); 
+        myUnit.DamageEffects.AbsolutDamageReduction -= amount; 
     }
 
     private static int CalculateAmount(int myTotalStat, int opponentsTotalStat)

@@ -120,6 +120,8 @@ public class SkillsPrinter
         if (unit.CombatEffects.HpRecuperationAtEveryAttack > 0)
             view.WriteLine(unit.Name + " recuperará HP igual al " + (unit.CombatEffects.HpRecuperationAtEveryAttack * 100) 
                            + "% del daño realizado en cada ataque");
+        if (unit.CombatEffects.HasCounterAttackDenial && !unit.CombatEffects.HasNeutralizationOfCounterattackDenial)
+            view.WriteLine(unit.Name + " no podrá contraatacar");
         if (unit.CombatEffects.HasNeutralizationOfCounterattackDenial && unit.CombatEffects.HasCounterAttackDenial)
             view.WriteLine(unit.Name + " neutraliza los efectos que previenen sus contraataques");
         if (unit.CombatEffects.HasGuaranteedFollowUp)
@@ -135,8 +137,8 @@ public class SkillsPrinter
         if (unit.CombatEffects.HasDenialOfGuaranteedFollowUp)
             view.WriteLine(unit.Name + " es inmune a los efectos que garantizan su follow up");
         // TODO: VER ORDEN DE ESTE ÚLTIMO
-        if (unit.CombatEffects.HasCounterAttackDenial && !unit.CombatEffects.HasNeutralizationOfCounterattackDenial)
-            view.WriteLine(unit.Name + " no podrá contraatacar");
+        //if (unit.CombatEffects.HasCounterAttackDenial && !unit.CombatEffects.HasNeutralizationOfCounterattackDenial)
+            //view.WriteLine(unit.Name + " no podrá contraatacar");
         
     }
 }
