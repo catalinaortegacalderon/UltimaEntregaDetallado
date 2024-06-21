@@ -2,6 +2,8 @@
 using Fire_Emblem_GUI;
 using Fire_Emblem_View;
 using Fire_Emblem_View.GuiLib;
+using System;
+using System.IO;
 
 
 //RunConsoleView(); // Descomentar para correr la vista en consola
@@ -21,12 +23,18 @@ void RunGuiView()
     string dataTeam1 = window.GetTeam1();
     string dataTeam2 = window.GetTeam2();
     
+    Console.WriteLine(dataTeam1);
+    Console.WriteLine(dataTeam2);
+    
     // todo: construir path y archivo con lo anterior y ponerlo aca
-    string teamsFolder = "hola";
 
     IView view = new GUIView(window);
     
-    var game = new Game(view, teamsFolder);
+    // todo: IDEA, SOBREESCRIBIR SIEMPRE EL MISMO ARCHIVO
+    // USAR FOTOSHOP
+    
+    // todo: es distinto el / para distintos os, arreglar
+    var game = new Game(view, "TeamsCreadosGUI");
     game.Play();
 
     // Harcodeamos los equipos para propósitos de este ejemplo
@@ -94,6 +102,7 @@ void RunConsoleView()
 
     var view = View.BuildManualTestingView(test);
     var game = new Game(new GameView(view), teamsFolder);
+    Console.WriteLine(teamsFolder);
     game.Play();
 }
 

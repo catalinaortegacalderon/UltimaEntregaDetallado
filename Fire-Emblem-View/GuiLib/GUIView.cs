@@ -17,12 +17,19 @@ public class GUIView : IView
     
     public int AskPlayerForTheChosenFile(string[] files)
     {
-        throw new NotImplementedException();
+        // todo: sacar este comentario. aca se retorna el ultimo
+        // tal vez sea mejor sobreescribir y retornar siempre 0
+        var filesCounter = 0;
+        foreach (var file in files)
+        {
+            filesCounter++;
+        }
+        return filesCounter - 1;
     }
 
     public void AnnounceTeamsAreNotValid()
     {
-        throw new NotImplementedException();
+        window.ShowInvalidTeamMessage();
     }
 
     public int[] AskBothPlayersForTheChosenUnit(PlayersList players, int currentAttacker)
