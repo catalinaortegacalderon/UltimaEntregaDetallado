@@ -12,7 +12,6 @@ public class ImpactSkill: Skill
 {
     public ImpactSkill(StatType firstStat, StatType secondStat)
     {
-        Console.WriteLine("creando");
         Conditions = new Condition[3];
         Conditions[0] = new MyUnitStartsCombatCondition();
         Conditions[1] = new MyUnitStartsCombatCondition();

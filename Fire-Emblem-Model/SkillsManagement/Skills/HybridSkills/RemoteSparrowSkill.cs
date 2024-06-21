@@ -16,6 +16,7 @@ public class RemoteSparrowSkill : Skill
         Conditions[0] = new MyUnitStartsCombatCondition();
         Conditions[1] = new MyUnitStartsCombatCondition();
         Conditions[2] = new MyUnitStartsCombatCondition();
+        
         Effects = new Effect[3];
         Effects[0] = new ChangeStatsInEffect(StatType.Atk, 7);
         Effects[1] = new ChangeStatsInEffect(StatType.Spd, 7);

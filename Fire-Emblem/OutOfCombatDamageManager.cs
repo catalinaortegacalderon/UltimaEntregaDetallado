@@ -7,8 +7,8 @@ public class OutOfCombatDamageManager
 {
     
     // todo: ordenar esta clase
-    private readonly GameView _view;
-    public OutOfCombatDamageManager(GameView view)
+    private readonly IView _view;
+    public OutOfCombatDamageManager(IView view)
     {
         _view = view;
     }

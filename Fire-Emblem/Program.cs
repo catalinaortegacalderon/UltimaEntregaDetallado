@@ -1,18 +1,33 @@
 ﻿using Fire_Emblem;
 using Fire_Emblem_GUI;
 using Fire_Emblem_View;
+using Fire_Emblem_View.GuiLib;
 
 
-RunConsoleView(); // Descomentar para correr la vista en consola
+//RunConsoleView(); // Descomentar para correr la vista en consola
 
 FireEmblemWindow window = new FireEmblemWindow();
-//window.Start(RunGuiView); // Descomentar para correr interfaz gráfica
+window.Start(RunGuiView); // Descomentar para correr interfaz gráfica
 
 void RunGuiView()
 {
+    // todo : sacar esto, estaba en console view
+    //string testFolder = SelectTestFolder();
+    //string test = SelectTest(testFolder);
+    //string teamsFolder = testFolder.Replace("-Tests","");
+    //AnnounceTestCase(test);
+    
     // Acá se forman los equipos y son retornados como un string
     string dataTeam1 = window.GetTeam1();
     string dataTeam2 = window.GetTeam2();
+    
+    // todo: construir path y archivo con lo anterior y ponerlo aca
+    string teamsFolder = "hola";
+
+    IView view = new GUIView(window);
+    
+    var game = new Game(view, teamsFolder);
+    game.Play();
 
     // Harcodeamos los equipos para propósitos de este ejemplo
     MyUnit[] team1 = [new MyUnit("Marth", "Sword", 54, 62, 53, 43, 37)];

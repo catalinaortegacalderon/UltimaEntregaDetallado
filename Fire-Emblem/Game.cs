@@ -11,7 +11,7 @@ public class Game
     private const int IdOfPlayer2 = 1;
     private readonly string _teamsFolder;
     
-    private readonly GameView _view;
+    private readonly IView _view;
     
     private int _currentRound;
     
@@ -27,7 +27,7 @@ public class Game
     // todo: hacer un manager
     // se encarga de cosas de game y de game attacks controler, todos los manage
 
-    public Game(GameView view, string teamsFolder)
+    public Game(IView view, string teamsFolder)
     {
         _view = view;
         _teamsFolder = teamsFolder;

@@ -16,8 +16,10 @@ public class PrescienceSkill : Skill
         Conditions[0] = new AlwaysTrueCondition();
         Conditions[1] = new AlwaysTrueCondition();
         Conditions[2] = new OrCondition([
-            new MyUnitStartsCombatCondition(), new OpponentUsesCertainWeaponCondition([WeaponType.Magic, WeaponType.Bow])
+            new MyUnitStartsCombatCondition(), 
+            new OpponentUsesCertainWeaponCondition([WeaponType.Magic, WeaponType.Bow])
         ]);
+        
         Effects = new Effect[3];
         Effects[0] = new ChangeOpponentsStatsInEffect(StatType.Atk, -5);
         Effects[1] = new ChangeOpponentsStatsInEffect(StatType.Res, -5);

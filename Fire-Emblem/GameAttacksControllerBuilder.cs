@@ -27,7 +27,7 @@ public class GameAttacksControllerBuilder
         }
     }
 
-    public GameAttacksController BuildGameController(string[] fileLines, GameView view)
+    public GameAttacksController BuildGameController(string[] fileLines, IView view)
     {
         ProcessFileToCreateUnitsAndSkills(fileLines);
 

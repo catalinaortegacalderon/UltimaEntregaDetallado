@@ -10,7 +10,7 @@ public class GameAttacksController
 {
     // todo: tal vez tenga mas sentido que players este en game y no aca
     private readonly PlayersList _players = new();
-    private readonly GameView _view;
+    private readonly IView _view;
     private DamageCalculator _damageCalculator;
     private OutOfCombatDamageManager _outOfCombatDamageManager;
     private Unit _currentAttackingUnit;
@@ -24,7 +24,7 @@ public class GameAttacksController
     // TODO: ideaa, aca manejar los tres casos, ataque contraataque y followup de manera diferente
     // no en el deesarollo sino en como se "autorizan"
 
-    public GameAttacksController(Player firstPlayer, Player secondPlayer, GameView view)
+    public GameAttacksController(Player firstPlayer, Player secondPlayer, IView view)
     {
         _currentAttackerId = 0;
         _players.AddPlayer(firstPlayer);

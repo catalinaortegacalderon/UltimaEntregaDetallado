@@ -11,7 +11,7 @@ public class FollowUpController
     private const int IdOfPlayer2 = 1;
     
     private readonly GameAttacksController _attackController;
-    private readonly GameView _view;
+    private readonly IView _view;
 
     private int _idOfTheRoundStarter;
     private int _otherPlayersId;
@@ -19,7 +19,7 @@ public class FollowUpController
     private Unit _unitThatStartedTheRound;
     private Unit _unitThatDidNotStartTheRound;
     
-    public FollowUpController(GameAttacksController attackController, GameView view)
+    public FollowUpController(GameAttacksController attackController, IView view)
     {
         _attackController = attackController;
         _view = view;

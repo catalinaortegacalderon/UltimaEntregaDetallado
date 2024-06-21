@@ -5,15 +5,21 @@ namespace Fire_Emblem_View;
 
 public interface IView
 {
-    int AskPlayerForTheChosenFile(string[] files);
-    void AnnounceTeamsAreNotValid();
-    int AskAPlayerForTheChosenUnit(int playerNumber, UnitsList units);
-    void ShowRoundInformation(int currentRound, string attackersName, int playersNumber);
-    void AnnounceAdvantage(Unit unitWithAdvantage, Unit unitWithoutAdvantage);
-    void AnnounceThereIsNoAdvantage();
-    void ShowAllSkills(Unit unit);
-    void ShowAttack(string attackersName, string defensorsName, int damage);
-    void AnnounceNoUnitCanDoAFollowup();
-    void ShowHp(Unit roundStarterUnit, Unit opponentsUnit);
-    void AnnounceWinner(int winnersNumber);
+    public int AskPlayerForTheChosenFile(string[] files);
+    public void AnnounceTeamsAreNotValid();
+    public int[] AskBothPlayersForTheChosenUnit(PlayersList players, int currentAttacker);
+    public int AskAPlayerForTheChosenUnit(int playerNumber, UnitsList units);
+    public void ShowRoundInformation(int currentRound, string attackersName, int playersNumber);
+    public void AnnounceAdvantage(Unit unitWithAdvantage, Unit unitWithoutAdvantage);
+    public void AnnounceThereIsNoAdvantage();
+    public void ShowAllSkills(Unit unit);
+    public void AnnounceHpRecuperation(Unit unitThatRecuperatesHp, int amount, int finalHp);
+    public void AnnounceDamageBeforeCombat(Unit unitThatRecievesDamage, int damage);
+    public void AnnounceCurationAfterCombat(Unit unitThatRecievesCuration, int recuperatedAmount);
+    public void AnnounceDamageAfterCombat(Unit unitThatRecievesDamage, int damage);
+    public void ShowAttack(string attackersName, string defensorsName, int damage);
+    public void AnnounceASpecificUnitCantDoAFollowup(String name);
+    public void AnnounceNoUnitCanDoAFollowup();
+    public void ShowHp(Unit roundStarterUnit, Unit opponentsUnit);
+    public void AnnounceWinner(int winnersNumber);
 }
