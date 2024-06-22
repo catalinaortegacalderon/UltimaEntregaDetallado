@@ -1,5 +1,6 @@
 using ConsoleApp1.DataTypes;
 using ConsoleApp1.GameDataStructures;
+using Fire_Emblem;
 
 namespace ConsoleApp1;
 
@@ -97,21 +98,15 @@ public class DamageCalculator
 
     private int CalculateOpponentsDefOrRes()
     {
+        // todo: seguir arreglando con total stat getter
         var attackingWeapon = _currentAttackingUnit.WeaponType;
 
         int rivalsDefOrRes;
         if (attackingWeapon == WeaponType.Magic)
         {
-            rivalsDefOrRes = _currentDefensiveUnit.Res + _currentDefensiveUnit.ActiveBonus.Res
-                                                       * _currentDefensiveUnit.ActiveBonusNeutralizer.Res
-                                                       + _currentDefensiveUnit.ActivePenalties.Res
-                                                       * _currentDefensiveUnit.ActivePenaltiesNeutralizer.Res;
-
+            rivalsDefOrRes = TotalStatGetter.GetTotal(StatType.Res, _currentDefensiveUnit);
             if (IsFirstOrSecondAttack())
-                rivalsDefOrRes += _currentDefensiveUnit.ActiveBonus.ResFirstAttack
-                                  * _currentDefensiveUnit.ActiveBonusNeutralizer.Res
-                                  + _currentDefensiveUnit.ActivePenalties.ResFirstAttack
-                                  * _currentDefensiveUnit.ActivePenaltiesNeutralizer.Res;
+                rivalsDefOrRes += TotalStatGetter.GetFirstAttackStat(StatType.Res, _currentDefensiveUnit);
         }
         else
         {

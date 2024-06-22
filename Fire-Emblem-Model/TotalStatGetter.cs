@@ -33,5 +33,22 @@ namespace Fire_Emblem
             }
             throw new ArgumentException("Unsupported stat type.");
         }
+        
+        public static int GetFirstAttackStat( StatType stat,Unit unit)
+        {
+            if (stat == StatType.Def) 
+                return unit.ActiveBonus.DefFirstAttack
+                       * unit.ActiveBonusNeutralizer.Def
+                       + unit.ActivePenalties.DefFirstAttack
+                       * unit.ActivePenaltiesNeutralizer.Def;
+            if (stat == StatType.Res)
+                return unit.ActiveBonus.ResFirstAttack
+                       * unit.ActiveBonusNeutralizer.Res
+                       + unit.ActivePenalties.ResFirstAttack
+                       * unit.ActivePenaltiesNeutralizer.Res;
+                
+            throw new ArgumentException("Unsupported stat type.");
+        }
     }
+    
 }
