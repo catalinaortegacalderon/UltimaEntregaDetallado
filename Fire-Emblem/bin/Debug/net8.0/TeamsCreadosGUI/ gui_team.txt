@@ -1,5 +1,5 @@
 Player 1 Team
-Alear 
+Alear
+Celica 
 Player 2 Team
-Byleth
-Claude (Agnea's Arrow,Alacrity)
+Lyn (Agnea's Arrow)

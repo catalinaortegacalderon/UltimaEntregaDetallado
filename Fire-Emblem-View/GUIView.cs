@@ -124,7 +124,21 @@ public class GuiView : IView
 
     public void ShowAttack(string attackersName, string defensorsName, int damage)
     {
-        return;
+        // todo: pensar en como actualizarlo, los teams y los units
+        // ojo, queda neggg el hp a veces
+
+        if (attackersName == _unitTeam1.Name)
+        {
+            _unitTeam2.Hp -= damage;
+            _window.UpdateUnitsStatsDuringBattle(_unitTeam1, _unitTeam2);
+            _window.ShowAttackFromTeam1(_unitTeam1, _unitTeam2);
+        }
+        else
+        {
+            _unitTeam1.Hp -= damage;
+            _window.UpdateUnitsStatsDuringBattle(_unitTeam1, _unitTeam2);
+            _window.ShowAttackFromTeam2(_unitTeam1, _unitTeam2);
+        }
     }
 
     public void AnnounceASpecificUnitCantDoAFollowup(string name)
@@ -139,7 +153,8 @@ public class GuiView : IView
 
     public void ShowHp(Unit roundStarterUnit, Unit opponentsUnit)
     {
-        return;
+        // todo: teams no se actualizannn ojito, tal vez llamar a update teams desde controller
+        _window.UpdateTeams(_team1, _team2);
     }
 
     public void AnnounceWinner(int winnersNumber)
