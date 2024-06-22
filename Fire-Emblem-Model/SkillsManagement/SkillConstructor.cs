@@ -8,7 +8,7 @@ using ConsoleApp1.SkillsManagement.Skills.ExtraDamageSkills;
 using ConsoleApp1.SkillsManagement.Skills.HybridSkills;
 using ConsoleApp1.SkillsManagement.Skills.NeutralizationSkills;
 using ConsoleApp1.SkillsManagement.Skills.PenaltySkills;
-using ConsoleApp1.SkillsManagement.Skills.PercentualDamageReductionSkills;
+using ConsoleApp1.SkillsManagement.Skills.PercentageDamageReductionSkills;
 using ConsoleApp1.SkillsManagement.Skills.SkillsThatAffectCombat;
 using ConsoleApp1.SkillsManagement.Skills.SkillsThatAffectCombat.CounterattackDenialSkills;
 using ConsoleApp1.SkillsManagement.Skills.SkillsThatAffectCombat.DenialOfFollowUpDenialSkills;

@@ -25,7 +25,7 @@ public class NewDivinitySkill : Skill
         Effects = new Effect[4];
         Effects[0] = new ChangeOpponentsStatsInEffect(StatType.Atk, -5);
         Effects[1] = new ChangeOpponentsStatsInEffect(StatType.Res, -5);
-        Effects[2] = new PercentualDamageReductionDeterminedByResDifferenceEffect(4, 0.6,
+        Effects[2] = new PercentageDamageReductionDeterminedByResDifferenceEffect(4, 0.6,
             DamageEffectCategory.All);
         Effects[3] = new OpponentFollowUpDenialEffect();
     }

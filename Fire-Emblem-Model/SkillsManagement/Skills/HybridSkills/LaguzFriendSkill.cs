@@ -20,7 +20,7 @@ public class LaguzFriendSkill : Skill
         Conditions[3] = new AlwaysTrueCondition();
         Conditions[4] = new AlwaysTrueCondition();
         Effects = new Effect[5];
-        Effects[0] = new PercentualDamageReductionEffect(0.5, DamageEffectCategory.All);
+        Effects[0] = new PercentageDamageReductionEffect(0.5, DamageEffectCategory.All);
         Effects[1] = new ChangeStatsInBasePercentageEffect(StatType.Def, -0.5);
         Effects[2] = new ChangeStatsInBasePercentageEffect(StatType.Res, -0.5);
         Effects[3] = new NeutralizeOneOfMyBonusEffect(StatType.Def);

@@ -19,6 +19,6 @@ public class AegisShieldSkill : Skill
         Effects = new Effect[3];
         Effects[0] = new ChangeStatsInEffect(StatType.Def, 6);
         Effects[1] = new ChangeStatsInEffect(StatType.Res, 3);
-        Effects[2] = new PercentualDamageReductionEffect(0.5, DamageEffectCategory.FirstAttack);
+        Effects[2] = new PercentageDamageReductionEffect(0.5, DamageEffectCategory.FirstAttack);
     }
 }

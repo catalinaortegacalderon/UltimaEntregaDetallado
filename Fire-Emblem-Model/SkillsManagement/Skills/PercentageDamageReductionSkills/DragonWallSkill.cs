@@ -5,16 +5,17 @@ using ConsoleApp1.SkillsManagement.Effects.DamageEffects;
 using ConsoleApp1.SkillsManagement.Effects.SpecificSkillEffects;
 using ConsoleApp1.SkillsManagement.Skills.BonusSkills;
 
-namespace ConsoleApp1.SkillsManagement.Skills.PercentualDamageReductionSkills;
+namespace ConsoleApp1.SkillsManagement.Skills.PercentageDamageReductionSkills;
 
-public class DodgeSkill : Skill
+public class DragonWallSkill : Skill
 {
-    public DodgeSkill()
+    public DragonWallSkill()
     {
         Conditions = new Condition[1];
-        Conditions[0] = new CompareTotalStatCondition(StatType.Spd);
+        Conditions[0] = new CompareTotalStatCondition(StatType.Res);
 
         Effects = new Effect[1];
-        Effects[0] = new PercentualDamageReductionDeterminedBySpdDifferenceEffect(4, 0.6, DamageEffectCategory.All);
+        Effects[0] = new PercentageDamageReductionDeterminedByResDifferenceEffect(
+            4, 0.6, DamageEffectCategory.All);
     }
 }

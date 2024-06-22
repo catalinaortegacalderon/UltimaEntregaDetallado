@@ -5,13 +5,13 @@ using Fire_Emblem;
 
 namespace ConsoleApp1.SkillsManagement.Effects.DamageEffects;
 
-public class PercentualDamageReductionDeterminedBySpdDifferenceEffect : Effect
+public class PercentageDamageReductionDeterminedBySpdDifferenceEffect : Effect
 {
     private readonly int _multiplicator;
     private readonly double _max;
     private readonly DamageEffectCategory _category;
     
-    public PercentualDamageReductionDeterminedBySpdDifferenceEffect( int multiplicator, 
+    public PercentageDamageReductionDeterminedBySpdDifferenceEffect( int multiplicator, 
         double max, DamageEffectCategory category)
     {
         _multiplicator = multiplicator;

@@ -25,7 +25,7 @@ public class SavyFighterSkill : Skill
         Effects = new Effect[3];
         Effects[0] = new OpponentDenialOfGuaranteedFollowUpEffect();
         Effects[1] = new NeutralizationOfFollowUpDenialEffect();
-        Effects[2] = new PercentualDamageReductionEffect(0.7, 
+        Effects[2] = new PercentageDamageReductionEffect(0.7, 
             DamageEffectCategory.FirstAttack);
     }
 }

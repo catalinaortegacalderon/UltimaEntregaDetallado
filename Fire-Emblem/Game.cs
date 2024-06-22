@@ -26,6 +26,7 @@ public class Game
     
     // todo: hacer un manager
     // se encarga de cosas de game y de game attacks controler, todos los manage
+    // todo: hay muchas skills parecidas, ver si lo arreglo o no
 
     public Game(IView view, string teamsFolder)
     {

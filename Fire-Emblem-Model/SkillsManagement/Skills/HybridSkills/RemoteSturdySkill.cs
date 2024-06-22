@@ -19,6 +19,6 @@ public class RemoteSturdySkill : Skill
         Effects = new Effect[3];
         Effects[0] = new ChangeStatsInEffect(StatType.Atk, 7);
         Effects[1] = new ChangeStatsInEffect(StatType.Def, 10);
-        Effects[2] = new PercentualDamageReductionEffect(0.7, DamageEffectCategory.FirstAttack);
+        Effects[2] = new PercentageDamageReductionEffect(0.7, DamageEffectCategory.FirstAttack);
     }
 }

@@ -22,6 +22,6 @@ public class BlackEagleRuleSkill : Skill
 
         Effects = new Effect[2];
         Effects[0] = new GuaranteeFollowUpEffect();
-        Effects[1] = new PercentualDamageReductionEffect(0.2, DamageEffectCategory.FollowUp);
+        Effects[1] = new PercentageDamageReductionEffect(0.2, DamageEffectCategory.FollowUp);
     }
 }

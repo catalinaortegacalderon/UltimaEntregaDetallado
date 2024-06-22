@@ -21,6 +21,6 @@ public class ExtraChivalrySkill : Skill
         Effects[0] = new ChangeOpponentsStatsInEffect(StatType.Atk, -5);
         Effects[1] = new ChangeOpponentsStatsInEffect(StatType.Def, -5);
         Effects[2] = new ChangeOpponentsStatsInEffect(StatType.Spd, -5);
-        Effects[3] = new PercentualDamageReductionConsideringOpponentsHpEffect(DamageEffectCategory.All);
+        Effects[3] = new PercentageDamageReductionConsideringOpponentsHpEffect(DamageEffectCategory.All);
     }
 }

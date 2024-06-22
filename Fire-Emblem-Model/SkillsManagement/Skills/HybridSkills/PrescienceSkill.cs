@@ -23,6 +23,6 @@ public class PrescienceSkill : Skill
         Effects = new Effect[3];
         Effects[0] = new ChangeOpponentsStatsInEffect(StatType.Atk, -5);
         Effects[1] = new ChangeOpponentsStatsInEffect(StatType.Res, -5);
-        Effects[2] = new PercentualDamageReductionEffect(0.7, DamageEffectCategory.FirstAttack);
+        Effects[2] = new PercentageDamageReductionEffect(0.7, DamageEffectCategory.FirstAttack);
     }
 }

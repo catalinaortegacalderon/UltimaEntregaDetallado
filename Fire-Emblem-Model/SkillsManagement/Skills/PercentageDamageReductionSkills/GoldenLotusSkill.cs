@@ -5,7 +5,7 @@ using ConsoleApp1.SkillsManagement.Effects.DamageEffects;
 using ConsoleApp1.SkillsManagement.Effects.SpecificSkillEffects;
 using ConsoleApp1.SkillsManagement.Skills.BonusSkills;
 
-namespace ConsoleApp1.SkillsManagement.Skills.PercentualDamageReductionSkills;
+namespace ConsoleApp1.SkillsManagement.Skills.PercentageDamageReductionSkills;
 
 public class GoldenLotusSkill : Skill
 {
@@ -18,6 +18,6 @@ public class GoldenLotusSkill : Skill
         ]);
 
         Effects = new Effect[1];
-        Effects[0] = new PercentualDamageReductionEffect(0.5, DamageEffectCategory.FirstAttack);
+        Effects[0] = new PercentageDamageReductionEffect(0.5, DamageEffectCategory.FirstAttack);
     }
 }

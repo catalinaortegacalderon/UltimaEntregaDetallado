@@ -34,7 +34,7 @@ public class BrashAssaultSkill : Skill
         Effects = new Effect[5];
         Effects[0] = new ChangeOpponentsStatsInEffect(StatType.Def, -4);
         Effects[1] = new ChangeOpponentsStatsInEffect(StatType.Res, -4);
-        Effects[2] = new PercentualDamageReductionEffect(0.7, DamageEffectCategory.FirstAttack);
+        Effects[2] = new PercentageDamageReductionEffect(0.7, DamageEffectCategory.FirstAttack);
         Effects[3] = new GuaranteeFollowUpEffect();
         Effects[4] = new BrashAssaultEffect(0.3);
         

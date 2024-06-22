@@ -16,7 +16,7 @@ public class DragonsWrathSkill : Skill
         Conditions[0] = new AlwaysTrueCondition();
         Conditions[1] = new CompareMyAtkWithOpponentsResCondition();
         Effects = new Effect[2];
-        Effects[0] = new PercentualDamageReductionEffect(0.75, DamageEffectCategory.FirstAttack);
+        Effects[0] = new PercentageDamageReductionEffect(0.75, DamageEffectCategory.FirstAttack);
         Effects[1] = new DragonsWrathSecondEffect();
     }
 }

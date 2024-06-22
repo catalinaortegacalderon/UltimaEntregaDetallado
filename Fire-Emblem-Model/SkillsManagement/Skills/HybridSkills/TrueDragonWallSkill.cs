@@ -19,9 +19,9 @@ public class TrueDragonWallSkill : Skill
         Conditions[2] = new MyUnitHasAllyWithMagicCondition();
 
         Effects = new Effect[3];
-        Effects[0] = new PercentualDamageReductionDeterminedByResDifferenceEffect(
+        Effects[0] = new PercentageDamageReductionDeterminedByResDifferenceEffect(
              6, 0.4, DamageEffectCategory.FirstAttack);
-        Effects[1] = new PercentualDamageReductionDeterminedByResDifferenceEffect(
+        Effects[1] = new PercentageDamageReductionDeterminedByResDifferenceEffect(
             4, 0.6, DamageEffectCategory.FollowUp );
         Effects[2] = new HealingAtTheEndOfTheCombatEffect(7);
     }

@@ -3,7 +3,7 @@ using ConsoleApp1.SkillsManagement.Effects.SpecificSkillEffects;
 
 namespace ConsoleApp1.SkillsManagement.Effects.DamageEffects;
 
-public class ReductionOfPercentualDamageReductionEffect : Effect
+public class ReductionOfPercentageDamageReductionEffect : Effect
 {
     public override void ApplyEffect(Unit myUnit, Unit opponentsUnit)
     {

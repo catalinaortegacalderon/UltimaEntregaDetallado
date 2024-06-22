@@ -26,7 +26,7 @@ public class MoonTwinWingSkill : Skill
         Effects = new Effect[3];
         Effects[0] = new ChangeOpponentsStatsInEffect(StatType.Spd, -5);
         Effects[1] = new ChangeOpponentsStatsInEffect(StatType.Atk, -5);
-        Effects[2] = new PercentualDamageReductionDeterminedBySpdDifferenceEffect(
+        Effects[2] = new PercentageDamageReductionDeterminedBySpdDifferenceEffect(
             4, 0.6, DamageEffectCategory.All);
     }
 }

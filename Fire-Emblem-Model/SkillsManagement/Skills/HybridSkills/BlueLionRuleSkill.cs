@@ -18,7 +18,7 @@ public class BlueLionRuleSkill : Skill
         Conditions[1] = new OpponentStartsCombatCondition();
 
         Effects = new Effect[2];
-        Effects[0] = new PercentualDamageReductionDeterminedByDefDifferenceEffect(4, 0.6, 
+        Effects[0] = new PercentageDamageReductionDeterminedByDefDifferenceEffect(4, 0.6, 
             DamageEffectCategory.All);
         Effects[1] = new GuaranteeFollowUpEffect();
     }
