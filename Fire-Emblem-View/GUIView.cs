@@ -41,82 +41,92 @@ public class GuiView : IView
         for (int i = 0; i < player2.AmountOfUnits; i++)
             team2[i] = player2.Units.GetUnitByIndex(i);
         
-        _window.UpdateTeams(team1 as Fire_Emblem_GUI.IUnit[], 
-            team2 as Fire_Emblem_GUI.IUnit[]);
+        // todo: esto no me esta funcionando, preguntarle a pinto
+        //_window.UpdateTeams(team1 as Fire_Emblem_GUI.IUnit[], team2 as Fire_Emblem_GUI.IUnit[]);
     }
 
     public int[] AskBothPlayersForTheChosenUnit(PlayersList players, int currentAttacker)
     {
-        throw new NotImplementedException();
+        // todo: arreglar
+        Console.WriteLine("paso por aqui, no implementado, chosen unit, solo retorno 0");
+        return new []{0,0};
     }
 
     public int AskAPlayerForTheChosenUnit(int playerNumber, UnitsList units)
     {
-        throw new NotImplementedException();
+        return 0;
     }
 
     public void ShowRoundInformation(int currentRound, string attackersName, int playersNumber)
     {
-        throw new NotImplementedException();
+        return;
     }
 
     public void AnnounceAdvantage(Unit unitWithAdvantage, Unit unitWithoutAdvantage)
     {
-        throw new NotImplementedException();
+        return;
     }
 
     public void AnnounceThereIsNoAdvantage()
     {
-        throw new NotImplementedException();
+        return;
     }
 
     public void ShowAllSkills(Unit unit)
     {
-        throw new NotImplementedException();
+        return;
     }
 
     public void AnnounceHpRecuperation(Unit unitThatRecuperatesHp, int amount, int finalHp)
     {
-        throw new NotImplementedException();
+        return;
     }
 
     public void AnnounceDamageBeforeCombat(Unit unitThatRecievesDamage, int damage)
     {
-        throw new NotImplementedException();
+        return;
     }
 
     public void AnnounceCurationAfterCombat(Unit unitThatRecievesCuration, int recuperatedAmount)
     {
-        throw new NotImplementedException();
+        return;
     }
 
     public void AnnounceDamageAfterCombat(Unit unitThatRecievesDamage, int damage)
     {
-        throw new NotImplementedException();
+        return;
     }
 
     public void ShowAttack(string attackersName, string defensorsName, int damage)
     {
-        throw new NotImplementedException();
+        return;
     }
 
     public void AnnounceASpecificUnitCantDoAFollowup(string name)
     {
-        throw new NotImplementedException();
+        return;
     }
 
     public void AnnounceNoUnitCanDoAFollowup()
     {
-        throw new NotImplementedException();
+        return;
     }
 
     public void ShowHp(Unit roundStarterUnit, Unit opponentsUnit)
     {
-        throw new NotImplementedException();
+        return;
     }
 
     public void AnnounceWinner(int winnersNumber)
     {
-        throw new NotImplementedException();
+        return;
+        if (winnersNumber == 0)
+            //_window.CongratulateTeam1();
+            return;
+        else
+        {
+            //_window.CongratulateTeam2();
+            return;
+        }
     }
 }

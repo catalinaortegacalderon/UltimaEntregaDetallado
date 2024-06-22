@@ -19,7 +19,7 @@ public class Unit : IUnit
     public int Def { get; }
     public int Res { get; }
     
-    public string[] Skills { get; }
+    public string[] Skills { get; set; }
     
     public readonly SkillsList SkillsList = new();
     

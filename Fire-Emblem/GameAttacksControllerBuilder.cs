@@ -15,6 +15,9 @@ public class GameAttacksControllerBuilder
 
     private const int IdOfPlayer1 = 0;
     private const int IdOfPlayer2 = 1;
+    
+    private string[] _skillsStringPlayer1 = [];
+    private string[] _skillsStringPlayer2 = [];
 
     public GameAttacksControllerBuilder() 
         => InitializeUnits();
@@ -59,7 +62,7 @@ public class GameAttacksControllerBuilder
         var currentPlayersUnits = _units[_currentPlayerNumber];
         var currentUnit = currentPlayersUnits[currentPlayersUnitNumber];
 
-        CreateSkills(currentUnit.SkillsList, unitInfo);
+        CreateSkills(currentUnit,currentUnit.SkillsList, unitInfo);
 
         _unitCounters[_currentPlayerNumber]++;
     }
@@ -101,12 +104,16 @@ public class GameAttacksControllerBuilder
         );
     }
 
-    private static void CreateSkills(SkillsList skills, string[] unitInfo)
+    private static void CreateSkills(Unit currentUnit,SkillsList skills, string[] unitInfo)
     {
-        if (DoesNotHaveSkills(unitInfo)) 
+        if (DoesNotHaveSkills(unitInfo))
+        {
+            currentUnit.Skills = [];
             return;
+        }
 
         var skillNames = unitInfo[1].Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+        currentUnit.Skills = skillNames;
         for (int i = 0; i < skillNames.Length; i++)
         {
             SkillConstructor.Construct(skills, skillNames[i].Trim(), i);

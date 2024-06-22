@@ -38,7 +38,7 @@ void RunGuiView()
     ];
 
     // Mostramos la vista con ambos equipos. Desde esta vista se puede elegir a la unidad que ataca
-    //window.UpdateTeams(team1, team2);
+    window.UpdateTeams(team1, team2);
 
     // El primer equipo elige a la unidad con la que atacará (retorna el id de la unidad seleccionada)
     int idSelectedUnitTeam1 = window.SelectUnitTeam1();
