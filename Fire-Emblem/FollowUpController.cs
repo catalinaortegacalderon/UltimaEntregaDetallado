@@ -60,11 +60,11 @@ public class FollowUpController
                 _unitThatStartedTheRound);
         }
         else if ( AttackerCantDoFollowup() && !CanASpecificPlayerCounterAttack(unitThatDidNotStartTheRound)
-                 && ThereAreNoLoosers())
+                 && ThereAreNoLosers())
         { 
             _view.AnnounceASpecificUnitCantDoAFollowup(unitThatStartedTheRound.Name);
         }
-        else if (ThereAreNoLoosers())
+        else if (ThereAreNoLosers())
         {
             _view.AnnounceNoUnitCanDoAFollowup();
         }
@@ -109,7 +109,7 @@ public class FollowUpController
 
     private bool CanDoAFollowup(Unit attackingUnit, Unit defensiveUnit)
     {
-        if (!ThereAreNoLoosers())
+        if (!ThereAreNoLosers())
             return false;
         if (attackingUnit.CombatEffects.HasFollowUpDenial
             && ! attackingUnit.CombatEffects.HasNeutralizationOfFollowUpDenial)
@@ -132,7 +132,7 @@ public class FollowUpController
         return doesFollowupConditionHold;
     }
 
-    private bool ThereAreNoLoosers()
+    private bool ThereAreNoLosers()
     {
         return _unitThatStartedTheRound.Hp != 0 
                && _unitThatDidNotStartTheRound.Hp != 0;

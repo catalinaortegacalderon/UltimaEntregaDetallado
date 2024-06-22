@@ -115,7 +115,7 @@ public class Game
         ResetUnitsBonus();
         ShowLeftoverHp();
         UpdateGameLogs();
-        EliminateLooserUnit();
+        EliminateLoserUnit();
     }
 
     private void ManageHpChangeAtTheEndOfTheCombat()
@@ -332,7 +332,7 @@ public class Game
             }
         }
 
-    private void EliminateLooserUnit()
+    private void EliminateLoserUnit()
     {
         var players = _attackController.GetPlayers();
         if (IsUnitDead(_currentUnitOfPlayer1))
