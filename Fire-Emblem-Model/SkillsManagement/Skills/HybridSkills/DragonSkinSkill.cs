@@ -12,28 +12,17 @@ public class DragonSkinSkill : Skill
 {
     public DragonSkinSkill()
     {
+       
         Conditions = new Condition[5];
-        Conditions[0] = new OrCondition([
-            new OpponentHasHpGreaterThanCondition(0.75),
-            new OpponentStartsCombatCondition()
-        ]);
-        Conditions[1] = new OrCondition([
-            new OpponentHasHpGreaterThanCondition(0.75),
-            new OpponentStartsCombatCondition()
-        ]);
-        Conditions[2] = new OrCondition([
-            new OpponentHasHpGreaterThanCondition(0.75),
-            new OpponentStartsCombatCondition()
-        ]);
-        Conditions[3] = new OrCondition([
-            new OpponentHasHpGreaterThanCondition(0.75),
-            new OpponentStartsCombatCondition()
-        ]);
-        Conditions[4] = new OrCondition([
-            new OpponentHasHpGreaterThanCondition(0.75),
-            new OpponentStartsCombatCondition()
-        ]);
-
+        Conditions[0] = 
+            Conditions[1] = 
+                Conditions[2] =
+                    Conditions[3] =
+                        Conditions[4] = 
+                            new OrCondition([
+                                new OpponentHasHpGreaterThanCondition(0.75), 
+                                new OpponentStartsCombatCondition()]);
+        
         Effects = new Effect[5];
         Effects[0] = new ChangeStatsInEffect(StatType.Atk, 6);
         Effects[1] = new ChangeStatsInEffect(StatType.Spd, 6);

@@ -13,28 +13,16 @@ public class DistantDefSkill : Skill
     public DistantDefSkill()
     {
         Conditions = new Condition[3];
-        Conditions[0] = new AndCondition([
-            new OpponentUsesCertainWeaponCondition([
-                WeaponType.Magic,
-                WeaponType.Bow
-            ]),
-            new OpponentStartsCombatCondition()
-        ]);
-        Conditions[1] = new AndCondition([
-            new OpponentUsesCertainWeaponCondition([
-                WeaponType.Magic,
-                WeaponType.Bow
-            ]),
-            new OpponentStartsCombatCondition()
-        ]);
-        Conditions[2] = new AndCondition([
-            new OpponentUsesCertainWeaponCondition([
-                WeaponType.Magic,
-                WeaponType.Bow
-            ]),
-            new OpponentStartsCombatCondition()
-        ]);
-
+        Conditions[0] = 
+            Conditions[1] = 
+                    Conditions[2] =
+                        new AndCondition([
+                            new OpponentUsesCertainWeaponCondition([
+                                WeaponType.Magic, 
+                                WeaponType.Bow
+                            ]), 
+                            new OpponentStartsCombatCondition()]);
+        
         Effects = new Effect[3];
         Effects[0] = new ChangeStatsInEffect(StatType.Def, 8);
         Effects[1] = new ChangeStatsInEffect(StatType.Res, 8);
