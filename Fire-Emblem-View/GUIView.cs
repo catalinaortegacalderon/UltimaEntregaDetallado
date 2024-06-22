@@ -64,6 +64,9 @@ public class GuiView : IView
             currentUnitNumberOfPlayer1 = AskAPlayerForTheChosenUnit(IdOfPlayer1, player1.Units);
         }
 
+        _unitTeam1 = _team1[currentUnitNumberOfPlayer1];
+        _unitTeam2 = _team2[currentUnitNumberOfPlayer2];
+
         return [currentUnitNumberOfPlayer1, currentUnitNumberOfPlayer2];
     }
 
