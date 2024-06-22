@@ -14,6 +14,9 @@ public class GuiView : IView
     private Unit[] _team1;
     private Unit[] _team2;
 
+    private Unit _unitTeam1;
+    private Unit _unitTeam2;
+
     public GuiView(FireEmblemWindow window)
     {
         this._window = window;
@@ -44,20 +47,40 @@ public class GuiView : IView
 
     public int[] AskBothPlayersForTheChosenUnit(PlayersList players, int currentAttacker)
     {
-        // todo: arreglar
-        Console.WriteLine("paso por aqui, no implementado, chosen unit, solo retorno 0");
-        return new []{0,0};
+        var player1 = players.GetPlayerById(IdOfPlayer1);
+        var player2 = players.GetPlayerById(IdOfPlayer2);
+
+        int currentUnitNumberOfPlayer1;
+        int currentUnitNumberOfPlayer2;
+
+        if (IsPlayer1TheCurrentAttacker(currentAttacker))
+        {
+            currentUnitNumberOfPlayer1 = AskAPlayerForTheChosenUnit(IdOfPlayer1, player1.Units);
+            currentUnitNumberOfPlayer2 = AskAPlayerForTheChosenUnit(IdOfPlayer2, player2.Units);
+        }
+        else
+        {
+            currentUnitNumberOfPlayer2 = AskAPlayerForTheChosenUnit(IdOfPlayer2, player2.Units);
+            currentUnitNumberOfPlayer1 = AskAPlayerForTheChosenUnit(IdOfPlayer1, player1.Units);
+        }
+
+        return [currentUnitNumberOfPlayer1, currentUnitNumberOfPlayer2];
     }
 
-    public int AskAPlayerForTheChosenUnit(int playerNumber, UnitsList units)
+    private int AskAPlayerForTheChosenUnit(int playerNumber, UnitsList units)
     {
-        // todo: arreglar
-        Console.WriteLine("paso por aqui, no implementado, chosen unit, solo retorno 0");
-        return 0;
+        if (playerNumber==0)
+            return _window.SelectUnitTeam1();
+        else
+        {
+            return _window.SelectUnitTeam2();
+        }
     }
 
     public void ShowRoundInformation(int currentRound, string attackersName, int playersNumber)
     {
+        // todo: tal vez esto no va aca pero ponerlo en algun lugar
+        _window.UpdateUnitsStatsDuringBattle(_unitTeam1, _unitTeam2);
         return;
     }
 
@@ -124,6 +147,11 @@ public class GuiView : IView
         {
             _window.CongratulateTeam2(_team2);
         }
+    }
+    
+    private static bool IsPlayer1TheCurrentAttacker(int currentAttacker)
+    {
+        return currentAttacker == IdOfPlayer1;
     }
     
 }

@@ -40,13 +40,13 @@ public class GameView : IView
 
         if (IsPlayer1TheCurrentAttacker(currentAttacker))
         {
-            currentUnitNumberOfPlayer1 = AskPlayerForUnit(IdOfPlayer1, player1.Units);
-            currentUnitNumberOfPlayer2 = AskPlayerForUnit(IdOfPlayer2, player2.Units);
+            currentUnitNumberOfPlayer1 = AskAPlayerForTheChosenUnit(IdOfPlayer1, player1.Units);
+            currentUnitNumberOfPlayer2 = AskAPlayerForTheChosenUnit(IdOfPlayer2, player2.Units);
         }
         else
         {
-            currentUnitNumberOfPlayer2 = AskPlayerForUnit(IdOfPlayer2, player2.Units);
-            currentUnitNumberOfPlayer1 = AskPlayerForUnit(IdOfPlayer1, player1.Units);
+            currentUnitNumberOfPlayer2 = AskAPlayerForTheChosenUnit(IdOfPlayer2, player2.Units);
+            currentUnitNumberOfPlayer1 = AskAPlayerForTheChosenUnit(IdOfPlayer1, player1.Units);
         }
 
         return [currentUnitNumberOfPlayer1, currentUnitNumberOfPlayer2];
@@ -56,13 +56,7 @@ public class GameView : IView
     {
         return currentAttacker == IdOfPlayer1;
     }
-
-    private int AskPlayerForUnit(int playerId, UnitsList units)
-    {
-        return AskAPlayerForTheChosenUnit(playerId, units);
-    }
-
-    public int AskAPlayerForTheChosenUnit(int playerNumber, UnitsList units)
+    private int AskAPlayerForTheChosenUnit(int playerNumber, UnitsList units)
     {
         PrintUnitOptions(playerNumber, units);
         var chosenUnitNumber = Convert.ToInt32(_view.ReadLine());

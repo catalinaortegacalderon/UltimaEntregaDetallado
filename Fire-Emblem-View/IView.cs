@@ -9,7 +9,6 @@ public interface IView
     public void AnnounceTeamsAreNotValid();
     public void UpdateTeams(Player player1, Player player2);
     public int[] AskBothPlayersForTheChosenUnit(PlayersList players, int currentAttacker);
-    public int AskAPlayerForTheChosenUnit(int playerNumber, UnitsList units);
     public void ShowRoundInformation(int currentRound, string attackersName, int playersNumber);
     public void AnnounceAdvantage(Unit unitWithAdvantage, Unit unitWithoutAdvantage);
     public void AnnounceThereIsNoAdvantage();
