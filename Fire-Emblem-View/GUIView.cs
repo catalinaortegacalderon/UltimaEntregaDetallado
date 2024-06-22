@@ -32,14 +32,14 @@ public class GuiView : IView
 
     public void UpdateTeams(Player player1, Player player2)
     {
-        var team1 = player1.Units.ToArray();
-        var team2 = player2.Units.ToArray();
+        var team1 = player1.Units.Where(unit => unit.Name != "").ToArray();
+        var team2 = player2.Units.Where(unit => unit.Name != "").ToArray();
 
         _team1 = team1;
-        _team1 = team2;
-        
-        // todo: esto no me esta funcionando, preguntarle a pinto
-        _window.UpdateTeams(team1 , team2);
+        _team2 = team2;
+
+        _window.UpdateTeams(team1, team2);
+
     }
 
     public int[] AskBothPlayersForTheChosenUnit(PlayersList players, int currentAttacker)

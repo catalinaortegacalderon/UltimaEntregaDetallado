@@ -1,8 +1,4 @@
 Player 1 Team
-Alear
-Alm
-Celica 
+Alear 
 Player 2 Team
-Celica
-Claude (Agnea's Arrow)
-Alm (Attack +6,Atk/Def Push)
+Byleth

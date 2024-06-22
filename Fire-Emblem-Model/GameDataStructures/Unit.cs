@@ -10,7 +10,7 @@ public class Unit : IUnit
     public readonly GenderType GenderType;
     public readonly WeaponType WeaponType;
 
-    public string Name { get; } = "";
+    public string Name { get; }
     public string Weapon { get; } = "hOLA";
     public int MaxHp { get; set; } = 0;
 
