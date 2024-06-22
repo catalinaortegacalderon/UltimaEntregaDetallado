@@ -5,6 +5,7 @@ using System;
 using System.IO;
 
 
+
 //RunConsoleView(); // Descomentar para correr la vista en consola
 
 FireEmblemWindow window = new FireEmblemWindow();
@@ -36,10 +37,13 @@ void RunGuiView()
         new MyUnit("Seliph", "Sword", 55, 68, 27, 48, 39),
         new MyUnit("Soren", "Magic", 49, 63, 41, 25, 53)
     ];
+    
+    // SI ES INVALID NO SIGUE PARA ACA ABAJO
 
     // Mostramos la vista con ambos equipos. Desde esta vista se puede elegir a la unidad que ataca
-    window.UpdateTeams(team1, team2);
-
+    
+    //window.UpdateTeams(team1, team2);
+    
     // El primer equipo elige a la unidad con la que atacará (retorna el id de la unidad seleccionada)
     int idSelectedUnitTeam1 = window.SelectUnitTeam1();
     MyUnit unitTeam1 = team1[idSelectedUnitTeam1];
@@ -83,6 +87,8 @@ void RunGuiView()
 
     // Finalmente, decimos (arbitrariamente) que el team1 ganó
     window.CongratulateTeam1(team1);
+    
+    
 }
 
 void RunConsoleView()

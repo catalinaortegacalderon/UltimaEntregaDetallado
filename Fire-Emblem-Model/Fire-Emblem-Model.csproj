@@ -8,4 +8,10 @@
         <RootNamespace>ConsoleApp1</RootNamespace>
     </PropertyGroup>
 
+    <ItemGroup>
+      <Reference Include="Fire-Emblem-GUI">
+        <HintPath>..\Fire-Emblem-View\GuiLib\Fire-Emblem-GUI.dll</HintPath>
+      </Reference>
+    </ItemGroup>
+
 </Project>

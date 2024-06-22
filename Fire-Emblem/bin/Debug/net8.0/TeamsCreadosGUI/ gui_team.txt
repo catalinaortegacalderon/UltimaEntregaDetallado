@@ -1,4 +1,8 @@
 Player 1 Team
-Alear 
+Alear
+Alm
+Celica 
 Player 2 Team
-Alear (Aegis Shield)
+Celica
+Claude (Agnea's Arrow)
+Alm (Attack +6,Atk/Def Push)

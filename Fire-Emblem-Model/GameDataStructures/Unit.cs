@@ -1,6 +1,7 @@
 using System.Runtime.CompilerServices;
 using ConsoleApp1.DataTypes;
 using ConsoleApp1.EncapsulatedLists;
+using Fire_Emblem_GUI;
 
 namespace ConsoleApp1.GameDataStructures;
 
@@ -8,18 +9,18 @@ public class Unit : IUnit
 {
     public readonly GenderType GenderType;
     public readonly WeaponType WeaponType;
-    
-    public string Name { get; }
-    public string Weapon { get; }
-    public int MaxHp { get; set; }
-    
-    public int Hp { get; set; }
-    public int Atk { get; }
-    public int Spd { get; }
-    public int Def { get; }
-    public int Res { get; }
-    
-    public string[] Skills { get; set; }
+
+    public string Name { get; } = "";
+    public string Weapon { get; } = "hOLA";
+    public int MaxHp { get; set; } = 0;
+
+    public int Hp { get; set; } = 0;
+    public int Atk { get; } = 0;
+    public int Spd { get; } = 0;
+    public int Def { get; } = 0;
+    public int Res { get; } = 0;
+
+    public string[] Skills { get; set; } = [];
     
     public readonly SkillsList SkillsList = new();
     

@@ -1,7 +1,6 @@
 using ConsoleApp1.EncapsulatedLists;
 using ConsoleApp1.GameDataStructures;
 using Fire_Emblem_GUI;
-using IUnit = ConsoleApp1.GameDataStructures.IUnit;
 
 namespace Fire_Emblem_View;
 
@@ -11,6 +10,9 @@ public class GuiView : IView
     
     private const int IdOfPlayer1 = 0;
     private const int IdOfPlayer2 = 1;
+
+    private Unit[] _team1;
+    private Unit[] _team2;
 
     public GuiView(FireEmblemWindow window)
     {
@@ -24,25 +26,20 @@ public class GuiView : IView
 
     public void AnnounceTeamsAreNotValid()
     {
+        // todo: muestra el mensaje pero sigue el flujo, creo que es program
         _window.ShowInvalidTeamMessage();
     }
 
     public void UpdateTeams(Player player1, Player player2)
     {
-        IUnit[] team1 = new IUnit[player1.AmountOfUnits];
-        IUnit[] team2 = new IUnit[player2.AmountOfUnits];
-        
-        Console.WriteLine(player1.AmountOfUnits);
-        Console.WriteLine(player2.AmountOfUnits);
-        
-        for (int i = 0; i < player1.AmountOfUnits; i++)
-            team1[i] = player1.Units.GetUnitByIndex(i);
-        
-        for (int i = 0; i < player2.AmountOfUnits; i++)
-            team2[i] = player2.Units.GetUnitByIndex(i);
+        var team1 = player1.Units.ToArray();
+        var team2 = player2.Units.ToArray();
+
+        _team1 = team1;
+        _team1 = team2;
         
         // todo: esto no me esta funcionando, preguntarle a pinto
-        //_window.UpdateTeams(team1 as Fire_Emblem_GUI.IUnit[], team2 as Fire_Emblem_GUI.IUnit[]);
+        _window.UpdateTeams(team1 , team2);
     }
 
     public int[] AskBothPlayersForTheChosenUnit(PlayersList players, int currentAttacker)
@@ -54,6 +51,8 @@ public class GuiView : IView
 
     public int AskAPlayerForTheChosenUnit(int playerNumber, UnitsList units)
     {
+        // todo: arreglar
+        Console.WriteLine("paso por aqui, no implementado, chosen unit, solo retorno 0");
         return 0;
     }
 
@@ -119,14 +118,12 @@ public class GuiView : IView
 
     public void AnnounceWinner(int winnersNumber)
     {
-        return;
         if (winnersNumber == 0)
-            //_window.CongratulateTeam1();
-            return;
+            _window.CongratulateTeam1(_team1);
         else
         {
-            //_window.CongratulateTeam2();
-            return;
+            _window.CongratulateTeam2(_team2);
         }
     }
+    
 }
