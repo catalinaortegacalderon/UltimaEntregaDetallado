@@ -1,7 +1,6 @@
 ﻿using Fire_Emblem;
 using Fire_Emblem_GUI;
 using Fire_Emblem_View;
-using Fire_Emblem_View.GuiLib;
 using System;
 using System.IO;
 
@@ -13,29 +12,22 @@ window.Start(RunGuiView); // Descomentar para correr interfaz gráfica
 
 void RunGuiView()
 {
-    // todo : sacar esto, estaba en console view
-    //string testFolder = SelectTestFolder();
-    //string test = SelectTest(testFolder);
-    //string teamsFolder = testFolder.Replace("-Tests","");
-    //AnnounceTestCase(test);
-    
-    // Acá se forman los equipos y son retornados como un string
     string dataTeam1 = window.GetTeam1();
     string dataTeam2 = window.GetTeam2();
     
     Console.WriteLine(dataTeam1);
     Console.WriteLine(dataTeam2);
-    
-    // todo: construir path y archivo con lo anterior y ponerlo aca
 
-    IView view = new GUIView(window);
+    IView view = new GuiView(window);
     
-    // todo: IDEA, SOBREESCRIBIR SIEMPRE EL MISMO ARCHIVO
-    // USAR FOTOSHOP
+    string data = $"Player 1 Team\n{ dataTeam1 } \nPlayer 2 Team\n{dataTeam2}";
+    string path = Path.Combine ( "TeamsCreadosGUI" , " gui_team.txt");
+    File.WriteAllText( path ,data );
     
-    // todo: es distinto el / para distintos os, arreglar
     var game = new Game(view, "TeamsCreadosGUI");
     game.Play();
+    
+    // TODO: DE ACA PARA ABAJO NO
 
     // Harcodeamos los equipos para propósitos de este ejemplo
     MyUnit[] team1 = [new MyUnit("Marth", "Sword", 54, 62, 53, 43, 37)];
@@ -46,7 +38,7 @@ void RunGuiView()
     ];
 
     // Mostramos la vista con ambos equipos. Desde esta vista se puede elegir a la unidad que ataca
-    window.UpdateTeams(team1, team2);
+    //window.UpdateTeams(team1, team2);
 
     // El primer equipo elige a la unidad con la que atacará (retorna el id de la unidad seleccionada)
     int idSelectedUnitTeam1 = window.SelectUnitTeam1();

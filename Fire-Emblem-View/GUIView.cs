@@ -1,35 +1,48 @@
 using ConsoleApp1.EncapsulatedLists;
 using ConsoleApp1.GameDataStructures;
 using Fire_Emblem_GUI;
+using IUnit = ConsoleApp1.GameDataStructures.IUnit;
 
-namespace Fire_Emblem_View.GuiLib;
+namespace Fire_Emblem_View;
 
-public class GUIView : IView
+public class GuiView : IView
 {
-    private FireEmblemWindow window;
+    private readonly FireEmblemWindow _window;
+    
     private const int IdOfPlayer1 = 0;
     private const int IdOfPlayer2 = 1;
 
-    public GUIView(FireEmblemWindow window)
+    public GuiView(FireEmblemWindow window)
     {
-        this.window = window;
+        this._window = window;
     }
     
     public int AskPlayerForTheChosenFile(string[] files)
     {
-        // todo: sacar este comentario. aca se retorna el ultimo
-        // tal vez sea mejor sobreescribir y retornar siempre 0
-        var filesCounter = 0;
-        foreach (var file in files)
-        {
-            filesCounter++;
-        }
-        return filesCounter - 1;
+        return 0;
     }
 
     public void AnnounceTeamsAreNotValid()
     {
-        window.ShowInvalidTeamMessage();
+        _window.ShowInvalidTeamMessage();
+    }
+
+    public void UpdateTeams(Player player1, Player player2)
+    {
+        IUnit[] team1 = new IUnit[player1.AmountOfUnits];
+        IUnit[] team2 = new IUnit[player2.AmountOfUnits];
+        
+        Console.WriteLine(player1.AmountOfUnits);
+        Console.WriteLine(player2.AmountOfUnits);
+        
+        for (int i = 0; i < player1.AmountOfUnits; i++)
+            team1[i] = player1.Units.GetUnitByIndex(i);
+        
+        for (int i = 0; i < player2.AmountOfUnits; i++)
+            team2[i] = player2.Units.GetUnitByIndex(i);
+        
+        _window.UpdateTeams(team1 as Fire_Emblem_GUI.IUnit[], 
+            team2 as Fire_Emblem_GUI.IUnit[]);
     }
 
     public int[] AskBothPlayersForTheChosenUnit(PlayersList players, int currentAttacker)

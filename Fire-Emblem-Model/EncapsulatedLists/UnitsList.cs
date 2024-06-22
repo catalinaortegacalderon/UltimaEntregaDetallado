@@ -15,9 +15,14 @@ public class UnitsList : IEnumerable<Unit>
 
     IEnumerator IEnumerable.GetEnumerator() 
         => _units.GetEnumerator();
-    
-    public Unit GetUnitByIndex(int index) 
-        => _units[index];
+
+    public Unit GetUnitByIndex(int index)
+    {
+        Console.WriteLine(_units[index].Name);
+        Console.WriteLine(_units[index].Weapon);
+        Console.WriteLine(_units[index].Spd);
+        return _units[index];
+    }
 
     public void AddUnit(int index, Unit unit) 
         => _units[index] = unit;

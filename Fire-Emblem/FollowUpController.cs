@@ -121,14 +121,9 @@ public class FollowUpController
         // todo: revisar, followup denial, condicion, guaranteed...
         const int additionValueForFollowupCondition = 5;
         // todo: encapsular esto en otra parte
-        bool doesFollowupConditionHold =
-            defensiveUnit.Spd
-            + defensiveUnit.ActiveBonus.Spd * defensiveUnit.ActiveBonusNeutralizer.Spd
-            + defensiveUnit.ActivePenalties.Spd * defensiveUnit.ActivePenaltiesNeutralizer.Spd
+        bool doesFollowupConditionHold = TotalStatGetter.GetTotal(StatType.Spd, defensiveUnit) +
             + additionValueForFollowupCondition
-            <= attackingUnit.Spd
-            + attackingUnit.ActiveBonus.Spd * attackingUnit.ActiveBonusNeutralizer.Spd
-            + attackingUnit.ActivePenalties.Spd * attackingUnit.ActivePenaltiesNeutralizer.Spd;
+            <= TotalStatGetter.GetTotal(StatType.Spd, attackingUnit);
 
         return doesFollowupConditionHold;
     }

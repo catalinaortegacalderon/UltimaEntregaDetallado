@@ -25,6 +25,11 @@ public class GameView : IView
         _view.WriteLine("Archivo de equipos no válido");
     }
 
+    public void UpdateTeams(Player player1, Player player2)
+    {
+        return;
+    }
+
     public int[] AskBothPlayersForTheChosenUnit(PlayersList players, int currentAttacker)
     {
         var player1 = players.GetPlayerById(IdOfPlayer1);

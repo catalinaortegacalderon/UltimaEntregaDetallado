@@ -53,6 +53,7 @@ public class Game
         var teamFile = GetTeamFile();
         var gameAttacksControllerBuilder = new GameAttacksControllerBuilder();
         _attackController = gameAttacksControllerBuilder.BuildGameController(File.ReadAllLines(teamFile), _view);
+        UpdateTeams();
         _followUpController = new FollowUpController(_attackController, _view);
 
         while (IsGameNotTerminated())
@@ -95,6 +96,13 @@ public class Game
         _attackController.SetCurrentAttacker(IsPlayer1TheRoundStarter() ? IdOfPlayer1 : IdOfPlayer2);
         StartRound();
         _currentRound++;
+    }
+
+    private void UpdateTeams()
+    {
+        // todo: arreglar este train wreck
+        _view.UpdateTeams(_attackController.GetPlayers().GetPlayerById(IdOfPlayer1),
+            _attackController.GetPlayers().GetPlayerById(IdOfPlayer2));
     }
 
     private bool IsPlayer1TheRoundStarter()
