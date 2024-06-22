@@ -7,14 +7,14 @@ namespace ConsoleApp1.SkillsManagement.Effects.DamageEffects;
 
 public class PercentageDamageReductionDeterminedByResDifferenceEffect : Effect
 {
-    private readonly int _multiplicator;
+    private readonly int _multiplier;
     private readonly double _max;
     private readonly DamageEffectCategory _category;
     
-    public PercentageDamageReductionDeterminedByResDifferenceEffect( int multiplicator, 
+    public PercentageDamageReductionDeterminedByResDifferenceEffect( int multiplier, 
         double max, DamageEffectCategory category)
     {
-        _multiplicator = multiplicator;
+        _multiplier = multiplier;
         _max = max;
         _category = category;
     }
@@ -45,7 +45,7 @@ public class PercentageDamageReductionDeterminedByResDifferenceEffect : Effect
     {
         double myTotalRes = TotalStatGetter.GetTotal(StatType.Res, myUnit);
         double opponentsTotalRes = TotalStatGetter.GetTotal(StatType.Res, opponentsUnit);
-        double reductionPercentage = 1 - (myTotalRes - opponentsTotalRes) * _multiplicator / 100;
+        double reductionPercentage = 1 - (myTotalRes - opponentsTotalRes) * _multiplier / 100;
         if (reductionPercentage < _max) 
             reductionPercentage = _max;
         return reductionPercentage;

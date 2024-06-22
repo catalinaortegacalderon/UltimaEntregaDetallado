@@ -20,6 +20,8 @@ public class PhysNullFollowSkill : Skill
         Conditions[2] = new AlwaysTrueCondition();
         Conditions[3] = new AlwaysTrueCondition();
         Conditions[4] = new AlwaysTrueCondition();
+        Conditions[4].ChangePriorityBecauseEffectPriorityIsBigger(
+            ConditionPriority.PriorityOfConditionsThatRequireDamageReductionInformation);
 
         Effects = new Effect[5];
         Effects[0] = new ChangeOpponentsStatsInEffect(StatType.Spd, -4);
