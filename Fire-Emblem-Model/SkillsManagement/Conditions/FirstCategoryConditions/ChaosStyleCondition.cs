@@ -8,19 +8,23 @@ public class ChaosStyleCondition : Condition
 {
     public override bool DoesItHold(Unit myUnit, Unit opponentsUnit)
     {
-        // todo: hacer funion que revisa las armas, isphysical ismagic
-
         if (myUnit.IsAttacking)
         {
-            if (myUnit.WeaponType == WeaponType.Magic && (opponentsUnit.WeaponType == WeaponType.Bow ||
-                                                  opponentsUnit.WeaponType == WeaponType.Axe ||
-                                                  opponentsUnit.WeaponType == WeaponType.Sword ||
-                                                  opponentsUnit.WeaponType == WeaponType.Lance)) return true;
-            if (opponentsUnit.WeaponType == WeaponType.Magic && (myUnit.WeaponType == WeaponType.Bow || myUnit.WeaponType == WeaponType.Axe ||
-                                                         myUnit.WeaponType == WeaponType.Sword ||
-                                                         myUnit.WeaponType == WeaponType.Lance)) return true;
+            return DoesMagicAttackPhysicalWeapon(myUnit.WeaponType, 
+                       opponentsUnit.WeaponType) 
+                   || DoesMagicAttackPhysicalWeapon(opponentsUnit.WeaponType, 
+                       myUnit.WeaponType);
         }
-
         return false;
+    }
+
+    private static bool DoesMagicAttackPhysicalWeapon(WeaponType attackingWeapon, WeaponType defensiveWeapon)
+    {
+        return attackingWeapon == WeaponType.Magic && IsWeaponPhysical(defensiveWeapon);
+    }
+
+    private static bool IsWeaponPhysical(WeaponType weapon)
+    {
+        return weapon is WeaponType.Bow or WeaponType.Axe or WeaponType.Sword or WeaponType.Lance;
     }
 }
