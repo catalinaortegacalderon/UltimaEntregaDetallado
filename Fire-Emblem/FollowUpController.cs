@@ -118,8 +118,9 @@ public class FollowUpController
             && !attackingUnit.CombatEffects.HasDenialOfGuaranteedFollowUp)
             return true;
         
-        // revisar, followup denial, condicion, guaranteed...
+        // todo: revisar, followup denial, condicion, guaranteed...
         const int additionValueForFollowupCondition = 5;
+        // todo: encapsular esto en otra parte
         bool doesFollowupConditionHold =
             defensiveUnit.Spd
             + defensiveUnit.ActiveBonus.Spd * defensiveUnit.ActiveBonusNeutralizer.Spd
