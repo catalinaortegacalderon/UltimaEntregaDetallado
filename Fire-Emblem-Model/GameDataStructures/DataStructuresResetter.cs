@@ -24,25 +24,27 @@ public static class DataStructuresResetter
         dataStructure.PercentageReductionOpponentsFirstAttack = 1;
         dataStructure.PercentageReductionOpponentsFollowup = 1;
         dataStructure.AbsolutDamageReduction = 0;
-        dataStructure.PercentageReductionReduction = false;
     }
     
     public static void ResetCombatEffects(CombatEffects dataStructure)
-    { 
-        // TODO: ORDENAR ESTO
+    {
+        dataStructure.HpRecuperationAtTheEndOfTheCombat = 0;
         dataStructure.HpRecuperationAtEveryAttack = 0;
         dataStructure.HpLostAtTheBeginning = 0;
+        
         dataStructure.DamageBeforeCombat = 0;
         dataStructure.DamageAfterCombat = 0;
         dataStructure.DamageAfterCombatIfUnitAttacks = 0;
-        dataStructure.HpRecuperationAtTheEndOfTheCombat = 0;
+        
         dataStructure.HasCounterAttackDenial = false;
-        dataStructure.AmountOfEffectsThatDenyFollowup = 0;
         dataStructure.HasNeutralizationOfCounterattackDenial = false;
+        
         dataStructure.HasGuaranteedFollowUp = false;
         dataStructure.AmountOfEffectsThatGuaranteeFollowup = 0;
         dataStructure.HasDenialOfGuaranteedFollowUp = false;
+        
         dataStructure.HasFollowUpDenial = false;
+        dataStructure.AmountOfEffectsThatDenyFollowup = 0;
         dataStructure.HasNeutralizationOfFollowUpDenial = false;
     }
     

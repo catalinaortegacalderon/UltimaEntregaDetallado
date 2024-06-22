@@ -7,12 +7,8 @@ public class ReductionOfPercentageDamageReductionEffect : Effect
 {
     public override void ApplyEffect(Unit myUnit, Unit opponentsUnit)
     {
-        // todo: revisar y aplicar
-        // falta aplicar en ataque y resetear
-        // siempre es a la mitad
+        // todo: arreglar unos tests, problemas con truncar parece, esta en fotos viernes 21
         
-        // TODO: BORRAR ESTO EN TODAS PARTES
-        opponentsUnit.DamageEffects.PercentageReductionReduction = true;
         
         if (opponentsUnit.DamageEffects.PercentageReduction != 1 )
             opponentsUnit.DamageEffects.PercentageReduction = 
@@ -23,11 +19,6 @@ public class ReductionOfPercentageDamageReductionEffect : Effect
         if (opponentsUnit.DamageEffects.PercentageReductionOpponentsFollowup != 1)
             opponentsUnit.DamageEffects.PercentageReductionOpponentsFollowup =
                 GetNewValue(opponentsUnit.DamageEffects.PercentageReductionOpponentsFollowup);
-
-        // ((1 - unit.DamageEffects.PercentageReduction) * 100) ES LO QUE SE IMPRIME
-        // DEBERIA SER A Y SE IMPRIME 2A
-
-        //(1 - unit), luego x 2, luego volver a restarselo
 
     }
 
