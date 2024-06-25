@@ -257,15 +257,15 @@ public class Game
     {
         if (IsPlayer1TheRoundStarter())
         {
-            ExecuteAtacksInOrder(_currentUnitOfPlayer1, _currentUnitOfPlayer2);
+            ExecuteAttacksInOrder(_currentUnitOfPlayer1, _currentUnitOfPlayer2);
         }
         else
         {
-            ExecuteAtacksInOrder(_currentUnitOfPlayer2, _currentUnitOfPlayer1);
+            ExecuteAttacksInOrder(_currentUnitOfPlayer2, _currentUnitOfPlayer1);
         }
     }
 
-    private void ExecuteAtacksInOrder(Unit firstAttacker, Unit secondAttacker)
+    private void ExecuteAttacksInOrder(Unit firstAttacker, Unit secondAttacker)
     {
         _attackController.GenerateAnAttackBetweenTwoUnits(AttackType.FirstAttack, 
             firstAttacker, 

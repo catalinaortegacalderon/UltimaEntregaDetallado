@@ -56,21 +56,12 @@ public class DamageCalculator
 // todo: codigo duplicado unidad y oponente
     private int CalculateUnitsAtk()
     {
-        var unitsAtk = _currentAttackingUnit.Atk + _currentAttackingUnit.ActiveBonus.Atk
-                                                 * _currentAttackingUnit.ActiveBonusNeutralizer.Atk
-                                                 + _currentAttackingUnit.ActivePenalties.Atk
-                                                 * _currentAttackingUnit.ActivePenaltiesNeutralizer.Atk;
+        var unitsAtk = TotalStatGetter.GetTotal(StatType.Atk, _currentAttackingUnit);
 
         if (IsFirstOrSecondAttack())
-            unitsAtk += _currentAttackingUnit.ActiveBonus.AtkFirstAttack
-                        * _currentAttackingUnit.ActiveBonusNeutralizer.Atk
-                        + _currentAttackingUnit.ActivePenalties.AtkFirstAttack
-                        * _currentAttackingUnit.ActivePenaltiesNeutralizer.Atk;
+            unitsAtk += TotalStatGetter.GetFirstAttackStat(StatType.Atk, _currentAttackingUnit);
         if (IsFollowUp())
-            unitsAtk += _currentAttackingUnit.ActiveBonus.AtkFollowup
-                        * _currentAttackingUnit.ActiveBonusNeutralizer.Atk
-                        + _currentAttackingUnit.ActivePenalties.AtkFollowup
-                        * _currentAttackingUnit.ActivePenaltiesNeutralizer.Atk;
+            unitsAtk += TotalStatGetter.GetFollowUpStat(StatType.Atk, _currentAttackingUnit);
         return unitsAtk;
     }
 
@@ -110,16 +101,10 @@ public class DamageCalculator
         }
         else
         {
-            rivalsDefOrRes = _currentDefensiveUnit.Def + _currentDefensiveUnit.ActiveBonus.Def
-                                                       * _currentDefensiveUnit.ActiveBonusNeutralizer.Def
-                                                       + _currentDefensiveUnit.ActivePenalties.Def
-                                                       * _currentDefensiveUnit.ActivePenaltiesNeutralizer.Def;
+            rivalsDefOrRes = TotalStatGetter.GetTotal(StatType.Def, _currentDefensiveUnit);
 
             if (IsFirstOrSecondAttack())
-                rivalsDefOrRes += _currentDefensiveUnit.ActiveBonus.DefFirstAttack
-                                  * _currentDefensiveUnit.ActiveBonusNeutralizer.Def
-                                  + _currentDefensiveUnit.ActivePenalties.DefFirstAttack
-                                  * _currentDefensiveUnit.ActivePenaltiesNeutralizer.Def;
+                rivalsDefOrRes += TotalStatGetter.GetFirstAttackStat(StatType.Def, _currentDefensiveUnit);
         }
 
         return rivalsDefOrRes;
