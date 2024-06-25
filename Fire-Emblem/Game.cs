@@ -22,10 +22,9 @@ public class Game
     
     private GameAttacksController _attackController;
     private FollowUpController _followUpController;
-    private OutOfCombatDamageManager _outOfCombatDamageManager;
+    private OutOfCombatDamageController _outOfCombatDamageController;
     
     // todo: hacer un manager
-    // se encarga de cosas de game y de game attacks controler, todos los manage
     // todo: hay muchas skills parecidas, ver si lo arreglo o no
 
     public Game(IView view, string teamsFolder)
@@ -33,7 +32,7 @@ public class Game
         _view = view;
         _teamsFolder = teamsFolder;
         _currentRound = 1;
-        _outOfCombatDamageManager = new OutOfCombatDamageManager(view);
+        _outOfCombatDamageController = new OutOfCombatDamageController(view);
     }
 
     public void Play()
@@ -100,9 +99,12 @@ public class Game
 
     private void UpdateTeams()
     {
-        // todo: arreglar este train wreck
-        _view.UpdateTeams(_attackController.GetPlayers().GetPlayerById(IdOfPlayer1),
-            _attackController.GetPlayers().GetPlayerById(IdOfPlayer2));
+        var players = _attackController.GetPlayers();
+        
+        var player1 = players.GetPlayerById(IdOfPlayer1);
+        var player2 = players.GetPlayerById(IdOfPlayer2);
+
+        _view.UpdateTeams(player1, player2);
     }
 
     private bool IsPlayer1TheRoundStarter()
@@ -131,12 +133,12 @@ public class Game
     {
         if (IsPlayer1TheRoundStarter())
         {
-            _outOfCombatDamageManager.ManageHpChangeAtTheEndOfTheCombat(
+            _outOfCombatDamageController.ManageHpChangeAtTheEndOfTheCombat(
                 _currentUnitOfPlayer1, _currentUnitOfPlayer2);
         }
         else
         {
-            _outOfCombatDamageManager.ManageHpChangeAtTheEndOfTheCombat(
+            _outOfCombatDamageController.ManageHpChangeAtTheEndOfTheCombat(
                 _currentUnitOfPlayer2, _currentUnitOfPlayer1);
         }
     }
@@ -241,12 +243,12 @@ public class Game
         // todo: hago esto mucho, pensar manera mas eficiente
         if (IsPlayer1TheRoundStarter())
         {
-            _outOfCombatDamageManager.ManageDamageAtTheBeginningOfTheCombat(
+            _outOfCombatDamageController.ManageDamageAtTheBeginningOfTheCombat(
                 _currentUnitOfPlayer1, _currentUnitOfPlayer2);
         }
         else
         {
-            _outOfCombatDamageManager.ManageDamageAtTheBeginningOfTheCombat(
+            _outOfCombatDamageController.ManageDamageAtTheBeginningOfTheCombat(
                 _currentUnitOfPlayer2, _currentUnitOfPlayer1);
         }
     }

@@ -14,7 +14,7 @@ public class FollowUpController
     private readonly IView _view;
 
     private int _idOfTheRoundStarter;
-    private int _otherPlayersId;
+    private int _idOfThePlayerThatDidntStartTheRound;
 
     private Unit _unitThatStartedTheRound;
     private Unit _unitThatDidNotStartTheRound;
@@ -30,19 +30,18 @@ public class FollowUpController
         if (idOfTheRoundStarter == IdOfPlayer1)
         {
             _idOfTheRoundStarter = IdOfPlayer1;
-            _otherPlayersId = IdOfPlayer2;
+            _idOfThePlayerThatDidntStartTheRound = IdOfPlayer2;
         }
         else
         {
             _idOfTheRoundStarter = IdOfPlayer2;
-            // todo: cambiar este nombre
-            _otherPlayersId = IdOfPlayer1;
+            _idOfThePlayerThatDidntStartTheRound = IdOfPlayer1;
         }
 
         _unitThatStartedTheRound = unitThatStartedTheRound;
         _unitThatDidNotStartTheRound = unitThatDidNotStartTheRound;
         
-        // flujo normal
+        // todo: flujo normal
         
         if (CanDoAFollowup(unitThatStartedTheRound, unitThatDidNotStartTheRound))
         {
@@ -54,7 +53,7 @@ public class FollowUpController
         else if (CanDoAFollowup(unitThatDidNotStartTheRound, unitThatStartedTheRound) &&
                  CanASpecificPlayerCounterAttack(unitThatDidNotStartTheRound))
         {
-            _attackController.SetCurrentAttacker(_otherPlayersId);
+            _attackController.SetCurrentAttacker(_idOfThePlayerThatDidntStartTheRound);
             _attackController.GenerateAnAttackBetweenTwoUnits(AttackType.FollowUp, 
                 _unitThatDidNotStartTheRound, 
                 _unitThatStartedTheRound);
@@ -78,7 +77,7 @@ public class FollowUpController
              CanDoAFollowup(unitThatDidNotStartTheRound, unitThatStartedTheRound)))
         {
             Console.WriteLine("PASO POR AQUI");
-            _attackController.SetCurrentAttacker(_otherPlayersId);
+            _attackController.SetCurrentAttacker(_idOfThePlayerThatDidntStartTheRound);
             _attackController.GenerateAnAttackBetweenTwoUnits(AttackType.FollowUp, 
                 _unitThatDidNotStartTheRound, 
                 _unitThatStartedTheRound);
@@ -89,7 +88,7 @@ public class FollowUpController
             )
         {
             Console.WriteLine("PASO POR AQUI 2");
-            _attackController.SetCurrentAttacker(_otherPlayersId);
+            _attackController.SetCurrentAttacker(_idOfThePlayerThatDidntStartTheRound);
             //_attackController.GenerateAnAttackBetweenTwoUnits(AttackType.FollowUp, 
             //    _unitThatDidNotStartTheRound, 
             //    _unitThatStartedTheRound);

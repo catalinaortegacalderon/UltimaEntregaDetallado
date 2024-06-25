@@ -12,7 +12,7 @@ public class GameAttacksController
     private readonly PlayersList _players = new();
     private readonly IView _view;
     private DamageCalculator _damageCalculator;
-    private OutOfCombatDamageManager _outOfCombatDamageManager;
+    private OutOfCombatDamageController _outOfCombatDamageController;
     private Unit _currentAttackingUnit;
     private Unit _currentDefensiveUnit;
     private int _attackValue;
@@ -30,7 +30,7 @@ public class GameAttacksController
         _players.AddPlayer(firstPlayer);
         _players.AddPlayer(secondPlayer);
         _view = view;
-        _outOfCombatDamageManager = new OutOfCombatDamageManager(view);
+        _outOfCombatDamageController = new OutOfCombatDamageController(view);
     }
 
     public void GenerateAnAttackBetweenTwoUnits(AttackType typeOfCurrentAttack, Unit atackingUnit, 
@@ -129,7 +129,7 @@ public class GameAttacksController
 
     private void ManageHpRecuperationInEveryAttack()
     {
-        _outOfCombatDamageManager.ManaManageHpRecuperationInEveryAttack(_currentAttackingUnit, _currentDefensiveUnit,
+        _outOfCombatDamageController.ManaManageHpRecuperationInEveryAttack(_currentAttackingUnit, _currentDefensiveUnit,
             _attackValue);
         
     }

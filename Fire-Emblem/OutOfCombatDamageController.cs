@@ -3,12 +3,12 @@ using Fire_Emblem_View;
 
 namespace Fire_Emblem;
 
-public class OutOfCombatDamageManager
+public class OutOfCombatDamageController
 {
     
     // todo: ordenar esta clase
     private readonly IView _view;
-    public OutOfCombatDamageManager(IView view)
+    public OutOfCombatDamageController(IView view)
     {
         _view = view;
     }
