@@ -73,8 +73,8 @@ public class FollowUpController
         // todo: FIRST CHECK IF ROUND STARTED DID THE FOLLOWUP, EL OTRO HARA EL FOLLOWUP
         // los dos metodos de abajo se parecen mucho
         if (CanDoAFollowup(unitThatStartedTheRound, unitThatDidNotStartTheRound) &&
-            (_unitThatDidNotStartTheRound.CombatEffects.HasGuaranteedFollowUp || 
-             CanDoAFollowup(unitThatDidNotStartTheRound, unitThatStartedTheRound)))
+            //(_unitThatDidNotStartTheRound.CombatEffects.HasGuaranteedFollowUp || 
+             CanDoAFollowup(unitThatDidNotStartTheRound, unitThatStartedTheRound))
         {
             Console.WriteLine("PASO POR AQUI");
             _attackController.SetCurrentAttacker(_idOfThePlayerThatDidntStartTheRound);
