@@ -145,6 +145,8 @@ public class FollowUpController
             && !attackingUnit.CombatEffects.HasDenialOfGuaranteedFollowUp)
             return attackingUnit.CombatEffects.AmountOfEffectsThatGuaranteeFollowup >
                    attackingUnit.CombatEffects.AmountOfEffectsThatDenyFollowup;
+        // con mayor o igual paso menos, me causa ruido test 11 de mix porque es igual pero si deberia
+        // hacerse followup supuestamente
         
         if (attackingUnit.CombatEffects.HasFollowUpDenial
             && ! attackingUnit.CombatEffects.HasNeutralizationOfFollowUpDenial)
