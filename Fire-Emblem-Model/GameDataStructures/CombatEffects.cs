@@ -7,8 +7,6 @@ public class CombatEffects
     
     public int HpRecuperationAtTheEndOfTheCombat = 0; // imp
     
-    public double HpLostAtTheBeginning = 0; // implementar
-    
     public int DamageBeforeCombat = 0; 
     public int DamageAfterCombat = 0; 
     public int DamageAfterCombatIfUnitAttacks = 0; // habra un contador para la unidad,  luego se suma a lo otro si se cumple

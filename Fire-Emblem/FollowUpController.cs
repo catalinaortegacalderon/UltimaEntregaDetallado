@@ -107,8 +107,45 @@ public class FollowUpController
 
     private bool CanDoAFollowup(Unit attackingUnit, Unit defensiveUnit)
     {
+        // paso por guaranteed followup y imprimo todo
+        Console.WriteLine("Paso por can do a followup y imprimo todo");
+        Console.WriteLine(attackingUnit.Name + " tiene:");
+        
+        var combatEffects = attackingUnit.CombatEffects;
+        
+        Console.WriteLine("HpRecuperationAtEveryAttack: " + combatEffects.HpRecuperationAtEveryAttack);
+        Console.WriteLine("HpRecuperationAtTheEndOfTheCombat: " + combatEffects.HpRecuperationAtTheEndOfTheCombat);
+        Console.WriteLine("DamageBeforeCombat: " + combatEffects.DamageBeforeCombat);
+        Console.WriteLine("DamageAfterCombat: " + combatEffects.DamageAfterCombat);
+        Console.WriteLine("DamageAfterCombatIfUnitAttacks: " + combatEffects.DamageAfterCombatIfUnitAttacks);
+        Console.WriteLine("HasCounterAttackDenial: " + combatEffects.HasCounterAttackDenial);
+        Console.WriteLine("HasNeutralizationOfCounterattackDenial: " + combatEffects.HasNeutralizationOfCounterattackDenial);
+        Console.WriteLine("HasGuaranteedFollowUp: " + combatEffects.HasGuaranteedFollowUp);
+        Console.WriteLine("AmountOfEffectsThatGuaranteeFollowup: " + combatEffects.AmountOfEffectsThatGuaranteeFollowup);
+        Console.WriteLine("HasDenialOfGuaranteedFollowUp: " + combatEffects.HasDenialOfGuaranteedFollowUp);
+        Console.WriteLine("HasFollowUpDenial: " + combatEffects.HasFollowUpDenial);
+        Console.WriteLine("AmountOfEffectsThatDenyFollowup: " + combatEffects.AmountOfEffectsThatDenyFollowup);
+        Console.WriteLine("HasNeutralizationOfFollowUpDenial: " + combatEffects.HasNeutralizationOfFollowUpDenial);
+        
+        
         if (!ThereAreNoLosers())
             return false;
+        // parace que followup denial le gana a guaranteed followup, mix parte 2 test 10, pero me causa ruido con test 11
+        // tal vez si parte la ronda entonces guaranteed followup le gana a followup denial?
+        
+        // paso mas tests con followup denial primero
+        
+        // me falto comparar los numeros
+        
+        // manejar caso que tiene followup denial y guarantee followup, todo: poner esto mucho mas bonito
+
+        if (attackingUnit.CombatEffects.HasFollowUpDenial
+            && !attackingUnit.CombatEffects.HasNeutralizationOfFollowUpDenial &&
+            attackingUnit.CombatEffects.HasGuaranteedFollowUp
+            && !attackingUnit.CombatEffects.HasDenialOfGuaranteedFollowUp)
+            return attackingUnit.CombatEffects.AmountOfEffectsThatGuaranteeFollowup >
+                   attackingUnit.CombatEffects.AmountOfEffectsThatDenyFollowup;
+        
         if (attackingUnit.CombatEffects.HasFollowUpDenial
             && ! attackingUnit.CombatEffects.HasNeutralizationOfFollowUpDenial)
             return false;
