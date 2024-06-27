@@ -27,6 +27,57 @@ public class FollowUpController
     public void ManageFollowup(Unit unitThatStartedTheRound, Unit unitThatDidNotStartTheRound, 
         int idOfTheRoundStarter)
     {
+        SetUnits(unitThatStartedTheRound, unitThatDidNotStartTheRound, idOfTheRoundStarter);
+        ManageMainDecisionFlow(unitThatStartedTheRound, unitThatDidNotStartTheRound);
+        ExecuteSecondFollowUpIfApplicable(unitThatStartedTheRound, unitThatDidNotStartTheRound);
+    }
+
+    private void ExecuteSecondFollowUpIfApplicable(Unit unitThatStartedTheRound, Unit unitThatDidNotStartTheRound)
+    {
+        if (CanDoAFollowup(unitThatStartedTheRound, unitThatDidNotStartTheRound) &&
+            CanDoAFollowup(unitThatDidNotStartTheRound, unitThatStartedTheRound))
+        {
+            _attackController.SetCurrentAttacker(_idOfThePlayerThatDidntStartTheRound);
+            _attackController.GenerateAnAttackBetweenTwoUnits(AttackType.FollowUp, 
+                _unitThatDidNotStartTheRound, 
+                _unitThatStartedTheRound);
+        }
+
+    }
+
+    private void ManageMainDecisionFlow(Unit unitThatStartedTheRound, Unit unitThatDidNotStartTheRound)
+    {
+        if (CanDoAFollowup(unitThatStartedTheRound, unitThatDidNotStartTheRound))
+        {
+            GenerateAttack(_idOfTheRoundStarter, _unitThatStartedTheRound, 
+                _unitThatDidNotStartTheRound);
+        }
+        else if (CanDoAFollowup(unitThatDidNotStartTheRound, unitThatStartedTheRound) &&
+                 CanASpecificPlayerCounterAttack(unitThatDidNotStartTheRound))
+        {
+            GenerateAttack(_idOfThePlayerThatDidntStartTheRound, _unitThatDidNotStartTheRound,
+                _unitThatStartedTheRound);
+        }
+        else if ( AttackerCantDoFollowup() && !CanASpecificPlayerCounterAttack(unitThatDidNotStartTheRound)
+                                           && ThereAreNoLosers())
+        { 
+            _view.AnnounceASpecificUnitCantDoAFollowup(unitThatStartedTheRound.Name);
+        }
+        else if (ThereAreNoLosers())
+        {
+            _view.AnnounceNoUnitCanDoAFollowup();
+        }
+    }
+
+    private void GenerateAttack(int idOfTheRoundStarter, Unit attackingUnit, Unit defensiveUnit)
+    {
+        _attackController.SetCurrentAttacker(idOfTheRoundStarter);
+        _attackController.GenerateAnAttackBetweenTwoUnits(AttackType.FollowUp, attackingUnit, 
+            defensiveUnit);
+    }
+
+    private void SetUnits(Unit unitThatStartedTheRound, Unit unitThatDidNotStartTheRound, int idOfTheRoundStarter)
+    {
         if (idOfTheRoundStarter == IdOfPlayer1)
         {
             _idOfTheRoundStarter = IdOfPlayer1;
@@ -40,60 +91,8 @@ public class FollowUpController
 
         _unitThatStartedTheRound = unitThatStartedTheRound;
         _unitThatDidNotStartTheRound = unitThatDidNotStartTheRound;
-        
-        // todo: flujo normal
-        
-        if (CanDoAFollowup(unitThatStartedTheRound, unitThatDidNotStartTheRound))
-        {
-            _attackController.SetCurrentAttacker(_idOfTheRoundStarter);
-            _attackController.GenerateAnAttackBetweenTwoUnits(AttackType.FollowUp, 
-                _unitThatStartedTheRound, 
-                _unitThatDidNotStartTheRound);
-        }
-        else if (CanDoAFollowup(unitThatDidNotStartTheRound, unitThatStartedTheRound) &&
-                 CanASpecificPlayerCounterAttack(unitThatDidNotStartTheRound))
-        {
-            _attackController.SetCurrentAttacker(_idOfThePlayerThatDidntStartTheRound);
-            _attackController.GenerateAnAttackBetweenTwoUnits(AttackType.FollowUp, 
-                _unitThatDidNotStartTheRound, 
-                _unitThatStartedTheRound);
-        }
-        else if ( AttackerCantDoFollowup() && !CanASpecificPlayerCounterAttack(unitThatDidNotStartTheRound)
-                 && ThereAreNoLosers())
-        { 
-            _view.AnnounceASpecificUnitCantDoAFollowup(unitThatStartedTheRound.Name);
-        }
-        else if (ThereAreNoLosers())
-        {
-            _view.AnnounceNoUnitCanDoAFollowup();
-        }
-        
-        // si uno ya lo hizo pero le toca al otro
-        
-        // todo: FIRST CHECK IF ROUND STARTED DID THE FOLLOWUP, EL OTRO HARA EL FOLLOWUP
-        // los dos metodos de abajo se parecen mucho
-        if (CanDoAFollowup(unitThatStartedTheRound, unitThatDidNotStartTheRound) &&
-             CanDoAFollowup(unitThatDidNotStartTheRound, unitThatStartedTheRound))
-        {
-            Console.WriteLine("PASO POR AQUI");
-            _attackController.SetCurrentAttacker(_idOfThePlayerThatDidntStartTheRound);
-            _attackController.GenerateAnAttackBetweenTwoUnits(AttackType.FollowUp, 
-                _unitThatDidNotStartTheRound, 
-                _unitThatStartedTheRound);
-        }
-        
-        if (CanDoAFollowup(unitThatStartedTheRound, unitThatDidNotStartTheRound) &&
-            CanDoAFollowup(unitThatDidNotStartTheRound, unitThatStartedTheRound)
-            )
-        {
-            Console.WriteLine("PASO POR AQUI 2");
-            _attackController.SetCurrentAttacker(_idOfThePlayerThatDidntStartTheRound);
-            //_attackController.GenerateAnAttackBetweenTwoUnits(AttackType.FollowUp, 
-            //    _unitThatDidNotStartTheRound, 
-            //    _unitThatStartedTheRound);
-        }
     }
-    
+
     private bool AttackerCantDoFollowup()
     {
         return !CanDoAFollowup(_unitThatStartedTheRound, _unitThatDidNotStartTheRound);
