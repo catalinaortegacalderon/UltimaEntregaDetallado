@@ -24,6 +24,7 @@ public static class DataStructuresResetter
         dataStructure.PercentageReductionOpponentsFirstAttack = 1;
         dataStructure.PercentageReductionOpponentsFollowup = 1;
         dataStructure.AbsolutDamageReduction = 0;
+        dataStructure.ReductionOfPercentageReduction = 1;
     }
     
     public static void ResetCombatEffects(CombatEffects dataStructure)

@@ -142,6 +142,14 @@ public class FollowUpController
         if (attackingUnit.CombatEffects.HasFollowUpDenial
             && !attackingUnit.CombatEffects.HasNeutralizationOfFollowUpDenial &&
             attackingUnit.CombatEffects.HasGuaranteedFollowUp
+            && !attackingUnit.CombatEffects.HasDenialOfGuaranteedFollowUp &&
+            (attackingUnit.CombatEffects.AmountOfEffectsThatGuaranteeFollowup ==
+             attackingUnit.CombatEffects.AmountOfEffectsThatDenyFollowup))
+            return DoesSpdFollowupConditionHold(attackingUnit, defensiveUnit);
+
+        if (attackingUnit.CombatEffects.HasFollowUpDenial
+            && !attackingUnit.CombatEffects.HasNeutralizationOfFollowUpDenial &&
+            attackingUnit.CombatEffects.HasGuaranteedFollowUp
             && !attackingUnit.CombatEffects.HasDenialOfGuaranteedFollowUp)
             return attackingUnit.CombatEffects.AmountOfEffectsThatGuaranteeFollowup >
                    attackingUnit.CombatEffects.AmountOfEffectsThatDenyFollowup;
@@ -156,13 +164,18 @@ public class FollowUpController
             return true;
         
         // todo: revisar, followup denial, condicion, guaranteed...
-        const int additionValueForFollowupCondition = 5;
-        // todo: encapsular esto en otra parte
-        bool doesFollowupConditionHold = TotalStatGetter.GetTotal(StatType.Spd, defensiveUnit) +
-            + additionValueForFollowupCondition
-            <= TotalStatGetter.GetTotal(StatType.Spd, attackingUnit);
+        var doesFollowupConditionHold = DoesSpdFollowupConditionHold(attackingUnit, defensiveUnit);
 
         return doesFollowupConditionHold;
+    }
+
+    private static bool DoesSpdFollowupConditionHold(Unit attackingUnit, Unit defensiveUnit)
+    {
+        const int additionValueForFollowupCondition = 5;
+        
+        return  TotalStatGetter.GetTotal(StatType.Spd, defensiveUnit) +
+                + additionValueForFollowupCondition
+                <= TotalStatGetter.GetTotal(StatType.Spd, attackingUnit);
     }
 
     private bool ThereAreNoLosers()
