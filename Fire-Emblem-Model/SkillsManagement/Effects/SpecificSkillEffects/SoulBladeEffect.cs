@@ -2,7 +2,7 @@ using ConsoleApp1.GameDataStructures;
 
 namespace ConsoleApp1.SkillsManagement.Effects.SpecificSkillEffects;
 
-public class SoulbladeEffect : Effect
+public class SoulBladeEffect : Effect
 {
     public override void ApplyEffect(Unit myUnit, Unit opponentsUnit)
         // todo: funcionnnn
@@ -11,10 +11,14 @@ public class SoulbladeEffect : Effect
         var refDesAverageInt = Convert.ToInt32(Math.Truncate(refDesAverage));
         var defChange = refDesAverageInt - opponentsUnit.Def;
         var resChange = refDesAverageInt - opponentsUnit.Res;
-        if (defChange < 0) opponentsUnit.ActivePenalties.Def += defChange;
+
+        if (defChange < 0)
+            opponentsUnit.ActivePenalties.Def += defChange;
         else
             opponentsUnit.ActiveBonus.Def += defChange;
-        if (resChange < 0) opponentsUnit.ActivePenalties.Res += resChange;
+        
+        if (resChange < 0) 
+            opponentsUnit.ActivePenalties.Res += resChange;
         else
             opponentsUnit.ActiveBonus.Res += resChange;
     }

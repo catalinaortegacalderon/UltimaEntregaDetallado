@@ -11,19 +11,19 @@ public class BewitchingTomeEffect : Effect
 
     public override void ApplyEffect(Unit myUnit, Unit opponentsUnit)
     {
-        int damageAfterCombat = CalculateDamageAfterCombat(myUnit, opponentsUnit);
+        var damageAfterCombat = CalculateDamageAfterCombat(myUnit, opponentsUnit);
         AddDamageAfterCombat(opponentsUnit, damageAfterCombat);
     }
 
     private static int CalculateDamageAfterCombat(Unit myUnit, Unit opponentsUnit)
     {
-        int rivalsAttack = TotalStatGetter.GetTotal(StatType.Atk, opponentsUnit);
-        int myTotalSpd = TotalStatGetter.GetTotal(StatType.Spd, myUnit);
-        int opponentsTotalSpd = TotalStatGetter.GetTotal(StatType.Spd, opponentsUnit);
+        var rivalsAttack = TotalStatGetter.GetTotal(StatType.Atk, opponentsUnit);
+        var myTotalSpd = TotalStatGetter.GetTotal(StatType.Spd, myUnit);
+        var opponentsTotalSpd = TotalStatGetter.GetTotal(StatType.Spd, opponentsUnit);
 
-        bool myUnitHasWeaponAdvantage = DamageCalculator.HasAttackerAdvantage(myUnit.WeaponType, opponentsUnit.WeaponType);
+        var myUnitHasWeaponAdvantage = DamageCalculator.HasAttackerAdvantage(myUnit.WeaponType, opponentsUnit.WeaponType);
 
-        double damageMultiplier = myTotalSpd > opponentsTotalSpd || myUnitHasWeaponAdvantage 
+        var damageMultiplier = myTotalSpd > opponentsTotalSpd || myUnitHasWeaponAdvantage 
             ? FirstCasePercentage 
             : SecondCasePercentage;
 

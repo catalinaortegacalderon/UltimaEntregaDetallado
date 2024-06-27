@@ -4,6 +4,7 @@ namespace Fire_Emblem_View;
 
 public class SkillsPrinter
 {
+    // todo: mucho codigo repetido
     public static void PrintAll(View view, Unit unit)
     {
         PrintBonus(view, unit);
@@ -125,20 +126,15 @@ public class SkillsPrinter
         if (unit.CombatEffects.HasNeutralizationOfCounterattackDenial && unit.CombatEffects.HasCounterAttackDenial)
             view.WriteLine(unit.Name + " neutraliza los efectos que previenen sus contraataques");
         if (unit.CombatEffects.HasGuaranteedFollowUp)
-            // todo: revisar esto
             view.WriteLine(unit.Name + " tiene " + unit.CombatEffects.AmountOfEffectsThatGuaranteeFollowup 
                            + " efecto(s) que garantiza(n) su follow up activo(s)");
         if (unit.CombatEffects.HasFollowUpDenial)
-            // todo: revisar esto
             view.WriteLine(unit.Name + " tiene " + unit.CombatEffects.AmountOfEffectsThatDenyFollowup 
                            + " efecto(s) que neutraliza(n) su follow up activo(s)");
         if (unit.CombatEffects.HasNeutralizationOfFollowUpDenial)
             view.WriteLine(unit.Name + " es inmune a los efectos que neutralizan su follow up");
         if (unit.CombatEffects.HasDenialOfGuaranteedFollowUp)
             view.WriteLine(unit.Name + " es inmune a los efectos que garantizan su follow up");
-        // TODO: VER ORDEN DE ESTE ÚLTIMO
-        //if (unit.CombatEffects.HasCounterAttackDenial && !unit.CombatEffects.HasNeutralizationOfCounterattackDenial)
-            //view.WriteLine(unit.Name + " no podrá contraatacar");
         
     }
 }

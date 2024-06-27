@@ -1,25 +1,23 @@
+using ConsoleApp1.DataTypes;
 using ConsoleApp1.GameDataStructures;
+using Fire_Emblem;
 
 namespace ConsoleApp1.SkillsManagement.Conditions.SecondCategoryConditions;
 
 
 public class CompareTotalSpdAddingSpdToTheOpponent : SecondCategoryCondition
 {
-    // todo: funcion
     private readonly int _amountToAdd;
         
     public CompareTotalSpdAddingSpdToTheOpponent(int amountToAdd)
     {
-        this._amountToAdd = amountToAdd;
+        _amountToAdd = amountToAdd;
     }
     
     public override bool DoesItHold(Unit myUnit, Unit opponentsUnit)
     {
-        var myTotalSpd = myUnit.Spd + myUnit.ActiveBonus.Spd * myUnit.ActiveBonusNeutralizer.Spd
-                                    + myUnit.ActivePenalties.Spd * myUnit.ActivePenaltiesNeutralizer.Spd;
-        var opponentsTotalSpd =
-            opponentsUnit.Spd + opponentsUnit.ActiveBonus.Spd * opponentsUnit.ActiveBonusNeutralizer.Spd
-                              + opponentsUnit.ActivePenalties.Spd * opponentsUnit.ActivePenaltiesNeutralizer.Spd;
+        var myTotalSpd = TotalStatGetter.GetTotal( StatType.Spd, myUnit);
+        var opponentsTotalSpd = TotalStatGetter.GetTotal( StatType.Spd, opponentsUnit);
 
         return myTotalSpd >= opponentsTotalSpd + _amountToAdd;
     }
