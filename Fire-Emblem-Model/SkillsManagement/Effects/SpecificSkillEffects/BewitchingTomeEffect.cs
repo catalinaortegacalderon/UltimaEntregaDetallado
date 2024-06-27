@@ -6,29 +6,32 @@ namespace ConsoleApp1.SkillsManagement.Effects.SpecificSkillEffects;
 
 public class BewitchingTomeEffect : Effect
 {
+    private const double FirstCasePercentage = 0.4;
+    private const double SecondCasePercentage = 0.2;
+
     public override void ApplyEffect(Unit myUnit, Unit opponentsUnit)
     {
-        // todo: encapsular
-        var rivalsAttack = TotalStatGetter.GetTotal(StatType.Atk, opponentsUnit);
-        
-        // todo: nose si esto es considerando total o solo bonus, parece que esta bien
-        var myTotalSpd = TotalStatGetter.GetTotal(StatType.Spd, myUnit);
-        var opponentsTotalSpd  = TotalStatGetter.GetTotal(StatType.Spd, opponentsUnit);
+        int damageAfterCombat = CalculateDamageAfterCombat(myUnit, opponentsUnit);
+        AddDamageAfterCombat(opponentsUnit, damageAfterCombat);
+    }
 
-        var myUnitHasWeaponAdvantage = DamageCalculator.HasAttackerAdvantage(myUnit.WeaponType,
-            opponentsUnit.WeaponType);
-        
-        int amount;
-        
-        if (myTotalSpd > opponentsTotalSpd || myUnitHasWeaponAdvantage)
-        {
-            amount = (int) (rivalsAttack * 0.4); 
-        }
-        else
-        {
-            amount = (int) (rivalsAttack * 0.2); 
-        }
+    private static int CalculateDamageAfterCombat(Unit myUnit, Unit opponentsUnit)
+    {
+        int rivalsAttack = TotalStatGetter.GetTotal(StatType.Atk, opponentsUnit);
+        int myTotalSpd = TotalStatGetter.GetTotal(StatType.Spd, myUnit);
+        int opponentsTotalSpd = TotalStatGetter.GetTotal(StatType.Spd, opponentsUnit);
 
+        bool myUnitHasWeaponAdvantage = DamageCalculator.HasAttackerAdvantage(myUnit.WeaponType, opponentsUnit.WeaponType);
+
+        double damageMultiplier = myTotalSpd > opponentsTotalSpd || myUnitHasWeaponAdvantage 
+            ? FirstCasePercentage 
+            : SecondCasePercentage;
+
+        return (int)(rivalsAttack * damageMultiplier);
+    }
+
+    private static void AddDamageAfterCombat(Unit opponentsUnit, int amount)
+    {
         opponentsUnit.CombatEffects.DamageBeforeCombat += amount;
     }
 }

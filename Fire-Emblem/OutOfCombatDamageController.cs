@@ -17,7 +17,7 @@ public class OutOfCombatDamageController
     {
         if (UnitRecuperatesHp(attackingUnit))
         {
-            int amountOfHpRecuperated = CalculateAmountOfHpRecuperated(attackingUnit, attackValue);
+            var amountOfHpRecuperated = CalculateAmountOfHpRecuperated(attackingUnit, attackValue);
             ApplyRecuperatedHp(attackingUnit, amountOfHpRecuperated);
             AnnounceHpRecuperation(attackingUnit, amountOfHpRecuperated);
         }
