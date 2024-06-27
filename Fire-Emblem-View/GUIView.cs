@@ -141,12 +141,12 @@ public class GuiView : IView
         }
     }
 
-    public void AnnounceASpecificUnitCantDoAFollowup(string name)
+    public void AnnounceUnitCannotFollowUp(string name)
     {
         return;
     }
 
-    public void AnnounceNoUnitCanDoAFollowup()
+    public void AnnounceNoUnitCanFollowUp()
     {
         return;
     }

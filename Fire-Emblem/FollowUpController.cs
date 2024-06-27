@@ -6,148 +6,131 @@ namespace Fire_Emblem;
 
 public class FollowUpController
 {
-    
-    private const int IdOfPlayer1 = 0;
-    private const int IdOfPlayer2 = 1;
-    
+    private const int Player1Id = 0;
+    private const int Player2Id = 1;
+    private const int SpeedFollowUpThreshold = 5;
+
     private readonly GameAttacksController _attackController;
     private readonly IView _view;
 
-    private int _idOfTheRoundStarter;
-    private int _idOfThePlayerThatDidntStartTheRound;
+    private int _roundStarterId;
+    private int _nonStarterId;
 
-    private Unit _unitThatStartedTheRound;
-    private Unit _unitThatDidNotStartTheRound;
-    
+    private Unit _roundStarter;
+    private Unit _nonStarter;
+
     public FollowUpController(GameAttacksController attackController, IView view)
     {
         _attackController = attackController;
         _view = view;
     }
-    public void ManageFollowup(Unit unitThatStartedTheRound, Unit unitThatDidNotStartTheRound, 
-        int idOfTheRoundStarter)
+
+    public void ManageFollowup(Unit roundStarter, Unit nonStarter, int roundStarterId)
     {
-        SetUnits(unitThatStartedTheRound, unitThatDidNotStartTheRound, idOfTheRoundStarter);
-        ManageMainDecisionFlow(unitThatStartedTheRound, unitThatDidNotStartTheRound);
-        ExecuteSecondFollowUpIfApplicable(unitThatStartedTheRound, unitThatDidNotStartTheRound);
+        SetUnits(roundStarter, nonStarter, roundStarterId);
+        HandleMainFlow(roundStarter, nonStarter);
+        HandleSecondFollowUpIfApplicable(roundStarter, nonStarter);
     }
 
-    private void ExecuteSecondFollowUpIfApplicable(Unit unitThatStartedTheRound, Unit unitThatDidNotStartTheRound)
+    private void HandleSecondFollowUpIfApplicable(Unit roundStarter, Unit nonStarter)
     {
-        if (BothUnitsCanDoAFollowUp(unitThatStartedTheRound, unitThatDidNotStartTheRound))
+        if (BothUnitsCanFollowUp(roundStarter, nonStarter))
         {
-            GenerateAttack(_idOfThePlayerThatDidntStartTheRound, _unitThatDidNotStartTheRound,
-                _unitThatStartedTheRound);
+            ExecuteAttack(_nonStarterId, _nonStarter, _roundStarter);
         }
-
     }
 
-    private bool BothUnitsCanDoAFollowUp(Unit unitThatStartedTheRound, Unit unitThatDidNotStartTheRound)
+    private bool BothUnitsCanFollowUp(Unit roundStarter, Unit nonStarter)
     {
-        return CanDoAFollowup(unitThatStartedTheRound, unitThatDidNotStartTheRound) &&
-               CanDoAFollowup(unitThatDidNotStartTheRound, unitThatStartedTheRound);
+        return CanFollowUp(roundStarter, nonStarter) && CanFollowUp(nonStarter, roundStarter);
     }
 
-    private void ManageMainDecisionFlow(Unit unitThatStartedTheRound, Unit unitThatDidNotStartTheRound)
+    private void HandleMainFlow(Unit roundStarter, Unit nonStarter)
     {
-        // todo: falta trabajo aqui
-        if (CanDoAFollowup(unitThatStartedTheRound, unitThatDidNotStartTheRound))
+        if (CanFollowUp(roundStarter, nonStarter))
         {
-            GenerateAttack(_idOfTheRoundStarter, _unitThatStartedTheRound, 
-                _unitThatDidNotStartTheRound);
+            ExecuteAttack(_roundStarterId, _roundStarter, _nonStarter);
         }
-        else if (CanDoAFollowup(unitThatDidNotStartTheRound, unitThatStartedTheRound) &&
-                 CanASpecificPlayerCounterAttack(unitThatDidNotStartTheRound))
+        else if (CanFollowUp(nonStarter, roundStarter) && CanCounterAttack(nonStarter))
         {
-            GenerateAttack(_idOfThePlayerThatDidntStartTheRound, _unitThatDidNotStartTheRound,
-                _unitThatStartedTheRound);
+            ExecuteAttack(_nonStarterId, _nonStarter, _roundStarter);
         }
-        else if ( AttackerCantDoFollowup() && !CanASpecificPlayerCounterAttack(unitThatDidNotStartTheRound)
-                                           && ThereAreNoLosers())
-        { 
-            _view.AnnounceASpecificUnitCantDoAFollowup(unitThatStartedTheRound.Name);
-        }
-        else if (ThereAreNoLosers())
+        else if (CannotFollowUp(nonStarter))
         {
-            _view.AnnounceNoUnitCanDoAFollowup();
+            _view.AnnounceUnitCannotFollowUp(_roundStarter.Name);
         }
-    }
-
-    private void GenerateAttack(int idOfTheRoundStarter, Unit attackingUnit, Unit defensiveUnit)
-    {
-        _attackController.SetCurrentAttacker(idOfTheRoundStarter);
-        _attackController.GenerateAnAttackBetweenTwoUnits(AttackType.FollowUp, attackingUnit, 
-            defensiveUnit);
-    }
-
-    private void SetUnits(Unit unitThatStartedTheRound, Unit unitThatDidNotStartTheRound, int idOfTheRoundStarter)
-    {
-        if (idOfTheRoundStarter == IdOfPlayer1)
+        else if (BothUnitsAlive())
         {
-            _idOfTheRoundStarter = IdOfPlayer1;
-            _idOfThePlayerThatDidntStartTheRound = IdOfPlayer2;
+            _view.AnnounceNoUnitCanFollowUp();
         }
-        else
-        {
-            _idOfTheRoundStarter = IdOfPlayer2;
-            _idOfThePlayerThatDidntStartTheRound = IdOfPlayer1;
-        }
-
-        _unitThatStartedTheRound = unitThatStartedTheRound;
-        _unitThatDidNotStartTheRound = unitThatDidNotStartTheRound;
     }
 
-    private bool AttackerCantDoFollowup()
+    private bool CannotFollowUp(Unit nonStarter)
     {
-        return !CanDoAFollowup(_unitThatStartedTheRound, _unitThatDidNotStartTheRound);
+        return !CanFollowUp(_roundStarter, _nonStarter) && !CanCounterAttack(nonStarter) && BothUnitsAlive();
     }
 
-    private bool CanASpecificPlayerCounterAttack(Unit unit)
+    private void ExecuteAttack(int attackerId, Unit attacker, Unit defender)
     {
-        return !unit.CombatEffects.HasCounterAttackDenial || 
-                   unit.CombatEffects.HasNeutralizationOfCounterattackDenial;;
+        _attackController.SetCurrentAttacker(attackerId);
+        _attackController.GenerateAnAttackBetweenTwoUnits(AttackType.FollowUp, attacker, defender);
     }
 
-    private bool CanDoAFollowup(Unit attackingUnit, Unit defensiveUnit)
+    private void SetUnits(Unit roundStarter, Unit nonStarter, int roundStarterId)
     {
-        // todo: arreglar aca
-        if (!ThereAreNoLosers())
-            return false;
-        if (attackingUnit.CombatEffects.HasFollowUpDenial
-            && !attackingUnit.CombatEffects.HasNeutralizationOfFollowUpDenial &&
-            attackingUnit.CombatEffects.HasGuaranteedFollowUp
-            && !attackingUnit.CombatEffects.HasDenialOfGuaranteedFollowUp &&
-            (attackingUnit.CombatEffects.AmountOfEffectsThatGuaranteeFollowup ==
-             attackingUnit.CombatEffects.AmountOfEffectsThatDenyFollowup))
-            return DoesSpdFollowupConditionHold(attackingUnit, defensiveUnit);
-        if (attackingUnit.CombatEffects.HasFollowUpDenial
-            && !attackingUnit.CombatEffects.HasNeutralizationOfFollowUpDenial &&
-            attackingUnit.CombatEffects.HasGuaranteedFollowUp
-            && !attackingUnit.CombatEffects.HasDenialOfGuaranteedFollowUp)
-            return attackingUnit.CombatEffects.AmountOfEffectsThatGuaranteeFollowup >
-                   attackingUnit.CombatEffects.AmountOfEffectsThatDenyFollowup;
-        if (attackingUnit.CombatEffects.HasFollowUpDenial
-            && ! attackingUnit.CombatEffects.HasNeutralizationOfFollowUpDenial)
-            return false;
-        if (attackingUnit.CombatEffects.HasGuaranteedFollowUp
-            && !attackingUnit.CombatEffects.HasDenialOfGuaranteedFollowUp)
-            return true;
+        _roundStarterId = roundStarterId == Player1Id ? Player1Id : Player2Id;
+        _nonStarterId = roundStarterId == Player1Id ? Player2Id : Player1Id;
 
-        var doesFollowupConditionHold = DoesSpdFollowupConditionHold(attackingUnit, defensiveUnit);
-        return doesFollowupConditionHold;
+        _roundStarter = roundStarter;
+        _nonStarter = nonStarter;
     }
 
-    private static bool DoesSpdFollowupConditionHold(Unit attackingUnit, Unit defensiveUnit)
+    private bool CanCounterAttack(Unit unit)
     {
-        const int additionValueForFollowupCondition = 5;
-        
-        return  TotalStatGetter.GetTotal(StatType.Spd, defensiveUnit) +
-                + additionValueForFollowupCondition
-                <= TotalStatGetter.GetTotal(StatType.Spd, attackingUnit);
+        return !unit.CombatEffects.HasCounterAttackDenial || unit.CombatEffects.HasNeutralizationOfCounterattackDenial;
     }
 
-    private bool ThereAreNoLosers()
+    private bool CanFollowUp(Unit attacker, Unit defender)
     {
-        return _unitThatStartedTheRound.Hp != 0 && _unitThatDidNotStartTheRound.Hp != 0;
+        if (!BothUnitsAlive()) return false;
+        if (HasEqualFollowUpEffects(attacker)) return MeetsSpeedFollowUpCondition(attacker, defender);
+        if (HasMixedFollowUpEffects(attacker)) return attacker.CombatEffects.AmountOfEffectsThatGuaranteeFollowup > attacker.CombatEffects.AmountOfEffectsThatDenyFollowup;
+        if (HasFollowUpDenial(attacker)) return false;
+        if (HasGuaranteedFollowUp(attacker)) return true;
+
+        return MeetsSpeedFollowUpCondition(attacker, defender);
+    }
+
+    private static bool HasGuaranteedFollowUp(Unit unit)
+    {
+        return unit.CombatEffects.HasGuaranteedFollowUp && !unit.CombatEffects.HasDenialOfGuaranteedFollowUp;
+    }
+
+    private static bool HasFollowUpDenial(Unit unit)
+    {
+        return unit.CombatEffects.HasFollowUpDenial && !unit.CombatEffects.HasNeutralizationOfFollowUpDenial;
+    }
+
+    private static bool HasMixedFollowUpEffects(Unit unit)
+    {
+        return unit.CombatEffects.HasFollowUpDenial && !unit.CombatEffects.HasNeutralizationOfFollowUpDenial &&
+               unit.CombatEffects.HasGuaranteedFollowUp && !unit.CombatEffects.HasDenialOfGuaranteedFollowUp;
+    }
+
+    private static bool HasEqualFollowUpEffects(Unit unit)
+    {
+        return unit.CombatEffects.HasFollowUpDenial && !unit.CombatEffects.HasNeutralizationOfFollowUpDenial &&
+               unit.CombatEffects.HasGuaranteedFollowUp && !unit.CombatEffects.HasDenialOfGuaranteedFollowUp &&
+               unit.CombatEffects.AmountOfEffectsThatGuaranteeFollowup == unit.CombatEffects.AmountOfEffectsThatDenyFollowup;
+    }
+
+    private static bool MeetsSpeedFollowUpCondition(Unit attacker, Unit defender)
+    {
+        return TotalStatGetter.GetTotal(StatType.Spd, defender) + SpeedFollowUpThreshold <= TotalStatGetter.GetTotal(StatType.Spd, attacker);
+    }
+
+    private bool BothUnitsAlive()
+    {
+        return _roundStarter.Hp != 0 && _nonStarter.Hp != 0;
     }
 }

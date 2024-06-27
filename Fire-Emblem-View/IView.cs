@@ -18,8 +18,8 @@ public interface IView
     public void AnnounceCurationAfterCombat(Unit unitThatRecievesCuration, int recuperatedAmount);
     public void AnnounceDamageAfterCombat(Unit unitThatRecievesDamage, int damage);
     public void ShowAttack(string attackersName, string defensorsName, int damage);
-    public void AnnounceASpecificUnitCantDoAFollowup(String name);
-    public void AnnounceNoUnitCanDoAFollowup();
+    public void AnnounceUnitCannotFollowUp(String name);
+    public void AnnounceNoUnitCanFollowUp();
     public void ShowHp(Unit roundStarterUnit, Unit opponentsUnit);
     public void AnnounceWinner(int winnersNumber);
 }
