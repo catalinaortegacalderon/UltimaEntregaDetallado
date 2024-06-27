@@ -134,12 +134,12 @@ public class Game
     {
         if (IsPlayer1TheRoundStarter())
         {
-            _outOfCombatDamageController.ManageHpChangeAtTheEndOfTheCombat(
+            _outOfCombatDamageController.ManageHpChangeAtTheEndOfCombat(
                 _currentUnitOfPlayer1, _currentUnitOfPlayer2);
         }
         else
         {
-            _outOfCombatDamageController.ManageHpChangeAtTheEndOfTheCombat(
+            _outOfCombatDamageController.ManageHpChangeAtTheEndOfCombat(
                 _currentUnitOfPlayer2, _currentUnitOfPlayer1);
         }
     }
@@ -244,12 +244,12 @@ public class Game
         // todo: hago esto mucho, pensar manera mas eficiente
         if (IsPlayer1TheRoundStarter())
         {
-            _outOfCombatDamageController.ManageDamageAtTheBeginningOfTheCombat(
+            _outOfCombatDamageController.ManageDamageAtTheBeginningOfCombat(
                 _currentUnitOfPlayer1, _currentUnitOfPlayer2);
         }
         else
         {
-            _outOfCombatDamageController.ManageDamageAtTheBeginningOfTheCombat(
+            _outOfCombatDamageController.ManageDamageAtTheBeginningOfCombat(
                 _currentUnitOfPlayer2, _currentUnitOfPlayer1);
         }
     }

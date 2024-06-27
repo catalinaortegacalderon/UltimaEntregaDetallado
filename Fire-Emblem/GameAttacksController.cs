@@ -129,7 +129,7 @@ public class GameAttacksController
 
     private void ManageHpRecuperationInEveryAttack()
     {
-        _outOfCombatDamageController.ManaManageHpRecuperationInEveryAttack(_currentAttackingUnit,
+        _outOfCombatDamageController.ManageHpRecuperationInEveryAttack(_currentAttackingUnit,
             _attackValue);
         
     }
