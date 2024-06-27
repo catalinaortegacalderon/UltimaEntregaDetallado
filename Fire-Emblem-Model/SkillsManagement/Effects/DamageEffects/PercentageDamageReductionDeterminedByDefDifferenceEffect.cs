@@ -27,17 +27,21 @@ public class PercentageDamageReductionDeterminedByDefDifferenceEffect : Effect
 
     private void ApplyReductionPercentage(Unit myUnit, double reductionPercentage)
     {
-        switch (_category)
+        if (_category == DamageEffectCategory.All)
         {
-            case DamageEffectCategory.All:
-                myUnit.DamageEffects.PercentageReduction *= reductionPercentage;
-                break;
-            case DamageEffectCategory.FirstAttack:
-                myUnit.DamageEffects.PercentageReductionOpponentsFirstAttack *= reductionPercentage;
-                break;
-            case DamageEffectCategory.FollowUp:
-                myUnit.DamageEffects.PercentageReductionOpponentsFollowup *= reductionPercentage;
-                break;
+            myUnit.DamageEffects.PercentageReduction *= reductionPercentage;
+            myUnit.DamageEffects.AmountOfEffectsOfPercentageReduction++;
+        }
+        else if (_category == DamageEffectCategory.FirstAttack)
+        {
+            myUnit.DamageEffects.PercentageReductionOpponentsFirstAttack *= reductionPercentage;
+            myUnit.DamageEffects.AmountOfEffectsOfPercentageReductionOpponentsFirstAttack++;
+        }
+        
+        else if (_category == DamageEffectCategory.FollowUp)
+        {
+            myUnit.DamageEffects.PercentageReductionOpponentsFollowup *= reductionPercentage;
+            myUnit.DamageEffects.AmountOfEffectsOfPercentageReductionOpponentsFollowup++;
         }
     }
 

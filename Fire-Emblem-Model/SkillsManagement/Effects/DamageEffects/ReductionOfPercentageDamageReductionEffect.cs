@@ -17,21 +17,24 @@ public class ReductionOfPercentageDamageReductionEffect : Effect
         
         if (opponentsUnit.DamageEffects.PercentageReduction != 1 )
             opponentsUnit.DamageEffects.PercentageReduction = 
-                GetNewValue(opponentsUnit.DamageEffects.PercentageReduction, opponentsUnit);
+                GetNewValue(opponentsUnit.DamageEffects.PercentageReduction, 
+                    opponentsUnit.DamageEffects.AmountOfEffectsOfPercentageReduction);
         if (opponentsUnit.DamageEffects.PercentageReductionOpponentsFirstAttack != 1)
             opponentsUnit.DamageEffects.PercentageReductionOpponentsFirstAttack =
-                GetNewValue(opponentsUnit.DamageEffects.PercentageReductionOpponentsFirstAttack, opponentsUnit);
+                GetNewValue(opponentsUnit.DamageEffects.PercentageReductionOpponentsFirstAttack, 
+                    opponentsUnit.DamageEffects.AmountOfEffectsOfPercentageReductionOpponentsFirstAttack);
         if (opponentsUnit.DamageEffects.PercentageReductionOpponentsFollowup != 1)
             opponentsUnit.DamageEffects.PercentageReductionOpponentsFollowup =
-                GetNewValue(opponentsUnit.DamageEffects.PercentageReductionOpponentsFollowup, opponentsUnit);
+                GetNewValue(opponentsUnit.DamageEffects.PercentageReductionOpponentsFollowup, 
+                    opponentsUnit.DamageEffects.AmountOfEffectsOfPercentageReductionOpponentsFollowup);
 
     }
 
-    private double GetNewValue(double currentValue, Unit opponentsUnit)
+    private double GetNewValue(double currentValue, int amountOfEffects)
     {
         // todo: encapsular 0.5
         var reduction = 1 - currentValue;
-        var newReduction = reduction * (0.5) ;
+        var newReduction = reduction * Math.Pow(0.5, amountOfEffects) ;
         var finalDataStructureValue = 1 - newReduction;
         return finalDataStructureValue;
     }

@@ -11,6 +11,7 @@ public class GuardBearingEffect : Effect
             IsTheFirstTimeMyUnitIsInACombatStartedByTheOpponent(myUnit, opponentsUnit)) 
             percentage = 0.4;
         myUnit.DamageEffects.PercentageReduction *= percentage;
+        myUnit.DamageEffects.AmountOfEffectsOfPercentageReduction++;
     }
 
     private static bool IsTheFirstTimeMyUnitsStartsTheCombat(Unit myUnit)

@@ -173,16 +173,16 @@ public class GameAttacksController
 
     private void ResetUnitSkills(Unit unit)
     {
-        DataStructuresResetter.ResetBonusPenaltiesAndNeutralizersToASpecificValue(unit.ActiveBonus, 
+        DataStructuresReseter.ResetBonusPenaltiesAndNeutralizersToASpecificValue(unit.ActiveBonus, 
             0);
-        DataStructuresResetter.ResetBonusPenaltiesAndNeutralizersToASpecificValue(unit.ActivePenalties, 
+        DataStructuresReseter.ResetBonusPenaltiesAndNeutralizersToASpecificValue(unit.ActivePenalties, 
             0);
-        DataStructuresResetter.ResetBonusPenaltiesAndNeutralizersToASpecificValue(unit.ActiveBonusNeutralizer, 
+        DataStructuresReseter.ResetBonusPenaltiesAndNeutralizersToASpecificValue(unit.ActiveBonusNeutralizer, 
             1);
-        DataStructuresResetter.ResetBonusPenaltiesAndNeutralizersToASpecificValue(unit.ActivePenaltiesNeutralizer, 
+        DataStructuresReseter.ResetBonusPenaltiesAndNeutralizersToASpecificValue(unit.ActivePenaltiesNeutralizer, 
             1);
-        DataStructuresResetter.ResetDamageGameStructure(unit.DamageEffects);
-        DataStructuresResetter.ResetCombatEffects(unit.CombatEffects);
+        DataStructuresReseter.ResetDamageGameStructure(unit.DamageEffects);
+        DataStructuresReseter.ResetCombatEffects(unit.CombatEffects);
         
     }
 

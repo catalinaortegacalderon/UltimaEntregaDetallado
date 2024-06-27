@@ -18,18 +18,22 @@ public class PercentageDamageReductionConsideringOpponentsHpEffect : Effect
         var percentageReduction = opponentsUnit.Hp / (double)opponentsUnit.MaxHp / 2;
         percentageReduction = Math.Truncate(100.0 * percentageReduction) / 100.0;
         var finalPercentage = 1 - percentageReduction;
-
-        switch (_type)
+        
+        if (_type == DamageEffectCategory.All)
         {
-            case DamageEffectCategory.All:
-                myUnit.DamageEffects.PercentageReduction *= finalPercentage;
-                break;
-            case DamageEffectCategory.FirstAttack:
-                myUnit.DamageEffects.PercentageReductionOpponentsFirstAttack *= finalPercentage;
-                break;
-            case DamageEffectCategory.FollowUp:
-                myUnit.DamageEffects.PercentageReductionOpponentsFollowup *= finalPercentage;
-                break;
+            myUnit.DamageEffects.PercentageReduction *= finalPercentage;
+            myUnit.DamageEffects.AmountOfEffectsOfPercentageReduction++;
+        }
+        else if (_type == DamageEffectCategory.FirstAttack)
+        {
+            myUnit.DamageEffects.PercentageReductionOpponentsFirstAttack *= finalPercentage;
+            myUnit.DamageEffects.AmountOfEffectsOfPercentageReductionOpponentsFirstAttack++;
+        }
+        
+        else if (_type == DamageEffectCategory.FollowUp)
+        {
+            myUnit.DamageEffects.PercentageReductionOpponentsFollowup *= finalPercentage;
+            myUnit.DamageEffects.AmountOfEffectsOfPercentageReductionOpponentsFollowup++;
         }
     }
 }

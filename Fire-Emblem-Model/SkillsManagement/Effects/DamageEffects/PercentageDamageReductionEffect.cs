@@ -18,10 +18,20 @@ public class PercentageDamageReductionEffect : Effect
     public override void ApplyEffect(Unit myUnit, Unit opponentsUnit)
     {
         if (_type == DamageEffectCategory.All)
+        {
             myUnit.DamageEffects.PercentageReduction *= _percentage;
+            myUnit.DamageEffects.AmountOfEffectsOfPercentageReduction++;
+        }
         else if (_type == DamageEffectCategory.FirstAttack)
+        {
             myUnit.DamageEffects.PercentageReductionOpponentsFirstAttack *= _percentage;
+            myUnit.DamageEffects.AmountOfEffectsOfPercentageReductionOpponentsFirstAttack++;
+        }
+        
         else if (_type == DamageEffectCategory.FollowUp)
+        {
             myUnit.DamageEffects.PercentageReductionOpponentsFollowup *= _percentage;
+            myUnit.DamageEffects.AmountOfEffectsOfPercentageReductionOpponentsFollowup++;
+        }
     }
 }

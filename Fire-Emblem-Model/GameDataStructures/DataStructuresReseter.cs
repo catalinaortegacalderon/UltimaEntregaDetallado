@@ -1,6 +1,6 @@
 namespace ConsoleApp1.GameDataStructures;
 
-public static class DataStructuresResetter
+public static class DataStructuresReseter
 {
     public static void ResetBonusPenaltiesAndNeutralizersToASpecificValue(BonusPenaltiesAndNeutralizers
         dataStructure, int valueToResetTo)
@@ -20,10 +20,17 @@ public static class DataStructuresResetter
         dataStructure.ExtraDamage = 0;
         dataStructure.ExtraDamageFirstAttack = 0;
         dataStructure.ExtraDamageFollowup = 0;
+        
         dataStructure.PercentageReduction = 1;
         dataStructure.PercentageReductionOpponentsFirstAttack = 1;
         dataStructure.PercentageReductionOpponentsFollowup = 1;
+        
+        dataStructure.AmountOfEffectsOfPercentageReduction = 0;
+        dataStructure.AmountOfEffectsOfPercentageReductionOpponentsFirstAttack = 0;
+        dataStructure.AmountOfEffectsOfPercentageReductionOpponentsFollowup = 0;
+        
         dataStructure.AbsolutDamageReduction = 0;
+        
         dataStructure.ReductionOfPercentageReduction = 1;
     }
     
