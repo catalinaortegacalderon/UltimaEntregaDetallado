@@ -1,20 +1,16 @@
+using ConsoleApp1.DataTypes;
 using ConsoleApp1.GameDataStructures;
+using Fire_Emblem;
 
 namespace ConsoleApp1.SkillsManagement.Conditions.SecondCategoryConditions;
 
 public class CompareMyAtkWithOpponentsResCondition : SecondCategoryCondition
 {
-    // todo: agregar funcion para calcular el if final
     public override bool DoesItHold(Unit myUnit, Unit opponentsUnit)
     {
-        var myTotalAtk =
-            myUnit.Atk + myUnit.ActiveBonus.Atk * myUnit.ActiveBonusNeutralizer.Atk
-                       + myUnit.ActivePenalties.Atk * myUnit.ActivePenaltiesNeutralizer.Atk;
-        var opponentsTotalRes =
-            opponentsUnit.Res + opponentsUnit.ActiveBonus.Res * opponentsUnit.ActiveBonusNeutralizer.Res
-                              + opponentsUnit.ActivePenalties.Res * opponentsUnit.ActivePenaltiesNeutralizer.Res;
+        var myTotalAtk = TotalStatGetter.GetTotal(StatType.Atk, myUnit);
+        var opponentsTotalRes = TotalStatGetter.GetTotal(StatType.Res, opponentsUnit);
 
-        if (myTotalAtk > opponentsTotalRes) return true;
-        return false;
+        return myTotalAtk > opponentsTotalRes;
     }
 }

@@ -13,7 +13,7 @@ public class GameView : IView
     {
         _view = view;
     }
-
+    
     public int AskPlayerForTheChosenFile(string[] files)
     {
         ShowTeamFilesToUser(files);

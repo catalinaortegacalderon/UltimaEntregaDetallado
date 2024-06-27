@@ -6,7 +6,7 @@ using ConsoleApp1.SkillsManagement.Skills.BonusSkills;
 
 namespace ConsoleApp1.GameDataStructures;
 
-public class ConditionEffectPair : IEnumerable
+public class ConditionEffectPair
 {
     public readonly Condition Condition;
     public readonly Effect Effect;
@@ -24,19 +24,17 @@ public class ConditionEffectPair : IEnumerable
 
     private void ManageDivineRecreationsOrBrashAssaultSpecialCase()
     {
-        // todo: encapsular
-        if ((Effect is DivineRecreationEffect || Effect is BrashAssaultEffect)
-            && UnitThatHasThePair.StartedTheRound)
+        if (IsSpecialCaseAndCertainUnitStartsRound(UnitThatHasThePair))
             Condition.ChangePriorityBecauseEffectPriorityIsBigger(ConditionPriority
                 .PriorityOfDivineRecreationWhenUnitBeginsCombat);
-        if ((Effect is DivineRecreationEffect || Effect is BrashAssaultEffect)
-            && OpponentsUnit.StartedTheRound)
+        if (IsSpecialCaseAndCertainUnitStartsRound(OpponentsUnit))
             Condition.ChangePriorityBecauseEffectPriorityIsBigger(ConditionPriority
                 .PriorityOfDivineRecreationWhenOpponentBeginsCombat);
     }
 
-    public IEnumerator GetEnumerator()
+    private bool IsSpecialCaseAndCertainUnitStartsRound(Unit unit)
     {
-        throw new NotImplementedException();
+        return Effect is DivineRecreationEffect or BrashAssaultEffect
+               && unit.StartedTheRound;
     }
 }
