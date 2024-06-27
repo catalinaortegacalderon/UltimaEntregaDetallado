@@ -18,7 +18,7 @@ using ConsoleApp1.SkillsManagement.Skills.SkillsThatAffectCombat.HealingSkills;
 
 namespace ConsoleApp1.SkillsManagement;
 
-public class SkillConstructor
+public abstract class SkillConstructor
 {
     public static void Construct(SkillsList skills, string skillString, int skillsCounter)
     {
@@ -42,7 +42,6 @@ public class SkillConstructor
             skills.AddSkill(skillsCounter, new AttackPlus6Skill());
         else if (skillString == "Bracing Blow")
             skills.AddSkill(skillsCounter, new BracingBlowSkill());
-
         else if (skillString == "Will to Win")
             skills.AddSkill(skillsCounter, new WillToWinSkill());
         else if (skillString == "Tome Precision")
@@ -320,6 +319,27 @@ public class SkillConstructor
         return skillString.Split(new[] { ' ', '/' },
             StringSplitOptions.RemoveEmptyEntries)[0] == skillName;
     }
+    
+    private static void CreateGuard(string skillString, int skillsCounter, SkillsList skills)
+    {
+        var weaponString = skillString.Split(" ")[0];
+        var weapon = GetWeaponTypeFromString(weaponString);
+        skills.AddSkill(skillsCounter, new Guard(weapon));
+    }
+
+    private static WeaponType GetWeaponTypeFromString(string weaponString)
+    {
+        var weapon = weaponString switch
+        {
+            "Magic" => WeaponType.Magic,
+            "Axe" => WeaponType.Axe,
+            "Lance" => WeaponType.Lance,
+            "Bow" => WeaponType.Bow,
+            "Sword" => WeaponType.Sword,
+            _ => WeaponType.Empty
+        };
+        return weapon;
+    }
 
     private static void CreateStance(string skillString, int skillsCounter, SkillsList skills)
     {
@@ -373,25 +393,27 @@ public class SkillConstructor
     {
         return skillString.Split(" ")[0] == type && skillString.Split(" ")[1] == "Stance";
     }
-
-    private static void CreateGuard(string skillString, int skillsCounter, SkillsList skills)
-    {
-        // todo: arreglar esto, tengo convertidor para stat pero no para weapon
-        
-        var weapon = WeaponType.Empty;
-        var weaponString = skillString.Split(" ")[0];
-        weapon = weaponString switch
-        {
-            "Magic" => WeaponType.Magic,
-            "Axe" => WeaponType.Axe,
-            "Lance" => WeaponType.Lance,
-            "Bow" => WeaponType.Bow,
-            "Sword" => WeaponType.Sword,
-            _ => weapon
-        };
-        skills.AddSkill(skillsCounter, new Guard(weapon));
-    }
     
+    private static void CreatePush(string skillString, int skillsCounter, SkillsList skills)
+    {
+        var firstStat = GetStatFromString(skillString, 0);
+        var secondStat = GetStatFromString(skillString, 1);
+        skills.AddSkill(skillsCounter, new PushSkill(firstStat, secondStat));
+    }
+
+    private static StatType ConvertStatStringToStatType(string statString)
+    {
+        var stat = statString switch
+        {
+            "Atk" => StatType.Atk,
+            "Res" => StatType.Res,
+            "Def" => StatType.Def,
+            "Spd" => StatType.Spd,
+            _ => StatType.None
+        };
+        return stat;
+    }
+
     private static void CreateImpact(string skillString, int skillsCounter, SkillsList skills)
     {
         var impactType = skillString.Split(" ")[0];
@@ -434,7 +456,6 @@ public class SkillConstructor
         skills.AddSkill(skillsCounter, skill);
     }
     
-    // todo: arreglar orden
     
     private static void CreateFlight(string skillString, int skillsCounter, SkillsList skills)
     {
@@ -452,25 +473,5 @@ public class SkillConstructor
         }
         
         skills.AddSkill(skillsCounter, skill);
-    }
-
-    private static void CreatePush(string skillString, int skillsCounter, SkillsList skills)
-    {
-        var firstStat = GetStatFromString(skillString, 0);
-        var secondSatat = GetStatFromString(skillString, 1);
-        skills.AddSkill(skillsCounter, new PushSkill(firstStat, secondSatat));
-    }
-
-    private static StatType ConvertStatStringToStatType(string statString)
-    {
-        var stat = StatType.None;
-        if (statString == "Atk")
-            stat = StatType.Atk;
-        else if (statString == "Res")
-            stat = StatType.Res;
-        else if (statString == "Def")
-            stat = StatType.Def;
-        else if (statString == "Spd") stat = StatType.Spd;
-        return stat;
     }
 }
