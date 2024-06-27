@@ -42,7 +42,8 @@ public class FollowUpController
 
     private bool BothUnitsCanFollowUp(Unit roundStarter, Unit nonStarter)
     {
-        return CanFollowUp(roundStarter, nonStarter) && CanFollowUp(nonStarter, roundStarter);
+        return CanFollowUp(roundStarter, nonStarter) && CanFollowUp(nonStarter, 
+            roundStarter);
     }
 
     private void HandleMainFlow(Unit roundStarter, Unit nonStarter)
@@ -67,7 +68,8 @@ public class FollowUpController
 
     private bool CannotFollowUp(Unit nonStarter)
     {
-        return !CanFollowUp(_roundStarter, _nonStarter) && !CanCounterAttack(nonStarter) && BothUnitsAlive();
+        return !CanFollowUp(_roundStarter, _nonStarter) && !CanCounterAttack(nonStarter) 
+                                                        && BothUnitsAlive();
     }
 
     private void ExecuteAttack(int attackerId, Unit attacker, Unit defender)
@@ -93,10 +95,15 @@ public class FollowUpController
     private bool CanFollowUp(Unit attacker, Unit defender)
     {
         if (!BothUnitsAlive()) return false;
-        if (HasEqualFollowUpEffects(attacker)) return MeetsSpeedFollowUpCondition(attacker, defender);
-        if (HasMixedFollowUpEffects(attacker)) return attacker.CombatEffects.AmountOfEffectsThatGuaranteeFollowup > attacker.CombatEffects.AmountOfEffectsThatDenyFollowup;
-        if (HasFollowUpDenial(attacker)) return false;
-        if (HasGuaranteedFollowUp(attacker)) return true;
+        if (HasEqualFollowUpEffects(attacker)) 
+            return MeetsSpeedFollowUpCondition(attacker, defender);
+        if (HasMixedFollowUpEffects(attacker)) 
+            return attacker.CombatEffects.AmountOfEffectsThatGuaranteeFollowup > 
+                   attacker.CombatEffects.AmountOfEffectsThatDenyFollowup;
+        if (HasFollowUpDenial(attacker)) 
+            return false;
+        if (HasGuaranteedFollowUp(attacker)) 
+            return true;
 
         return MeetsSpeedFollowUpCondition(attacker, defender);
     }
@@ -121,12 +128,14 @@ public class FollowUpController
     {
         return unit.CombatEffects.HasFollowUpDenial && !unit.CombatEffects.HasNeutralizationOfFollowUpDenial &&
                unit.CombatEffects.HasGuaranteedFollowUp && !unit.CombatEffects.HasDenialOfGuaranteedFollowUp &&
-               unit.CombatEffects.AmountOfEffectsThatGuaranteeFollowup == unit.CombatEffects.AmountOfEffectsThatDenyFollowup;
+               unit.CombatEffects.AmountOfEffectsThatGuaranteeFollowup 
+               == unit.CombatEffects.AmountOfEffectsThatDenyFollowup;
     }
 
     private static bool MeetsSpeedFollowUpCondition(Unit attacker, Unit defender)
     {
-        return TotalStatGetter.GetTotal(StatType.Spd, defender) + SpeedFollowUpThreshold <= TotalStatGetter.GetTotal(StatType.Spd, attacker);
+        return TotalStatGetter.GetTotal(StatType.Spd, defender) + SpeedFollowUpThreshold 
+               <= TotalStatGetter.GetTotal(StatType.Spd, attacker);
     }
 
     private bool BothUnitsAlive()
