@@ -84,45 +84,38 @@ public class GuiView : IView
     {
         // todo: tal vez esto no va aca pero ponerlo en algun lugar
         _window.UpdateUnitsStatsDuringBattle(_unitTeam1, _unitTeam2);
-        return;
     }
 
     public void AnnounceAdvantage(Unit unitWithAdvantage, Unit unitWithoutAdvantage)
     {
-        return;
     }
 
     public void AnnounceThereIsNoAdvantage()
     {
-        return;
     }
 
     public void ShowAllSkills(Unit unit)
     {
-        return;
     }
 
     public void AnnounceHpRecuperation(Unit unitThatRecuperatesHp, int amount, int finalHp)
     {
-        return;
     }
 
-    public void AnnounceDamageBeforeCombat(Unit unitThatRecievesDamage, int damage)
+    public void AnnounceDamageBeforeCombat(Unit unitThatReceivesDamage, int damage)
+    {
+    }
+
+    public void AnnounceCurationAfterCombat(Unit unitThatReceivesCuration, int recuperatedAmount)
+    {
+    }
+
+    public void AnnounceDamageAfterCombat(Unit unitThatReceivesDamage, int damage)
     {
         return;
     }
 
-    public void AnnounceCurationAfterCombat(Unit unitThatRecievesCuration, int recuperatedAmount)
-    {
-        return;
-    }
-
-    public void AnnounceDamageAfterCombat(Unit unitThatRecievesDamage, int damage)
-    {
-        return;
-    }
-
-    public void ShowAttack(string attackersName, string defensorsName, int damage)
+    public void ShowAttack(string attackersName, string defendersName, int damage)
     {
         // todo: pensar en como actualizarlo, los teams y los units
         // ojo, queda neggg el hp a veces

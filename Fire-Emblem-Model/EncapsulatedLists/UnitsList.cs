@@ -18,9 +18,6 @@ public class UnitsList : IEnumerable<Unit>
 
     public Unit GetUnitByIndex(int index)
     {
-        Console.WriteLine(_units[index].Name);
-        Console.WriteLine(_units[index].Weapon);
-        Console.WriteLine(_units[index].Spd);
         return _units[index];
     }
 

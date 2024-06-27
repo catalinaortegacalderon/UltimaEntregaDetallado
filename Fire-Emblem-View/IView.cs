@@ -14,10 +14,10 @@ public interface IView
     public void AnnounceThereIsNoAdvantage();
     public void ShowAllSkills(Unit unit);
     public void AnnounceHpRecuperation(Unit unitThatRecuperatesHp, int amount, int finalHp);
-    public void AnnounceDamageBeforeCombat(Unit unitThatRecievesDamage, int damage);
-    public void AnnounceCurationAfterCombat(Unit unitThatRecievesCuration, int recuperatedAmount);
-    public void AnnounceDamageAfterCombat(Unit unitThatRecievesDamage, int damage);
-    public void ShowAttack(string attackersName, string defensorsName, int damage);
+    public void AnnounceDamageBeforeCombat(Unit unitThatReceivesDamage, int damage);
+    public void AnnounceCurationAfterCombat(Unit unitThatReceivesCuration, int recuperatedAmount);
+    public void AnnounceDamageAfterCombat(Unit unitThatReceivesDamage, int damage);
+    public void ShowAttack(string attackersName, string defendersName, int damage);
     public void AnnounceUnitCannotFollowUp(String name);
     public void AnnounceNoUnitCanFollowUp();
     public void ShowHp(Unit roundStarterUnit, Unit opponentsUnit);

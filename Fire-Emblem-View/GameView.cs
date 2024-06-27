@@ -95,25 +95,25 @@ public class GameView : IView
                         $"y queda con {finalHp} HP.");
     }
 
-    public void AnnounceDamageBeforeCombat(Unit unitThatRecievesDamage, int damage)
+    public void AnnounceDamageBeforeCombat(Unit unitThatReceivesDamage, int damage)
     {
-        _view.WriteLine($"{unitThatRecievesDamage.Name} recibe {damage} de daño antes de iniciar el combate " +
-                        $"y queda con {unitThatRecievesDamage.Hp} HP");
+        _view.WriteLine($"{unitThatReceivesDamage.Name} recibe {damage} de daño antes de iniciar el combate " +
+                        $"y queda con {unitThatReceivesDamage.Hp} HP");
     }
 
-    public void AnnounceCurationAfterCombat(Unit unitThatRecievesCuration, int recuperatedAmount)
+    public void AnnounceCurationAfterCombat(Unit unitThatReceivesCuration, int recuperatedAmount)
     {
-        _view.WriteLine($"{unitThatRecievesCuration.Name} recupera {recuperatedAmount} HP despues del combate");
+        _view.WriteLine($"{unitThatReceivesCuration.Name} recupera {recuperatedAmount} HP despues del combate");
     }
 
-    public void AnnounceDamageAfterCombat(Unit unitThatRecievesDamage, int damage)
+    public void AnnounceDamageAfterCombat(Unit unitThatReceivesDamage, int damage)
     {
-        _view.WriteLine($"{unitThatRecievesDamage.Name} recibe {damage} de daño despues del combate");
+        _view.WriteLine($"{unitThatReceivesDamage.Name} recibe {damage} de daño despues del combate");
     }
 
-    public void ShowAttack(string attackersName, string defensorsName, int damage)
+    public void ShowAttack(string attackersName, string defendersName, int damage)
     {
-        _view.WriteLine($"{attackersName} ataca a {defensorsName} con {damage} de daño");
+        _view.WriteLine($"{attackersName} ataca a {defendersName} con {damage} de daño");
     }
 
     public void AnnounceUnitCannotFollowUp(string name)
