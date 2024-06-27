@@ -13,11 +13,13 @@ public class GameView : IView
     {
         _view = view;
     }
-    
+
     public int AskPlayerForTheChosenFile(string[] files)
     {
         ShowTeamFilesToUser(files);
-        return Convert.ToInt32(_view.ReadLine());
+        if (int.TryParse(_view.ReadLine(), out int fileIndex))
+            return fileIndex;
+        return AskPlayerForTheChosenFile(files);
     }
 
     public void AnnounceTeamsAreNotValid()
@@ -27,7 +29,6 @@ public class GameView : IView
 
     public void UpdateTeams(Player player1, Player player2)
     {
-        return;
     }
 
     public int[] AskBothPlayersForTheChosenUnit(PlayersList players, int currentAttacker)
@@ -56,25 +57,26 @@ public class GameView : IView
     {
         return currentAttacker == IdOfPlayer1;
     }
+
     private int AskAPlayerForTheChosenUnit(int playerNumber, UnitsList units)
     {
         PrintUnitOptions(playerNumber, units);
-        var chosenUnitNumber = Convert.ToInt32(_view.ReadLine());
-        return chosenUnitNumber;
+        if (int.TryParse(_view.ReadLine(), out int chosenUnitNumber))
+        {
+            return chosenUnitNumber;
+        }
+        return AskAPlayerForTheChosenUnit(playerNumber, units);
     }
 
     public void ShowRoundInformation(int currentRound, string attackersName, int playersNumber)
     {
-        _view.WriteLine("Round " + currentRound + ": "
-                        + attackersName + " (Player " + playersNumber + ") comienza");
+        _view.WriteLine($"Round {currentRound}: {attackersName} (Player {playersNumber}) comienza");
     }
 
     public void AnnounceAdvantage(Unit unitWithAdvantage, Unit unitWithoutAdvantage)
     {
-        // todo: queda mejor $"{unit} ({weapon}) tiene ...}"
-        _view.WriteLine(unitWithAdvantage.Name + " (" + unitWithAdvantage.WeaponType +
-                        ") tiene ventaja con respecto a " + unitWithoutAdvantage.Name + " ("
-                        + unitWithoutAdvantage.WeaponType + ")");
+        _view.WriteLine($"{unitWithAdvantage.Name} ({unitWithAdvantage.WeaponType}) " +
+                        $"tiene ventaja con respecto a {unitWithoutAdvantage.Name} ({unitWithoutAdvantage.WeaponType})");
     }
 
     public void AnnounceThereIsNoAdvantage()
@@ -89,34 +91,34 @@ public class GameView : IView
 
     public void AnnounceHpRecuperation(Unit unitThatRecuperatesHp, int amount, int finalHp)
     {
-        _view.WriteLine(unitThatRecuperatesHp.Name + " recupera " + amount + " HP luego de atacar y queda con " +
-                        finalHp + " HP.");
+        _view.WriteLine($"{unitThatRecuperatesHp.Name} recupera {amount} HP luego de atacar " +
+                        $"y queda con {finalHp} HP.");
     }
-    
+
     public void AnnounceDamageBeforeCombat(Unit unitThatRecievesDamage, int damage)
     {
-        _view.WriteLine(unitThatRecievesDamage.Name + " recibe " + damage 
-                        + " de daño antes de iniciar el combate y queda con " + unitThatRecievesDamage.Hp
-                        + " HP");
+        _view.WriteLine($"{unitThatRecievesDamage.Name} recibe {damage} de daño antes de iniciar el combate " +
+                        $"y queda con {unitThatRecievesDamage.Hp} HP");
     }
-    
+
     public void AnnounceCurationAfterCombat(Unit unitThatRecievesCuration, int recuperatedAmount)
     {
-        _view.WriteLine(unitThatRecievesCuration.Name + " recupera " + recuperatedAmount + " HP despues del combate");
+        _view.WriteLine($"{unitThatRecievesCuration.Name} recupera {recuperatedAmount} HP despues del combate");
     }
+
     public void AnnounceDamageAfterCombat(Unit unitThatRecievesDamage, int damage)
     {
-        _view.WriteLine(unitThatRecievesDamage.Name + " recibe " + damage + " de daño despues del combate");
+        _view.WriteLine($"{unitThatRecievesDamage.Name} recibe {damage} de daño despues del combate");
     }
 
     public void ShowAttack(string attackersName, string defensorsName, int damage)
     {
-        _view.WriteLine(attackersName + " ataca a " + defensorsName + " con " + damage + " de daño");
+        _view.WriteLine($"{attackersName} ataca a {defensorsName} con {damage} de daño");
     }
-    
-    public void AnnounceUnitCannotFollowUp(String name)
+
+    public void AnnounceUnitCannotFollowUp(string name)
     {
-        _view.WriteLine(name + " no puede hacer un follow up");
+        _view.WriteLine($"{name} no puede hacer un follow up");
     }
 
     public void AnnounceNoUnitCanFollowUp()
@@ -126,26 +128,21 @@ public class GameView : IView
 
     public void ShowHp(Unit roundStarterUnit, Unit opponentsUnit)
     {
-        _view.WriteLine(roundStarterUnit.Name +
-                        " (" + roundStarterUnit.Hp +
-                        ") : " + opponentsUnit.Name +
-                        " (" + opponentsUnit.Hp +
-                        ")");
+        _view.WriteLine($"{roundStarterUnit.Name} ({roundStarterUnit.Hp}) : {opponentsUnit.Name} " +
+                        $"({opponentsUnit.Hp})");
     }
 
     public void AnnounceWinner(int winnersNumber)
     {
-        _view.WriteLine("Player " + winnersNumber + " ganó");
+        _view.WriteLine($"Player {winnersNumber} ganó");
     }
 
     private void ShowTeamFilesToUser(string[] files)
     {
         _view.WriteLine("Elige un archivo para cargar los equipos");
-        var filesCounter = 0;
-        foreach (var file in files)
+        for (int i = 0; i < files.Length; i++)
         {
-            _view.WriteLine(filesCounter + ": " + Path.GetFileName(file));
-            filesCounter++;
+            _view.WriteLine($"{i}: {Path.GetFileName(files[i])}");
         }
     }
 
@@ -153,10 +150,11 @@ public class GameView : IView
     {
         var unitNumberCounter = 0;
         var playerNumberString = playerNumber == 0 ? "1" : "2";
-        _view.WriteLine("Player " + playerNumberString + " selecciona una opción");
+        _view.WriteLine($"Player {playerNumberString} selecciona una opción");
         foreach (var unit in units)
         {
-            if (unit.Name != "") _view.WriteLine(unitNumberCounter + ": " + unit.Name);
+            if (unit.Name != "")
+                _view.WriteLine(unitNumberCounter + ": " + unit.Name);
             unitNumberCounter++;
         }
     }
