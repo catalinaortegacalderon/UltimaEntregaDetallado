@@ -5,6 +5,7 @@ namespace Fire_Emblem;
 
 public class OutOfCombatDamageController
 {
+    private const int MinimumHp = 1;
     private readonly IView _view;
 
     public OutOfCombatDamageController(IView view)
@@ -67,7 +68,8 @@ public class OutOfCombatDamageController
     {
         if (unit.CombatEffects.DamageBeforeCombat <= 0) return;
 
-        unit.Hp = unit.Hp <= unit.CombatEffects.DamageBeforeCombat ? 1 : unit.Hp - unit.CombatEffects.DamageBeforeCombat;
+        unit.Hp = unit.Hp <= unit.CombatEffects.DamageBeforeCombat ? MinimumHp 
+            : unit.Hp - unit.CombatEffects.DamageBeforeCombat;
         _view.AnnounceDamageBeforeCombat(unit, unit.CombatEffects.DamageBeforeCombat);
     }
 
@@ -79,15 +81,24 @@ public class OutOfCombatDamageController
 
     private void ApplyCurationOrDamageAtTheEndOfCombat(Unit unit)
     {
+        if (unit.Hp <= 0) return;
+        var totalHpChange = CalculateTotalHpChange(unit);
+        ApplyHpChange(unit, totalHpChange);
+    }
+    
+    private static int CalculateTotalHpChange(Unit unit)
+    {
         if (unit.HasAttackedThisRound)
         {
             unit.CombatEffects.DamageAfterCombat += unit.CombatEffects.DamageAfterCombatIfUnitAttacks;
         }
 
         int totalHpChange = unit.CombatEffects.HpRecuperationAtTheEndOfTheCombat - unit.CombatEffects.DamageAfterCombat;
+        return totalHpChange;
+    }
 
-        if (unit.Hp <= 0) return;
-
+    private void ApplyHpChange(Unit unit, int totalHpChange)
+    {
         if (totalHpChange > 0)
         {
             ApplyCuration(unit, totalHpChange);
@@ -100,7 +111,7 @@ public class OutOfCombatDamageController
 
     private void ApplyDamage(Unit unit, int totalDamage)
     {
-        unit.Hp = unit.Hp <= -totalDamage ? 1 : unit.Hp + totalDamage;
+        unit.Hp = unit.Hp <= -totalDamage ? MinimumHp : unit.Hp + totalDamage;
         _view.AnnounceDamageAfterCombat(unit, -totalDamage);
     }
 
