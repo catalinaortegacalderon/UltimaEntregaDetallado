@@ -3,38 +3,56 @@ using Fire_Emblem_View;
 
 namespace Fire_Emblem;
 
-public class OutOfCombatDamageController
+public class OutOfCombatDamageController(IView view)
 {
     
     // todo: ordenar esta clase
-    private readonly IView _view;
-    public OutOfCombatDamageController(IView view)
-    {
-        _view = view;
-    }
 
-    public void ManaManageHpRecuperationInEveryAttack(Unit attackingUnit, Unit defensiveUnit,
-        int attackValue)
+    public void ManaManageHpRecuperationInEveryAttack(Unit attackingUnit, int attackValue)
     {
-        // todo: esta funcion separarla en, calculate recuperation, apply, anounce
-        if (attackingUnit.CombatEffects.HpRecuperationAtEveryAttack > 0)
+        if (UnitRecuperatesHp(attackingUnit))
         {
-            var amountOfHpRecuperated = (int)(attackingUnit.CombatEffects.HpRecuperationAtEveryAttack 
-                                              * attackValue);
-            int finalAmountOfHpRecuperated = amountOfHpRecuperated;
-            if (attackingUnit.Hp + amountOfHpRecuperated > attackingUnit.MaxHp)
-            {
-                finalAmountOfHpRecuperated = attackingUnit.MaxHp - attackingUnit.Hp;
-            }
-            attackingUnit.Hp += finalAmountOfHpRecuperated;
-            if (amountOfHpRecuperated > 0)
-            {
-                _view.AnnounceHpRecuperation(attackingUnit, amountOfHpRecuperated , 
-                    attackingUnit.Hp);
-            }
+            var amountOfHpRecuperated = CalculateAmountOfHpRecuperated(attackingUnit, attackValue);
+            ApplyRecuperatedHp(attackingUnit, amountOfHpRecuperated);
+            AnnounceHpRecuperation(attackingUnit, amountOfHpRecuperated);
         }
     }
     
+    private static bool UnitRecuperatesHp(Unit attackingUnit)
+    {
+        return attackingUnit.CombatEffects.HpRecuperationAtEveryAttack > 0;
+    }
+    
+    private static int CalculateAmountOfHpRecuperated(Unit attackingUnit, int attackValue)
+    {
+        return (int)(attackingUnit.CombatEffects.HpRecuperationAtEveryAttack 
+                     * attackValue);
+    }
+    
+    private static void ApplyRecuperatedHp(Unit attackingUnit, int amountOfHpRecuperated)
+    {
+        var finalAmountOfHpRecuperated = amountOfHpRecuperated;
+        
+        if (DoesHpRecuperationExceedMaximum(attackingUnit, amountOfHpRecuperated))
+            finalAmountOfHpRecuperated = attackingUnit.MaxHp - attackingUnit.Hp;
+        
+        attackingUnit.Hp += finalAmountOfHpRecuperated;
+    }
+
+    private static bool DoesHpRecuperationExceedMaximum(Unit attackingUnit, int amountOfHpRecuperated)
+    {
+        return attackingUnit.Hp + amountOfHpRecuperated > attackingUnit.MaxHp;
+    }
+
+    private void AnnounceHpRecuperation(Unit attackingUnit, int amountOfHpRecuperated)
+    {
+        if (amountOfHpRecuperated > 0)
+        {
+            view.AnnounceHpRecuperation(attackingUnit, amountOfHpRecuperated , 
+                attackingUnit.Hp);
+        }
+    }
+
     public void ManageDamageAtTheBeginningOfTheCombat(
         Unit firstUnitToProcess, Unit secondUnitToProcess)
     { 
@@ -55,7 +73,7 @@ public class OutOfCombatDamageController
             {
                 unit.Hp -= unit.CombatEffects.DamageBeforeCombat;
             }
-            _view.AnnounceDamageBeforeCombat(unit, 
+            view.AnnounceDamageBeforeCombat(unit, 
                 unit.CombatEffects.DamageBeforeCombat);
         }
     }
@@ -63,7 +81,6 @@ public class OutOfCombatDamageController
     public void ManageHpChangeAtTheEndOfTheCombat(Unit firstUnitToProcess, Unit secondUnitToProcess)
     {
         ManageCurationAndDamageAtTheEndOfTheCombat(firstUnitToProcess, secondUnitToProcess);
-        //ManageDamageAtTheEndOfTheCombat(firstUnitToProcess, secondUnitToProcess);
     }
     
     private void ManageCurationAndDamageAtTheEndOfTheCombat(Unit firstUnitToProcess, Unit secondUnitToProcess)
@@ -100,21 +117,20 @@ public class OutOfCombatDamageController
             unit.Hp += totalDamageOrCuration;
         }
 
-        _view.AnnounceDamageAfterCombat(unit, 
+        view.AnnounceDamageAfterCombat(unit, 
             -totalDamageOrCuration);
     }
 
     private void ApplyCuration(Unit unit, int totalDamageOrCuration)
     {
-        if (unit.Hp + totalDamageOrCuration
-            > unit.MaxHp)
+        if (unit.Hp + totalDamageOrCuration > unit.MaxHp)
             unit.Hp = unit.MaxHp;
         else
         {
             unit.Hp += totalDamageOrCuration;
         }
 
-        _view.AnnounceCurationAfterCombat(unit, 
+        view.AnnounceCurationAfterCombat(unit, 
             totalDamageOrCuration);
     }
 }

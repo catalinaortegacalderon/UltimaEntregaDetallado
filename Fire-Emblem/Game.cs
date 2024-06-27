@@ -26,6 +26,7 @@ public class Game
     
     // todo: hacer un manager
     // todo: hay muchas skills parecidas, ver si lo arreglo o no
+    // todo: consistencia, todos los constructores arriba o todos como metodo, creo que mejor todo como metodo
 
     public Game(IView view, string teamsFolder)
     {

@@ -6,163 +6,147 @@ namespace ConsoleApp1;
 
 public class DamageCalculator
 {
-    private const double WtbValueForNoAdvantage = 1;
-    private const double WtbValueForAttackersAdvantage = 1.2;
-    private const double WtbValueForDefensorsAdvantage = 0.8;
-    private readonly Unit _currentAttackingUnit;
-    private readonly Unit _currentDefensiveUnit;
-    private readonly AttackType _typeOfThisRoundsCurrentAttack;
+    private const double NoAdvantageMultiplier = 1;
+    private const double AttackerAdvantageMultiplier = 1.2;
+    private const double DefenderAdvantageMultiplier = 0.8;
+
+    private readonly Unit _attackingUnit;
+    private readonly Unit _defensiveUnit;
+    private readonly AttackType _currentAttackType;
 
     public DamageCalculator(Unit attackingUnit, Unit defensiveUnit, AttackType attackType)
     {
-        _currentAttackingUnit = attackingUnit;
-        _currentDefensiveUnit = defensiveUnit;
-        _typeOfThisRoundsCurrentAttack = attackType;
+        _attackingUnit = attackingUnit;
+        _defensiveUnit = defensiveUnit;
+        _currentAttackType = attackType;
     }
 
     public int CalculateAttack()
     {
-        var initialDamage = CalculateInitialDamage();
+        int initialDamage = CalculateInitialDamage();
         double finalDamage = CalculateFinalDamage(initialDamage);
-        finalDamage = Convert.ToInt32(Math.Floor(finalDamage));
-
-        if (finalDamage < 0)
-            return 0;
-        return Convert.ToInt32(Math.Truncate(finalDamage));
+        return Math.Max(0, (int)Math.Truncate(finalDamage));
     }
 
     public int CalculateAttackForDivineRecreation()
     {
-        var initialDamage = CalculateInitialDamage();
+        int initialDamage = CalculateInitialDamage();
         double finalDamage = CalculateFinalDamageForDivineRecreation(initialDamage);
-        if (finalDamage < 0)
-            return 0;
-        return Convert.ToInt32(Math.Truncate(finalDamage));
+        return Math.Max(0, (int)Math.Truncate(finalDamage));
     }
 
     private int CalculateInitialDamage()
     {
-        var rivalsDefOrRes = CalculateOpponentsDefOrRes();
-        var wtb = CalculateWtb();
-        var unitsAtk = CalculateUnitsAtk();
+        int defenseOrResistance = GetDefensiveStat();
+        double weaponTriangleBonus = GetWeaponTriangleBonus();
+        int attackPower = GetAttackPower();
 
-        var initialDamage = Convert.ToInt32(Math.Floor(unitsAtk * wtb - rivalsDefOrRes));
-        if (initialDamage < 0)
-            initialDamage = 0;
-
-        return initialDamage;
+        var initialDamage = attackPower * weaponTriangleBonus - defenseOrResistance;
+        
+        return Math.Max(0, (int)Math.Floor(initialDamage));
     }
 
-// todo: codigo duplicado unidad y oponente
-    private int CalculateUnitsAtk()
+    private int GetAttackPower()
     {
-        var unitsAtk = TotalStatGetter.GetTotal(StatType.Atk, _currentAttackingUnit);
+        int attackPower = TotalStatGetter.GetTotal(StatType.Atk, _attackingUnit);
 
         if (IsFirstOrSecondAttack())
-            unitsAtk += TotalStatGetter.GetFirstAttackStat(StatType.Atk, _currentAttackingUnit);
+            attackPower += TotalStatGetter.GetFirstAttackStat(StatType.Atk, _attackingUnit);
         if (IsFollowUp())
-            unitsAtk += TotalStatGetter.GetFollowUpStat(StatType.Atk, _currentAttackingUnit);
-        return unitsAtk;
+            attackPower += TotalStatGetter.GetFollowUpStat(StatType.Atk, _attackingUnit);
+
+        return attackPower;
     }
 
-    private bool IsFollowUp()
+    private bool IsFollowUp() 
+        => _currentAttackType == AttackType.FollowUp;
+
+    private bool IsFirstOrSecondAttack() 
+        => _currentAttackType is AttackType.FirstAttack or AttackType.SecondAttack;
+
+    private double GetWeaponTriangleBonus()
     {
-        return _typeOfThisRoundsCurrentAttack == AttackType.FollowUp;
+        if (IsNoAdvantage(_attackingUnit.WeaponType, _defensiveUnit.WeaponType))
+            return NoAdvantageMultiplier;
+        if (HasAttackerAdvantage(_attackingUnit.WeaponType, _defensiveUnit.WeaponType))
+            return AttackerAdvantageMultiplier;
+        
+        return DefenderAdvantageMultiplier;
     }
 
-    private bool IsFirstOrSecondAttack()
+    private int GetDefensiveStat()
     {
-        return _typeOfThisRoundsCurrentAttack is AttackType.FirstAttack or AttackType.SecondAttack;
-    }
+        WeaponType attackingWeapon = _attackingUnit.WeaponType;
+        
+        int defensiveStat = attackingWeapon == WeaponType.Magic
+            ? TotalStatGetter.GetTotal(StatType.Res, _defensiveUnit)
+            : TotalStatGetter.GetTotal(StatType.Def, _defensiveUnit);
 
-    private double CalculateWtb()
-    {
-        double wtb;
-        if (IsNoAdvantage(_currentAttackingUnit.WeaponType, _currentDefensiveUnit.WeaponType))
-            wtb = WtbValueForNoAdvantage;
-        else if (DoesAttackerHaveAdvantage(_currentAttackingUnit.WeaponType, _currentDefensiveUnit.WeaponType))
-            wtb = WtbValueForAttackersAdvantage;
-        else
-            wtb = WtbValueForDefensorsAdvantage;
-        return wtb;
-    }
-
-    private int CalculateOpponentsDefOrRes()
-    {
-        // todo: seguir arreglando con total stat getter
-        var attackingWeapon = _currentAttackingUnit.WeaponType;
-
-        int rivalsDefOrRes;
-        if (attackingWeapon == WeaponType.Magic)
+        if (IsFirstOrSecondAttack())
         {
-            rivalsDefOrRes = TotalStatGetter.GetTotal(StatType.Res, _currentDefensiveUnit);
-            if (IsFirstOrSecondAttack())
-                rivalsDefOrRes += TotalStatGetter.GetFirstAttackStat(StatType.Res, _currentDefensiveUnit);
-        }
-        else
-        {
-            rivalsDefOrRes = TotalStatGetter.GetTotal(StatType.Def, _currentDefensiveUnit);
-
-            if (IsFirstOrSecondAttack())
-                rivalsDefOrRes += TotalStatGetter.GetFirstAttackStat(StatType.Def, _currentDefensiveUnit);
+            defensiveStat += attackingWeapon == WeaponType.Magic
+                ? TotalStatGetter.GetFirstAttackStat(StatType.Res, _defensiveUnit)
+                : TotalStatGetter.GetFirstAttackStat(StatType.Def, _defensiveUnit);
         }
 
-        return rivalsDefOrRes;
+        return defensiveStat;
     }
 
-    private int CalculateFinalDamage(double initialDamage)
+    private double CalculateFinalDamage(double initialDamage)
     {
-        var finalDamage = initialDamage;
-        // todo: separar en funciones
+        double finalDamage = initialDamage;
+
         if (IsFirstOrSecondAttack())
-            finalDamage =
-                (initialDamage + _currentAttackingUnit.DamageEffects.ExtraDamage
-                               + _currentAttackingUnit.DamageEffects.ExtraDamageFirstAttack)
-                * _currentDefensiveUnit.DamageEffects.PercentageReduction
-                * _currentDefensiveUnit.DamageEffects.PercentageReductionOpponentsFirstAttack
-                + _currentDefensiveUnit.DamageEffects.AbsolutDamageReduction;
+            finalDamage = CalculateFinalDamageForFirstOrSecondAttack(initialDamage);
         else if (IsFollowUp())
-            finalDamage =
-                (initialDamage + _currentAttackingUnit.DamageEffects.ExtraDamage
-                               + _currentAttackingUnit.DamageEffects.ExtraDamageFollowup)
-                * _currentDefensiveUnit.DamageEffects.PercentageReduction
-                * _currentDefensiveUnit.DamageEffects.PercentageReductionOpponentsFollowup
-                + _currentDefensiveUnit.DamageEffects.AbsolutDamageReduction;
-        var newDamage = Math.Round(finalDamage, 9);
-        var damage = Convert.ToInt32(Math.Floor(newDamage));
-        return damage;
+            finalDamage = CalculateFinalDamageForFollowUp(initialDamage);
+
+        return Math.Round(finalDamage, 9);
     }
 
-    private int CalculateFinalDamageForDivineRecreation(double initialDamage)
+    private double CalculateFinalDamageForFirstOrSecondAttack(double initialDamage)
     {
-        var finalDamage = initialDamage;
+        return (initialDamage + _attackingUnit.DamageEffects.ExtraDamage 
+                              + _attackingUnit.DamageEffects.ExtraDamageFirstAttack)
+               * _defensiveUnit.DamageEffects.PercentageReduction
+               * _defensiveUnit.DamageEffects.PercentageReductionOpponentsFirstAttack
+               + _defensiveUnit.DamageEffects.AbsolutDamageReduction;
+    }
+
+    private double CalculateFinalDamageForFollowUp(double initialDamage)
+    {
+        return (initialDamage + _attackingUnit.DamageEffects.ExtraDamage 
+                              + _attackingUnit.DamageEffects.ExtraDamageFollowup)
+               * _defensiveUnit.DamageEffects.PercentageReduction
+               * _defensiveUnit.DamageEffects.PercentageReductionOpponentsFollowup
+               + _defensiveUnit.DamageEffects.AbsolutDamageReduction;
+    }
+
+    private double CalculateFinalDamageForDivineRecreation(double initialDamage)
+    {
+        double finalDamage = initialDamage;
+
         if (IsFirstOrSecondAttack())
-            finalDamage =
-                initialDamage + _currentAttackingUnit.DamageEffects.ExtraDamage +
-                _currentAttackingUnit.DamageEffects.ExtraDamageFirstAttack;
+            finalDamage += _attackingUnit.DamageEffects.ExtraDamage 
+                           + _attackingUnit.DamageEffects.ExtraDamageFirstAttack;
         else if (IsFollowUp())
-            finalDamage =
-                initialDamage + _currentAttackingUnit.DamageEffects.ExtraDamage +
-                _currentAttackingUnit.DamageEffects.ExtraDamageFollowup;
-        // todo: sacar espacios
-        var newDamage = Math.Round(finalDamage, 9);
-        var damage = Convert.ToInt32(Math.Floor(newDamage));
-        return damage;
+            finalDamage += _attackingUnit.DamageEffects.ExtraDamage 
+                           + _attackingUnit.DamageEffects.ExtraDamageFollowup;
+
+        return Math.Round(finalDamage, 9);
     }
 
-    public static bool DoesAttackerHaveAdvantage(WeaponType attackingWeaponType, WeaponType defensiveWeaponType)
+    public static bool HasAttackerAdvantage(WeaponType attackerWeapon, WeaponType defenderWeapon)
     {
-        return (attackingWeaponType == WeaponType.Sword) & (defensiveWeaponType == WeaponType.Axe) ||
-               (attackingWeaponType == WeaponType.Lance) & (defensiveWeaponType == WeaponType.Sword) ||
-               (attackingWeaponType == WeaponType.Axe) & (defensiveWeaponType == WeaponType.Lance);
+        return (attackerWeapon == WeaponType.Sword && defenderWeapon == WeaponType.Axe) ||
+               (attackerWeapon == WeaponType.Lance && defenderWeapon == WeaponType.Sword) ||
+               (attackerWeapon == WeaponType.Axe && defenderWeapon == WeaponType.Lance);
     }
 
-    public static bool IsNoAdvantage(WeaponType attackingWeaponType, WeaponType defensiveWeaponType)
+    public static bool IsNoAdvantage(WeaponType attackerWeapon, WeaponType defenderWeapon)
     {
-        return defensiveWeaponType == attackingWeaponType
-               || attackingWeaponType == WeaponType.Magic
-               || defensiveWeaponType == WeaponType.Magic
-               || defensiveWeaponType == WeaponType.Bow
-               || attackingWeaponType == WeaponType.Bow;
+        return attackerWeapon == defenderWeapon ||
+               attackerWeapon == WeaponType.Magic || defenderWeapon == WeaponType.Magic ||
+               attackerWeapon == WeaponType.Bow || defenderWeapon == WeaponType.Bow;
     }
 }

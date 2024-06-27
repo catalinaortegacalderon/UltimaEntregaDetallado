@@ -93,7 +93,7 @@ public class GameAttacksController
         {
             _view.AnnounceThereIsNoAdvantage();
         }
-        else if (DamageCalculator.DoesAttackerHaveAdvantage(attackingWeapon, defensiveWeapon))
+        else if (DamageCalculator.HasAttackerAdvantage(attackingWeapon, defensiveWeapon))
         {
             _view.AnnounceAdvantage(_currentAttackingUnit, _currentDefensiveUnit);
         }
@@ -129,7 +129,7 @@ public class GameAttacksController
 
     private void ManageHpRecuperationInEveryAttack()
     {
-        _outOfCombatDamageController.ManaManageHpRecuperationInEveryAttack(_currentAttackingUnit, _currentDefensiveUnit,
+        _outOfCombatDamageController.ManaManageHpRecuperationInEveryAttack(_currentAttackingUnit,
             _attackValue);
         
     }
