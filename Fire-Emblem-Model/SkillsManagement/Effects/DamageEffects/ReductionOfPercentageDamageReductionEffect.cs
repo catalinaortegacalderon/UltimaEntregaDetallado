@@ -9,9 +9,7 @@ public class ReductionOfPercentageDamageReductionEffect : Effect
     {
         // todo: arreglar unos tests, problemas con truncar parece, esta en fotos viernes 21
         // tengo que truncar
-
         //return;
-        
         // todo: hacer lo de pinto, foto jueves 27, es por cada reduccion individual
         
         
@@ -33,6 +31,9 @@ public class ReductionOfPercentageDamageReductionEffect : Effect
     private double GetNewValue(double currentValue, int amountOfEffects)
     {
         // todo: encapsular 0.5
+        // parece que no funciona
+        // todo: hacer lo de pinto
+        // esto se hará al principio, ver prioridades bien
         var reduction = 1 - currentValue;
         var newReduction = reduction * Math.Pow(0.5, amountOfEffects) ;
         var finalDataStructureValue = 1 - newReduction;

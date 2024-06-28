@@ -119,7 +119,8 @@ public class SkillsPrinter
     private static void PrintCombatEffects(View view, Unit unit)
     {
         if (unit.CombatEffects.HpRecuperationAtEveryAttack > 0)
-            view.WriteLine(unit.Name + " recuperará HP igual al " + (unit.CombatEffects.HpRecuperationAtEveryAttack * 100) 
+            view.WriteLine(unit.Name + " recuperará HP igual al " 
+                                     + (unit.CombatEffects.HpRecuperationAtEveryAttack * 100) 
                            + "% del daño realizado en cada ataque");
         if (unit.CombatEffects.HasCounterAttackDenial && !unit.CombatEffects.HasNeutralizationOfCounterattackDenial)
             view.WriteLine(unit.Name + " no podrá contraatacar");

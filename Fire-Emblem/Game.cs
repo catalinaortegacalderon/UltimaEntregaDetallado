@@ -96,6 +96,8 @@ public class Game
         _attackController.SetCurrentAttacker(IsPlayer1TheRoundStarter() ? IdOfPlayer1 : IdOfPlayer2);
         StartRound();
         _currentRound++;
+        // todo: ver si pongo update teams al principio o al final
+        UpdateTeams();
     }
 
     private void UpdateTeams()

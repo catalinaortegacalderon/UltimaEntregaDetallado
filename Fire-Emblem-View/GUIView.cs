@@ -16,6 +16,8 @@ public class GuiView : IView
 
     private Unit _unitTeam1;
     private Unit _unitTeam2;
+    
+    // todo: arreglar hp neg
 
     public GuiView(FireEmblemWindow window)
     {
@@ -96,6 +98,7 @@ public class GuiView : IView
 
     public void ShowAllSkills(Unit unit)
     {
+        // todo: pinto lo uso para actualizar units
     }
 
     public void AnnounceHpRecuperation(Unit unitThatRecuperatesHp, int amount, int finalHp)
