@@ -7,11 +7,12 @@ namespace ConsoleApp1.SkillsManagement.Effects.DamageEffects;
 
 public class PercentageDamageReductionDeterminedBySpdDifferenceEffect : Effect
 {
-    private readonly int _multiplier;
+    private double _multiplier;
     private readonly double _max;
     private readonly DamageEffectCategory _category;
+    private const double ReductionOfPercentageDamageReduction = 0.5;
     
-    public PercentageDamageReductionDeterminedBySpdDifferenceEffect( int multiplier, 
+    public PercentageDamageReductionDeterminedBySpdDifferenceEffect(int multiplier, 
         double max, DamageEffectCategory category)
     {
         _multiplier = multiplier;
@@ -27,21 +28,17 @@ public class PercentageDamageReductionDeterminedBySpdDifferenceEffect : Effect
 
     private void ApplyReductionPercentage(Unit myUnit, double reductionPercentage)
     {
-        if (_category == DamageEffectCategory.All)
+        switch (_category)
         {
-            myUnit.DamageEffects.PercentageReduction *= reductionPercentage;
-            myUnit.DamageEffects.AmountOfEffectsOfPercentageReduction++;
-        }
-        else if (_category == DamageEffectCategory.FirstAttack)
-        {
-            myUnit.DamageEffects.PercentageReductionOpponentsFirstAttack *= reductionPercentage;
-            myUnit.DamageEffects.AmountOfEffectsOfPercentageReductionOpponentsFirstAttack++;
-        }
-        
-        else if (_category == DamageEffectCategory.FollowUp)
-        {
-            myUnit.DamageEffects.PercentageReductionOpponentsFollowup *= reductionPercentage;
-            myUnit.DamageEffects.AmountOfEffectsOfPercentageReductionOpponentsFollowup++;
+            case DamageEffectCategory.All:
+                myUnit.DamageEffects.PercentageReduction *= reductionPercentage;
+                break;
+            case DamageEffectCategory.FirstAttack:
+                myUnit.DamageEffects.PercentageReductionOpponentsFirstAttack *= reductionPercentage;
+                break;
+            case DamageEffectCategory.FollowUp:
+                myUnit.DamageEffects.PercentageReductionOpponentsFollowup *= reductionPercentage;
+                break;
         }
     }
 
@@ -49,9 +46,17 @@ public class PercentageDamageReductionDeterminedBySpdDifferenceEffect : Effect
     {
         double myTotalSpd = TotalStatGetter.GetTotal(StatType.Spd, myUnit);
         double opponentsTotalSpd = TotalStatGetter.GetTotal(StatType.Spd, opponentsUnit);
-        double reductionPercentage = 1 - (myTotalSpd - opponentsTotalSpd) * _multiplier / 100;
+        
+        var newMultiplier = _multiplier;
+
+        if (myUnit.DamageEffects.HasReductionOfPercentageReduction)
+            newMultiplier *= ReductionOfPercentageDamageReduction;
+        
+        double reductionPercentage = 1 - (myTotalSpd - opponentsTotalSpd) * newMultiplier / 100;
+        
         if (reductionPercentage < _max) 
             reductionPercentage = _max;
+        
         return reductionPercentage;
     }
 }

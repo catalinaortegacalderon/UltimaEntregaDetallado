@@ -7,9 +7,10 @@ namespace ConsoleApp1.SkillsManagement.Effects.DamageEffects;
 
 public class PercentageDamageReductionDeterminedByDefDifferenceEffect : Effect
 {
-    private readonly int _multiplier;
+    private double _multiplier;
     private readonly double _max;
     private readonly DamageEffectCategory _category;
+    private const double ReductionOfPercentageDamageReduction = 0.5;
     
     public PercentageDamageReductionDeterminedByDefDifferenceEffect( int multiplier, 
         double max, DamageEffectCategory category)
@@ -30,18 +31,15 @@ public class PercentageDamageReductionDeterminedByDefDifferenceEffect : Effect
         if (_category == DamageEffectCategory.All)
         {
             myUnit.DamageEffects.PercentageReduction *= reductionPercentage;
-            myUnit.DamageEffects.AmountOfEffectsOfPercentageReduction++;
         }
         else if (_category == DamageEffectCategory.FirstAttack)
         {
             myUnit.DamageEffects.PercentageReductionOpponentsFirstAttack *= reductionPercentage;
-            myUnit.DamageEffects.AmountOfEffectsOfPercentageReductionOpponentsFirstAttack++;
         }
         
         else if (_category == DamageEffectCategory.FollowUp)
         {
             myUnit.DamageEffects.PercentageReductionOpponentsFollowup *= reductionPercentage;
-            myUnit.DamageEffects.AmountOfEffectsOfPercentageReductionOpponentsFollowup++;
         }
     }
 
@@ -49,9 +47,17 @@ public class PercentageDamageReductionDeterminedByDefDifferenceEffect : Effect
     {
         double myTotalDef = TotalStatGetter.GetTotal(StatType.Def, myUnit);
         double opponentsTotalDef = TotalStatGetter.GetTotal(StatType.Def, opponentsUnit);
-        double reductionPercentage = 1 - (myTotalDef - opponentsTotalDef) * _multiplier / 100;
+        
+        var newMultiplier = _multiplier;
+
+        if (myUnit.DamageEffects.HasReductionOfPercentageReduction)
+            newMultiplier *= ReductionOfPercentageDamageReduction;
+        
+        double reductionPercentage = 1 - (myTotalDef - opponentsTotalDef) * newMultiplier / 100;
+        
         if (reductionPercentage < _max) 
             reductionPercentage = _max;
+        
         return reductionPercentage;
     }
 }

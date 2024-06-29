@@ -1,15 +1,11 @@
 ﻿using Fire_Emblem;
 using Fire_Emblem_GUI;
 using Fire_Emblem_View;
-using System;
-using System.IO;
 
-
-
-//RunConsoleView(); // Descomentar para correr la vista en consola
+RunConsoleView(); // Descomentar para correr la vista en consola
 
 FireEmblemWindow window = new FireEmblemWindow();
-window.Start(RunGuiView); // Descomentar para correr interfaz gráfica
+//window.Start(RunGuiView); // Descomentar para correr interfaz gráfica
 
 void RunGuiView()
 {
@@ -24,9 +20,6 @@ void RunGuiView()
     
     var game = new Game(view, "TeamsCreadosGUI");
     game.Play();
-    
-    
-    
 }
 
 void RunConsoleView()

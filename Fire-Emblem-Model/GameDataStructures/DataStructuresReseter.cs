@@ -25,13 +25,16 @@ public static class DataStructuresReseter
         dataStructure.PercentageReductionOpponentsFirstAttack = 1;
         dataStructure.PercentageReductionOpponentsFollowup = 1;
         
-        dataStructure.AmountOfEffectsOfPercentageReduction = 0;
-        dataStructure.AmountOfEffectsOfPercentageReductionOpponentsFirstAttack = 0;
-        dataStructure.AmountOfEffectsOfPercentageReductionOpponentsFollowup = 0;
+        
+        // todo: arreglar esto
+        //dataStructure.AmountOfEffectsOfPercentageReduction = 0;
+        //dataStructure.AmountOfEffectsOfPercentageReductionOpponentsFirstAttack = 0;
+        //dataStructure.AmountOfEffectsOfPercentageReductionOpponentsFollowup = 0;
         
         dataStructure.AbsolutDamageReduction = 0;
         
         dataStructure.ReductionOfPercentageReduction = 1;
+        dataStructure.HasReductionOfPercentageReduction = false;
     }
     
     public static void ResetCombatEffects(CombatEffects dataStructure)
