@@ -3,6 +3,8 @@ using ConsoleApp1.Exceptions;
 using ConsoleApp1.GameDataStructures;
 using Fire_Emblem_View;
 using Fire_Emblem.Controllers;
+using System;
+using System.IO;
 
 namespace Fire_Emblem
 {
@@ -10,15 +12,14 @@ namespace Fire_Emblem
     {
         private const int IdOfPlayer1 = 0;
         private const int IdOfPlayer2 = 1;
-        
+
         private readonly string _teamsFolder;
         private readonly IView _view;
         private int _currentRound;
-        
+
         private Player _player1;
         private Player _player2;
-        
-        private GameAttacksController _attackController;
+
         private RoundController _roundController;
 
         public Game(IView view, string teamsFolder)
@@ -32,7 +33,9 @@ namespace Fire_Emblem
         {
             try
             {
-                TryToPlay();
+                InitializeGame();
+                PlayRounds();
+                AnnounceWinner();
             }
             catch (InvalidTeamException)
             {
@@ -40,34 +43,29 @@ namespace Fire_Emblem
             }
         }
 
-        private void TryToPlay()
-        {
-            InitializeGame();
-            PlayRounds();
-            AnnounceWinner();
-        }
-
         private void InitializeGame()
         {
-            BuildAndSetPlayers();
+            BuildPlayers();
+            BuildRoundController();
             UpdateTeams();
         }
 
-        private void BuildAndSetPlayers()
+        private void BuildPlayers()
         {
-            var teamFile = GetValidTeamFile();
-            var players =
-                new PlayersConstructor().BuildPlayers(File.ReadAllLines(teamFile));
+            string teamFile = GetValidTeamFile();
+            Player[] players = new PlayersConstructor().BuildPlayers(File.ReadAllLines(teamFile));
             SetPlayers(players);
-            _attackController = new GameAttacksController(_player1, _player2, _view);
-            
-            _roundController = new RoundController(_view, _currentRound, _player1, _player2, _attackController);
+        }
+        
+        private void BuildRoundController()
+        {
+            _roundController = new RoundController(_view, _player1, _player2);
         }
 
         private string GetValidTeamFile()
         {
-            var files = GetSortedTeamFiles();
-            var chosenFileIndex = _view.AskPlayerForTheChosenFile(files);
+            string[] files = GetSortedTeamFiles();
+            int chosenFileIndex = _view.AskPlayerForTheChosenFile(files);
 
             if (!FileChecker.IsGameValid(files[chosenFileIndex]))
             {
@@ -79,7 +77,7 @@ namespace Fire_Emblem
 
         private string[] GetSortedTeamFiles()
         {
-            var files = Directory.GetFiles(_teamsFolder);
+            string[] files = Directory.GetFiles(_teamsFolder);
             Array.Sort(files);
             return files;
         }
@@ -112,14 +110,7 @@ namespace Fire_Emblem
 
         private void ExecuteRound()
         {
-            // todo: nose si es tan buena idea crearlo siempre, tal vez que solo tenga round controller
-            // y no atack controller
             _roundController.ExecuteRound();
-        }
-
-        private bool IsPlayer1StartingRound()
-        {
-            return _currentRound % 2 == 1;
         }
 
         private void AnnounceWinner()
@@ -131,7 +122,7 @@ namespace Fire_Emblem
         {
             _view.UpdateTeams(_player1, _player2);
         }
-        
+
         private void IncrementRound()
         {
             _currentRound++;

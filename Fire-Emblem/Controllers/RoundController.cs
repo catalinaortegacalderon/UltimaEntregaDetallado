@@ -25,14 +25,13 @@ public class RoundController
     private readonly FollowUpController _followUpController;
     private readonly OutOfCombatDamageController _outOfCombatDamageController;
 
-    public RoundController(IView view, int currentRound, Player player1,
-        Player player2, GameAttacksController attackController)
+    public RoundController(IView view, Player player1, Player player2)
     {
         _view = view;
-        _currentRound = currentRound;
+        _currentRound = 1;
         _player1 = player1;
         _player2 = player2;
-        _attackController = attackController;
+        _attackController = new GameAttacksController(_player1, _player2, _view);
         _followUpController = new FollowUpController(_attackController, _view);
         _outOfCombatDamageController = new OutOfCombatDamageController(_view);
     }
