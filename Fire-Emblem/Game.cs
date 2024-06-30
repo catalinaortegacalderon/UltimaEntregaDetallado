@@ -14,6 +14,9 @@ public class Game
     private readonly IView _view;
     
     private int _currentRound;
+
+    private Player _player1;
+    private Player _player2;
     
     private int _currentUnitNumberOfPlayer1;
     private int _currentUnitNumberOfPlayer2;
@@ -34,6 +37,8 @@ public class Game
         _teamsFolder = teamsFolder;
         _currentRound = 1;
         _outOfCombatDamageController = new OutOfCombatDamageController(view);
+        
+        
     }
 
     public void Play()
@@ -92,12 +97,10 @@ public class Game
     private void PlayOneRound()
     {
         _attackController.RestartRound();
-        
         _attackController.SetCurrentAttacker(IsPlayer1TheRoundStarter() ? IdOfPlayer1 : IdOfPlayer2);
         StartRound();
-        _currentRound++;
-        // todo: ver si pongo update teams al principio o al final
         UpdateTeams();
+        _currentRound++;
     }
 
     private void UpdateTeams()

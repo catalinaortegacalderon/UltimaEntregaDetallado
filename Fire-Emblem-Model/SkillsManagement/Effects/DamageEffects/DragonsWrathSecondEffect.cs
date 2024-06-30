@@ -1,21 +1,21 @@
+using ConsoleApp1.DataTypes;
 using ConsoleApp1.GameDataStructures;
 using ConsoleApp1.SkillsManagement.Effects.SpecificSkillEffects;
+using Fire_Emblem;
 
 namespace ConsoleApp1.SkillsManagement.Effects.DamageEffects;
 
 public class DragonsWrathSecondEffect : Effect
 {
+    private const double DragonsWrathSecondEffectMultiplier = 0.25;
     public override void ApplyEffect(Unit myUnit, Unit opponentsUnit)
     {
-        var unitsAtk = myUnit.Atk + myUnit.ActiveBonus.Atk
-            * myUnit.ActiveBonusNeutralizer.Atk + myUnit.ActivePenalties.Atk
-            * myUnit.ActivePenaltiesNeutralizer.Atk;
+        var unitsAtk = TotalStatGetter.GetTotal(StatType.Atk, myUnit);
+        var rivalsRes = TotalStatGetter.GetTotal(StatType.Res, opponentsUnit);
 
-        var rivalsRes = opponentsUnit.Res + opponentsUnit.ActiveBonus.Res
-            * opponentsUnit.ActiveBonusNeutralizer.Res + opponentsUnit.ActivePenalties.Res
-            * opponentsUnit.ActivePenaltiesNeutralizer.Res;
-
-        var amount = Convert.ToInt32(Math.Truncate((unitsAtk - rivalsRes) * 0.25));
+        var amount = Convert.ToInt32(Math.Truncate((unitsAtk - rivalsRes) * 
+                                                   DragonsWrathSecondEffectMultiplier));
+        
         myUnit.DamageEffects.ExtraDamageFirstAttack += amount;
     }
 }

@@ -12,9 +12,8 @@ public class StanceSkill : Skill
     public StanceSkill(StatType firstStat, StatType secondStat, int amount1, int amount2)
     {
         Conditions = new Condition[3];
-        Conditions[0] = new OpponentStartsCombatCondition();
-        Conditions[1] = new OpponentStartsCombatCondition();
-        Conditions[2] = new OpponentStartsCombatCondition();
+        Conditions[0] = Conditions[1] = Conditions[2] 
+            = new OpponentStartsCombatCondition();
         
         Effects = new Effect[3];
         Effects[0] = new ChangeStatsInEffect(firstStat, amount1);

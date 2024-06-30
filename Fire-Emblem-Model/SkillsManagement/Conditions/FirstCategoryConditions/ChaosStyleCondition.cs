@@ -8,14 +8,15 @@ public class ChaosStyleCondition : Condition
 {
     public override bool DoesItHold(Unit myUnit, Unit opponentsUnit)
     {
-        if (myUnit.IsAttacking)
-        {
-            return DoesMagicAttackPhysicalWeapon(myUnit.WeaponType, 
-                       opponentsUnit.WeaponType) 
-                   || DoesMagicAttackPhysicalWeapon(opponentsUnit.WeaponType, 
-                       myUnit.WeaponType);
-        }
-        return false;
+        return myUnit.IsAttacking && DoesChaosStyleConditionHolds(myUnit, opponentsUnit);
+    }
+
+    private static bool DoesChaosStyleConditionHolds(Unit myUnit, Unit opponentsUnit)
+    {
+        return DoesMagicAttackPhysicalWeapon(myUnit.WeaponType, 
+                   opponentsUnit.WeaponType) 
+               || DoesMagicAttackPhysicalWeapon(opponentsUnit.WeaponType, 
+                   myUnit.WeaponType);
     }
 
     private static bool DoesMagicAttackPhysicalWeapon(WeaponType attackingWeapon, WeaponType defensiveWeapon)

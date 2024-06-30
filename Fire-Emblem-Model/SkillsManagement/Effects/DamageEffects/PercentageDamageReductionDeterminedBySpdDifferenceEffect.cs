@@ -7,7 +7,7 @@ namespace ConsoleApp1.SkillsManagement.Effects.DamageEffects;
 
 public class PercentageDamageReductionDeterminedBySpdDifferenceEffect : Effect
 {
-    private double _multiplier;
+    private readonly double _multiplier;
     private readonly double _max;
     private readonly DamageEffectCategory _category;
     private const double ReductionOfPercentageDamageReduction = 0.5;

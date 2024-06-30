@@ -17,11 +17,17 @@ public class ExtraDamageEffect : Effect
 
     public override void ApplyEffect(Unit myUnit, Unit opponentsUnit)
     {
-        if (_type == DamageEffectCategory.All)
-            myUnit.DamageEffects.ExtraDamage += _amount;
-        else if (_type == DamageEffectCategory.FirstAttack)
-            myUnit.DamageEffects.ExtraDamageFirstAttack += _amount;
-        else if (_type == DamageEffectCategory.FollowUp)
-            myUnit.DamageEffects.ExtraDamageFollowup += _amount;
+        switch (_type)
+        {
+            case DamageEffectCategory.All:
+                myUnit.DamageEffects.ExtraDamage += _amount;
+                break;
+            case DamageEffectCategory.FirstAttack:
+                myUnit.DamageEffects.ExtraDamageFirstAttack += _amount;
+                break;
+            case DamageEffectCategory.FollowUp:
+                myUnit.DamageEffects.ExtraDamageFollowup += _amount;
+                break;
+        }
     }
 }

@@ -7,7 +7,7 @@ namespace ConsoleApp1.SkillsManagement.Effects.DamageEffects;
 
 public class PercentageDamageReductionDeterminedByDefDifferenceEffect : Effect
 {
-    private double _multiplier;
+    private readonly double _multiplier;
     private readonly double _max;
     private readonly DamageEffectCategory _category;
     private const double ReductionOfPercentageDamageReduction = 0.5;
@@ -28,18 +28,17 @@ public class PercentageDamageReductionDeterminedByDefDifferenceEffect : Effect
 
     private void ApplyReductionPercentage(Unit myUnit, double reductionPercentage)
     {
-        if (_category == DamageEffectCategory.All)
+        switch (_category)
         {
-            myUnit.DamageEffects.PercentageReduction *= reductionPercentage;
-        }
-        else if (_category == DamageEffectCategory.FirstAttack)
-        {
-            myUnit.DamageEffects.PercentageReductionOpponentsFirstAttack *= reductionPercentage;
-        }
-        
-        else if (_category == DamageEffectCategory.FollowUp)
-        {
-            myUnit.DamageEffects.PercentageReductionOpponentsFollowup *= reductionPercentage;
+            case DamageEffectCategory.All:
+                myUnit.DamageEffects.PercentageReduction *= reductionPercentage;
+                break;
+            case DamageEffectCategory.FirstAttack:
+                myUnit.DamageEffects.PercentageReductionOpponentsFirstAttack *= reductionPercentage;
+                break;
+            case DamageEffectCategory.FollowUp:
+                myUnit.DamageEffects.PercentageReductionOpponentsFollowup *= reductionPercentage;
+                break;
         }
     }
 
