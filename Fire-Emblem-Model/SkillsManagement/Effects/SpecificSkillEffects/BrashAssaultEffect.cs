@@ -7,13 +7,26 @@ namespace ConsoleApp1.SkillsManagement.Effects.SpecificSkillEffects;
 
 public class BrashAssaultEffect : Effect
 {
-    private double _percentage;
+    private readonly double _percentage;
     public BrashAssaultEffect(double percentage)
     {
         _percentage = percentage;
     }
     public override void ApplyEffect(Unit myUnit, Unit opponentsUnit)
+    {
+        var amount = CalculateExtraDamage(myUnit, opponentsUnit);
+        ApplyExtraDamage(myUnit, amount);
+    }
 
+    private static void ApplyExtraDamage(Unit myUnit, int amount)
+    {
+        if (myUnit.StartedTheRound)
+            myUnit.DamageEffects.ExtraDamageFollowup += amount;
+        else
+            myUnit.DamageEffects.ExtraDamageFirstAttack += amount;
+    }
+
+    private int CalculateExtraDamage(Unit myUnit, Unit opponentsUnit)
     {
         var calculator = new DamageCalculator(opponentsUnit, myUnit,
             AttackType.FirstAttack);
@@ -21,10 +34,6 @@ public class BrashAssaultEffect : Effect
         double initialDamage = calculator.CalculateAttackForDivineRecreationOrBrashAssault();
 
         var amount = (int)((initialDamage) * _percentage);
-
-        if (myUnit.StartedTheRound)
-            myUnit.DamageEffects.ExtraDamageFollowup += amount;
-        else
-            myUnit.DamageEffects.ExtraDamageFirstAttack += amount;
+        return amount;
     }
 }
