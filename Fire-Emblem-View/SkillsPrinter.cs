@@ -6,7 +6,6 @@ public class SkillsPrinter
 {
     private static Unit _unit;
     private static View _view;
-    // todo: mucho codigo repetido
     public static void PrintAll(View view, Unit unit)
     {
         _unit = unit;
@@ -22,24 +21,13 @@ public class SkillsPrinter
     private static void PrintBonus(View view, Unit unit)
     {
         PrintOneBonus(unit.ActiveBonus.Atk, "Atk", "");
-        if (unit.ActiveBonus.Spd > 0)
-            view.WriteLine(unit.Name + " obtiene Spd+" + unit.ActiveBonus.Spd);
-        if (unit.ActiveBonus.Def > 0)
-            view.WriteLine(unit.Name + " obtiene Def+" + unit.ActiveBonus.Def);
-        if (unit.ActiveBonus.Res > 0)
-            view.WriteLine(unit.Name + " obtiene Res+" + unit.ActiveBonus.Res);
-        if (unit.ActiveBonus.AtkFirstAttack > 0)
-            view.WriteLine(unit.Name + " obtiene Atk+" + unit.ActiveBonus.AtkFirstAttack
-                           + " en su primer ataque");
-        if (unit.ActiveBonus.DefFirstAttack > 0)
-            view.WriteLine(unit.Name + " obtiene Def+" + unit.ActiveBonus.DefFirstAttack
-                           + " en su primer ataque");
-        if (unit.ActiveBonus.ResFirstAttack > 0)
-            view.WriteLine(unit.Name + " obtiene Res+" + unit.ActiveBonus.ResFirstAttack
-                           + " en su primer ataque");
-        if (unit.ActiveBonus.AtkFollowup > 0)
-            view.WriteLine(unit.Name + " obtiene Atk+" + unit.ActiveBonus.AtkFollowup
-                           + " en su Follow-Up");
+        PrintOneBonus(unit.ActiveBonus.Spd, "Spd", "");
+        PrintOneBonus(unit.ActiveBonus.Def, "Def", "");
+        PrintOneBonus(unit.ActiveBonus.Res, "Res", "");
+        PrintOneBonus(unit.ActiveBonus.AtkFirstAttack, "Atk", " en su primer ataque");
+        PrintOneBonus(unit.ActiveBonus.DefFirstAttack, "Def", " en su primer ataque");
+        PrintOneBonus(unit.ActiveBonus.ResFirstAttack, "Res", " en su primer ataque");
+        PrintOneBonus(unit.ActiveBonus.AtkFollowup, "Atk", " en su Follow-Up");
     }
 
     private static void PrintOneBonus(int bonus, string skill, string extraInformation)
@@ -50,26 +38,20 @@ public class SkillsPrinter
 
     private static void PrintPenalties(View view, Unit unit)
     {
-        if (unit.ActivePenalties.Atk < 0)
-            view.WriteLine(unit.Name + " obtiene Atk" + unit.ActivePenalties.Atk);
-        if (unit.ActivePenalties.Spd < 0)
-            view.WriteLine(unit.Name + " obtiene Spd" + unit.ActivePenalties.Spd);
-        if (unit.ActivePenalties.Def < 0)
-            view.WriteLine(unit.Name + " obtiene Def" + unit.ActivePenalties.Def);
-        if (unit.ActivePenalties.Res < 0)
-            view.WriteLine(unit.Name + " obtiene Res" + unit.ActivePenalties.Res);
-        if (unit.ActivePenalties.AtkFirstAttack < 0)
-            view.WriteLine(unit.Name + " obtiene Atk" + unit.ActivePenalties.AtkFirstAttack
-                           + " en su primer ataque");
-        if (unit.ActivePenalties.DefFirstAttack < 0)
-            view.WriteLine(unit.Name + " obtiene Def" + unit.ActivePenalties.DefFirstAttack
-                           + " en su primer ataque");
-        if (unit.ActivePenalties.ResFirstAttack < 0)
-            view.WriteLine(unit.Name + " obtiene Res" + unit.ActivePenalties.ResFirstAttack
-                           + " en su primer ataque");
-        if (unit.ActivePenalties.AtkFollowup < 0)
-            view.WriteLine(unit.Name + " obtiene Atk" + unit.ActivePenalties.AtkFollowup
-                           + " en su Follow-Up");
+        PrintOnePenalty(unit.ActivePenalties.Atk, "Atk", "");
+        PrintOnePenalty(unit.ActivePenalties.Spd, "Spd", "");
+        PrintOnePenalty(unit.ActivePenalties.Def, "Def", "");
+        PrintOnePenalty(unit.ActivePenalties.Res, "Res", "");
+        PrintOnePenalty(unit.ActivePenalties.AtkFirstAttack, "Atk", " en su primer ataque");
+        PrintOnePenalty(unit.ActivePenalties.DefFirstAttack, "Def", " en su primer ataque");
+        PrintOnePenalty(unit.ActivePenalties.ResFirstAttack, "Res", " en su primer ataque");
+        PrintOnePenalty(unit.ActivePenalties.AtkFollowup, "Atk", " en su Follow-Up");
+    }
+    
+    private static void PrintOnePenalty(int penalty, string skill, string extraInformation)
+    {
+        if (penalty < 0)
+            _view.WriteLine(_unit.Name + " obtiene " + skill + penalty + extraInformation);
     }
 
     private static void PrintBonusNetralization(View view, Unit unit)
@@ -88,43 +70,47 @@ public class SkillsPrinter
 
     private static void PrintPenaltyNetralization(View view, Unit unit)
     {
-        if (unit.ActivePenaltiesNeutralizer.Atk == 0)
-            view.WriteLine("Los penalty de Atk de " + unit.Name + " fueron neutralizados");
-        if (unit.ActivePenaltiesNeutralizer.Spd == 0)
-            view.WriteLine("Los penalty de Spd de " + unit.Name + " fueron neutralizados");
-        if (unit.ActivePenaltiesNeutralizer.Def == 0)
-            view.WriteLine("Los penalty de Def de " + unit.Name + " fueron neutralizados");
-        if (unit.ActivePenaltiesNeutralizer.Res == 0)
-            view.WriteLine("Los penalty de Res de " + unit.Name + " fueron neutralizados");
+        PrintOnePenaltyNeutralization(unit.ActivePenaltiesNeutralizer.Atk, "Atk");
+        PrintOnePenaltyNeutralization(unit.ActivePenaltiesNeutralizer.Spd, "Spd");
+        PrintOnePenaltyNeutralization(unit.ActivePenaltiesNeutralizer.Def, "Def");
+        PrintOnePenaltyNeutralization(unit.ActivePenaltiesNeutralizer.Res, "Res");
+    }
+    
+    private static void PrintOnePenaltyNeutralization(int neutralizer, string stat)
+    {
+        if (neutralizer == 0)
+            _view.WriteLine("Los penalty de " + stat + " de " + _unit.Name + " fueron neutralizados");
     }
 
     private static void PrintDamageEffects(View view, Unit unit)
     {
-        if (unit.DamageEffects.ExtraDamage != 0)
-            view.WriteLine(unit.Name + " realizará +" + unit.DamageEffects.ExtraDamage
-                           + " daño extra en cada ataque");
-        if (unit.DamageEffects.ExtraDamageFirstAttack != 0)
-            view.WriteLine(unit.Name + " realizará +" + unit.DamageEffects.ExtraDamageFirstAttack
-                           + " daño extra en su primer ataque");
-        if (unit.DamageEffects.ExtraDamageFollowup != 0)
-            view.WriteLine(unit.Name + " realizará +" + unit.DamageEffects.ExtraDamageFollowup
-                           + " daño extra en su Follow-Up");
-        if (unit.DamageEffects.PercentageReduction != 1.000)
-            view.WriteLine(unit.Name + " reducirá el daño de los ataques del rival en un "
-                                     + Math.Round((1 - unit.DamageEffects.PercentageReduction) * 100)
-                                     + "%");
-        if (unit.DamageEffects.PercentageReductionOpponentsFirstAttack != 1)
-            view.WriteLine(unit.Name + " reducirá el daño del primer ataque del rival en un "
-                                     + Math.Round(
-                                         (1 - unit.DamageEffects.PercentageReductionOpponentsFirstAttack) * 100)
-                                     + "%");
-        if (unit.DamageEffects.PercentageReductionOpponentsFollowup != 1)
-            view.WriteLine(unit.Name + " reducirá el daño del Follow-Up del rival en un "
-                                     + Math.Round((1 - unit.DamageEffects.PercentageReductionOpponentsFollowup) * 100)
-                                     + "%");
-        if (unit.DamageEffects.AbsolutDamageReduction != 0)
-            view.WriteLine(unit.Name + " recibirá " + unit.DamageEffects.AbsolutDamageReduction
-                           + " daño en cada ataque");
+        PrintOneDamageEffect(unit.DamageEffects.ExtraDamage, " realizará +", 
+            " daño extra en cada ataque");
+        PrintOneDamageEffect(unit.DamageEffects.ExtraDamageFirstAttack, " realizará +",
+            " daño extra en su primer ataque");
+        PrintOneDamageEffect(unit.DamageEffects.ExtraDamageFollowup, " realizará +", 
+            " daño extra en su Follow-Up");
+        PrintOnePercentageDamageEffect(unit.DamageEffects.PercentageReduction, 
+            " reducirá el daño de los ataques del rival en un ", "%");
+        PrintOnePercentageDamageEffect(unit.DamageEffects.PercentageReductionOpponentsFirstAttack, 
+            " reducirá el daño del primer ataque del rival en un ", "%");
+        PrintOnePercentageDamageEffect(unit.DamageEffects.PercentageReductionOpponentsFollowup, 
+            " reducirá el daño del Follow-Up del rival en un ", "%");
+        PrintOneDamageEffect(unit.DamageEffects.AbsolutDamageReduction, " recibirá ", 
+            " daño en cada ataque");
+    }
+    
+    private static void PrintOneDamageEffect(int damage, string firstString, string extraInformation)
+    {
+        if (damage != 0)
+            _view.WriteLine(_unit.Name + firstString + + damage + extraInformation);
+    }
+    
+    private static void PrintOnePercentageDamageEffect(double damage, string firstString, string extraInformation)
+    {
+        var amount = Math.Round((1 - damage) * 100);
+        if (damage != 1)
+            _view.WriteLine(_unit.Name + firstString + amount + extraInformation);
     }
     
     private static void PrintCombatEffects(View view, Unit unit)
@@ -148,4 +134,6 @@ public class SkillsPrinter
         if (unit.CombatEffects.HasDenialOfGuaranteedFollowUp)
             view.WriteLine(unit.Name + " es inmune a los efectos que garantizan su follow up");
     }
+    
+    
 }
