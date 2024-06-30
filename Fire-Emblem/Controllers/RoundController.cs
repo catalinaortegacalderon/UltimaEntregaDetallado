@@ -39,6 +39,8 @@ public class RoundController
 
     public void ExecuteRound()
     {
+        ResetRound();
+        SetCurrentAttacker();
         SetCurrentUnits();
         DisplayRoundInfo();
         CheckAndApplyAllySkills();
@@ -52,6 +54,16 @@ public class RoundController
         LogGameUpdates();
         EliminateDeadUnits();
         IncrementRound();
+    }
+    
+    private void ResetRound()
+    {
+        _attackController.RestartRound();
+    }
+
+    private void SetCurrentAttacker()
+    {
+        _attackController.SetCurrentAttacker(IsPlayer1StartingRound() ? IdOfPlayer1 : IdOfPlayer2);
     }
 
     private bool IsPlayer1StartingRound()

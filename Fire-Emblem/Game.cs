@@ -105,21 +105,9 @@ namespace Fire_Emblem
 
         private void PlayOneRound()
         {
-            ResetRound();
-            SetCurrentAttacker();
             ExecuteRound();
             UpdateTeams();
             IncrementRound();
-        }
-
-        private void ResetRound()
-        {
-            _attackController.RestartRound();
-        }
-
-        private void SetCurrentAttacker()
-        {
-            _attackController.SetCurrentAttacker(IsPlayer1StartingRound() ? IdOfPlayer1 : IdOfPlayer2);
         }
 
         private void ExecuteRound()
