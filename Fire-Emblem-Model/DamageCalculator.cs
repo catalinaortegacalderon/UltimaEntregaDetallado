@@ -22,7 +22,6 @@ public class DamageCalculator
 
     public int CalculateAttack()
     {
-        Console.WriteLine(_currentAttackType);
         int initialDamage = CalculateInitialDamage();
         double finalDamage = CalculateFinalDamage(initialDamage);
         return Math.Max(0, (int)Math.Truncate(finalDamage));
@@ -30,7 +29,6 @@ public class DamageCalculator
 
     public int CalculateAttackForDivineRecreationOrBrashAssault()
     {
-        Console.WriteLine(_currentAttackType);
         int initialDamage = CalculateInitialDamage();
         double finalDamage = CalculateFinalDamageForDivineRecreation(initialDamage);
         return Math.Max(0, (int)Math.Truncate(finalDamage));
