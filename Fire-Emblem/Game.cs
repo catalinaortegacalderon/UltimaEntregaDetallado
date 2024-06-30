@@ -16,10 +16,6 @@ namespace Fire_Emblem
         
         private Player _player1;
         private Player _player2;
-        private int _currentUnitNumberOfPlayer1;
-        private int _currentUnitNumberOfPlayer2;
-        private Unit _currentUnitOfPlayer1;
-        private Unit _currentUnitOfPlayer2;
         
         private GameAttacksController _attackController;
         private FollowUpController _followUpController;

@@ -1,6 +1,5 @@
 Player 1 Team
-Sigurd (Divine Recreation,Hliðskjálf)
-Byleth (Alacrity,Defense +5) 
+Alear 
 Player 2 Team
-Chrom (Extra Chivalry,True Dragon Wall)
-Celica (Magic Guard,Moon-Twin Wing)
+Camilla
+Byleth (Agnea's Arrow,Arms Shield)
