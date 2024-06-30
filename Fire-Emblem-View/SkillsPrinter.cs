@@ -85,13 +85,20 @@ public class SkillsPrinter
 
     private static void PrintDamageEffects()
     {
-        PrintOneDamageEffect(_unit.DamageEffects.ExtraDamage, " realizará +", " daño extra en cada ataque");
-        PrintOneDamageEffect(_unit.DamageEffects.ExtraDamageFirstAttack, " realizará +", " daño extra en su primer ataque");
-        PrintOneDamageEffect(_unit.DamageEffects.ExtraDamageFollowup, " realizará +", " daño extra en su Follow-Up");
-        PrintOnePercentageDamageEffect(_unit.DamageEffects.PercentageReduction, " reducirá el daño de los ataques del rival en un ", "%");
-        PrintOnePercentageDamageEffect(_unit.DamageEffects.PercentageReductionOpponentsFirstAttack, " reducirá el daño del primer ataque del rival en un ", "%");
-        PrintOnePercentageDamageEffect(_unit.DamageEffects.PercentageReductionOpponentsFollowup, " reducirá el daño del Follow-Up del rival en un ", "%");
-        PrintOneDamageEffect(_unit.DamageEffects.AbsoluteDamageReduction, " recibirá ", " daño en cada ataque");
+        PrintOneDamageEffect(_unit.DamageEffects.ExtraDamage, " realizará +", 
+            " daño extra en cada ataque");
+        PrintOneDamageEffect(_unit.DamageEffects.ExtraDamageFirstAttack, " realizará +", 
+            " daño extra en su primer ataque");
+        PrintOneDamageEffect(_unit.DamageEffects.ExtraDamageFollowup, " realizará +", 
+            " daño extra en su Follow-Up");
+        PrintOnePercentageDamageEffect(_unit.DamageEffects.PercentageReduction, 
+            " reducirá el daño de los ataques del rival en un ", "%");
+        PrintOnePercentageDamageEffect(_unit.DamageEffects.PercentageReductionOpponentsFirstAttack, 
+            " reducirá el daño del primer ataque del rival en un ", "%");
+        PrintOnePercentageDamageEffect(_unit.DamageEffects.PercentageReductionOpponentsFollowup, 
+            " reducirá el daño del Follow-Up del rival en un ", "%");
+        PrintOneDamageEffect(_unit.DamageEffects.AbsoluteDamageReduction, " recibirá ", 
+            " daño en cada ataque");
     }
 
     private static void PrintOneDamageEffect(int damage, string firstString, string extraInformation)
@@ -110,15 +117,19 @@ public class SkillsPrinter
     private static void PrintCombatEffects()
     {
         if (_unit.CombatEffects.HpRecuperationAtEveryAttack > 0)
-            _view.WriteLine($"{_unit.Name} recuperará HP igual al {(_unit.CombatEffects.HpRecuperationAtEveryAttack * 100)}% del daño realizado en cada ataque");
+            _view.WriteLine($"{_unit.Name} recuperará HP igual al " +
+                            $"{(_unit.CombatEffects.HpRecuperationAtEveryAttack * 100)}% " +
+                            $"del daño realizado en cada ataque");
         if (_unit.CombatEffects.HasCounterAttackDenial && !_unit.CombatEffects.HasNeutralizationOfCounterattackDenial)
             _view.WriteLine($"{_unit.Name} no podrá contraatacar");
         if (_unit.CombatEffects.HasNeutralizationOfCounterattackDenial && _unit.CombatEffects.HasCounterAttackDenial)
             _view.WriteLine($"{_unit.Name} neutraliza los efectos que previenen sus contraataques");
         if (_unit.CombatEffects.HasGuaranteedFollowUp)
-            _view.WriteLine($"{_unit.Name} tiene {_unit.CombatEffects.AmountOfEffectsThatGuaranteeFollowup} efecto(s) que garantiza(n) su follow up activo(s)");
+            _view.WriteLine($"{_unit.Name} tiene {_unit.CombatEffects.AmountOfEffectsThatGuaranteeFollowup} " +
+                            $"efecto(s) que garantiza(n) su follow up activo(s)");
         if (_unit.CombatEffects.HasFollowUpDenial)
-            _view.WriteLine($"{_unit.Name} tiene {_unit.CombatEffects.AmountOfEffectsThatDenyFollowup} efecto(s) que neutraliza(n) su follow up activo(s)");
+            _view.WriteLine($"{_unit.Name} tiene {_unit.CombatEffects.AmountOfEffectsThatDenyFollowup} " +
+                            $"efecto(s) que neutraliza(n) su follow up activo(s)");
         if (_unit.CombatEffects.HasNeutralizationOfFollowUpDenial)
             _view.WriteLine($"{_unit.Name} es inmune a los efectos que neutralizan su follow up");
         if (_unit.CombatEffects.HasDenialOfGuaranteedFollowUp)
