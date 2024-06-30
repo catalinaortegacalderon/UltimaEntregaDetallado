@@ -30,9 +30,7 @@ public class BrashAssaultEffect : Effect
     {
         var calculator = new DamageCalculator(opponentsUnit, myUnit,
             AttackType.FirstAttack);
-
         double initialDamage = calculator.CalculateAttackForDivineRecreationOrBrashAssault();
-
         var amount = (int)((initialDamage) * _percentage);
         return amount;
     }

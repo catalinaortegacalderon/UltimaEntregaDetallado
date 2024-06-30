@@ -30,7 +30,7 @@ public class DamageCalculator
     public int CalculateAttackForDivineRecreationOrBrashAssault()
     {
         int initialDamage = CalculateInitialDamage();
-        double finalDamage = CalculateFinalDamageForDivineRecreation(initialDamage);
+        double finalDamage = CalculateFinalDamageForDivineRecreationOrBrashAssault(initialDamage);
         return Math.Max(0, (int)Math.Truncate(finalDamage));
     }
 
@@ -121,7 +121,7 @@ public class DamageCalculator
                + _defensiveUnit.DamageEffects.AbsolutDamageReduction;
     }
 
-    private double CalculateFinalDamageForDivineRecreation(double initialDamage)
+    private double CalculateFinalDamageForDivineRecreationOrBrashAssault(double initialDamage)
     {
         double finalDamage = initialDamage;
 
