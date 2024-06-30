@@ -24,6 +24,8 @@ public class RoundController
     private readonly GameAttacksController _attackController;
     private readonly FollowUpController _followUpController;
     private readonly OutOfCombatDamageController _outOfCombatDamageController;
+    
+    // todo: revisar bien esta clase, si retorna tuplas o cosas raras
 
 
     public RoundController(IView view, int currentRound, Player player1,
@@ -88,6 +90,7 @@ public class RoundController
 
     private void ApplyAllySkills(Player player, Unit currentUnit)
     {
+        // todo: arreglar esta funcion, esta fea
         currentUnit.HasAnAllyWithMagic = player.Units.Any(unit =>
             unit.Hp > 0 && unit.WeaponType == WeaponType.Magic && unit != currentUnit);
     }
