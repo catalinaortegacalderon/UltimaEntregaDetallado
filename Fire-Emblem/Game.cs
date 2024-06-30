@@ -1,5 +1,6 @@
 ﻿using ConsoleApp1;
 using ConsoleApp1.DataTypes;
+using ConsoleApp1.EncapsulatedLists;
 using ConsoleApp1.Exceptions;
 using ConsoleApp1.GameDataStructures;
 using Fire_Emblem_View;
@@ -25,7 +26,7 @@ public class Game
     
     private GameAttacksController _attackController;
     private FollowUpController _followUpController;
-    private OutOfCombatDamageController _outOfCombatDamageController;
+    private readonly OutOfCombatDamageController _outOfCombatDamageController;
     
     // todo: hacer un manager
     // todo: hay muchas skills parecidas, ver si lo arreglo o no
@@ -37,8 +38,6 @@ public class Game
         _teamsFolder = teamsFolder;
         _currentRound = 1;
         _outOfCombatDamageController = new OutOfCombatDamageController(view);
-        
-        
     }
 
     public void Play()
@@ -55,11 +54,8 @@ public class Game
 
     private void TryToPlay()
     {
-        var teamFile = GetTeamFile();
-        var gameAttacksControllerBuilder = new GameAttacksControllerBuilder();
-        _attackController = gameAttacksControllerBuilder.BuildGameController(File.ReadAllLines(teamFile), _view);
-        UpdateTeams();
-        _followUpController = new FollowUpController(_attackController, _view);
+        BuildControllers();
+        SetPlayers();
 
         while (IsGameNotTerminated())
         {
@@ -67,6 +63,22 @@ public class Game
         }
 
         _view.AnnounceWinner(_attackController.GetWinner());
+    }
+
+    private void BuildControllers()
+    {
+        var teamFile = GetTeamFile();
+        var gameAttacksControllerBuilder = new GameAttacksControllerBuilder();
+        _attackController = gameAttacksControllerBuilder.BuildGameController(File.ReadAllLines(teamFile), _view);
+        UpdateTeams();
+        _followUpController = new FollowUpController(_attackController, _view);
+    }
+    
+    private void SetPlayers()
+    {
+        var players = _attackController.GetPlayers();
+        _player1 = players.GetPlayerById(IdOfPlayer1);
+        _player2 = players.GetPlayerById(IdOfPlayer2);
     }
 
     private bool IsGameNotTerminated()
@@ -105,12 +117,7 @@ public class Game
 
     private void UpdateTeams()
     {
-        var players = _attackController.GetPlayers();
-        
-        var player1 = players.GetPlayerById(IdOfPlayer1);
-        var player2 = players.GetPlayerById(IdOfPlayer2);
-
-        _view.UpdateTeams(player1, player2);
+        _view.UpdateTeams(_player1, _player2);
     }
 
     private bool IsPlayer1TheRoundStarter()
@@ -120,7 +127,6 @@ public class Game
 
     private void StartRound()
     {
-        // todo: ACA SE MANEJA TODO
         GetAndSetPlayersChosenUnit();
         PrintRound();
         CheckAlliesConditionsForSkills();
@@ -132,7 +138,7 @@ public class Game
         ResetUnitsBonus();
         ShowLeftoverHp();
         UpdateGameLogs();
-        EliminateLoserUnit();
+        EliminateLoserUnits();
     }
 
     private void ManageHpChangeAtTheEndOfTheCombat()
@@ -167,15 +173,10 @@ public class Game
 
     private void SetUnits()
     {
-        var players = _attackController.GetPlayers();
-
-        var player1 = players.GetPlayerById(IdOfPlayer1);
-        var unitsOfPlayer1 = player1.Units;
-        
-        var player2 = players.GetPlayerById(IdOfPlayer2);
-        var unitsOfPlayer2 = player2.Units;
-        
+        var unitsOfPlayer1 = _player1.Units;
         _currentUnitOfPlayer1 = unitsOfPlayer1.GetUnitByIndex(_currentUnitNumberOfPlayer1);
+        
+        var unitsOfPlayer2 = _player2.Units;
         _currentUnitOfPlayer2 = unitsOfPlayer2.GetUnitByIndex(_currentUnitNumberOfPlayer2);
     }
 
@@ -192,35 +193,35 @@ public class Game
 
     private void CheckAlliesConditionsForSkills()
     {
-        CheckPlayerAlliesConditions(IdOfPlayer1);
-        CheckPlayerAlliesConditions(IdOfPlayer2);
+        CheckPlayerAlliesConditions(_player1, _currentUnitOfPlayer1);
+        CheckPlayerAlliesConditions(_player2, _currentUnitOfPlayer2);
     }
 
-    private void CheckPlayerAlliesConditions(int playerId)
+    private void CheckPlayerAlliesConditions(Player player, Unit playersCurrentUnit)
     {
-        // todo: aca queda desatualizado el param siempre, solo esta actualizado el de la unit actual
-        // tal vez tiene mas sentido actualziar solo la unit actual y no todas
-        var playersUnitNumber = _currentUnitNumberOfPlayer2;
-        if (playerId == IdOfPlayer1)
-        {
-            playersUnitNumber = _currentUnitNumberOfPlayer1;
-        }
-        var players = _attackController.GetPlayers();
-        var player = players.GetPlayerById(playerId);
-        var unitsOfThePlayer = player.Units;
-        bool hasAllyWithMagic = false;
-        int counter = 0;
         
+        var unitsOfThePlayer = player.Units;
+        var hasAllyWithMagic = HasAllyWithMagic(playersCurrentUnit, unitsOfThePlayer);
+        playersCurrentUnit.HasAnAllyWithMagic = hasAllyWithMagic;
+        
+    }
+
+    private static bool HasAllyWithMagic(Unit playersCurrentUnit, UnitsList unitsOfThePlayer)
+    {
+        bool hasAllyWithMagic = false;
+
         foreach (var unit in unitsOfThePlayer)
         {
-            if (unit.Hp > 0 && unit.WeaponType == WeaponType.Magic  && counter != playersUnitNumber)
+            if (IsAllyAlliveAndHasMagic(playersCurrentUnit, unit))
                 hasAllyWithMagic = true;
-            counter++;
         }
-        foreach (var unit in unitsOfThePlayer)
-        {
-            unit.HasAnAllyWithMagic = hasAllyWithMagic;
-        }
+
+        return hasAllyWithMagic;
+    }
+
+    private static bool IsAllyAlliveAndHasMagic(Unit playersCurrentUnit, Unit unit)
+    {
+        return unit.Hp > 0 && unit.WeaponType == WeaponType.Magic  && unit != playersCurrentUnit;
     }
 
     private void InitializeRound()
@@ -332,7 +333,7 @@ public class Game
         private void UpdateGameLogs()
         {
             // todo: separar en tres funciones
-            _attackController.UpdateLastOpponents();
+            UpdateLastOpponents();
 
             _currentUnitOfPlayer1.HasAttackedThisRound = false;
             _currentUnitOfPlayer2.HasAttackedThisRound = false;
@@ -348,28 +349,27 @@ public class Game
                 _currentUnitOfPlayer1.HasBeenBeenInACombatStartedByTheOpponent = true;
             }
         }
+        
+        
+        public void UpdateLastOpponents()
+        {
+            _currentUnitOfPlayer1.LastOpponentName = _currentUnitOfPlayer2.Name;
+            _currentUnitOfPlayer2.LastOpponentName = _currentUnitOfPlayer1.Name;
+        }
 
-    private void EliminateLoserUnit()
+    private void EliminateLoserUnits()
     {
-        var players = _attackController.GetPlayers();
-        if (IsUnitDead(_currentUnitOfPlayer1))
-        {
-            var player1 = players.GetPlayerById(IdOfPlayer1);
-            var unitsOfPlayer1 = player1.Units;
-                
-            unitsOfPlayer1.EliminateUnit(_currentUnitNumberOfPlayer1);
-        }
-
-        if (IsUnitDead(_currentUnitOfPlayer2))
-        {
-            var player2 = players.GetPlayerById(IdOfPlayer2);
-            var unitsOfPlayer2 = player2.Units;
-                
-            unitsOfPlayer2.EliminateUnit(_currentUnitNumberOfPlayer2);
-        }
+        EliminateLoserUnit(_player1.Units, _currentUnitOfPlayer1, _currentUnitNumberOfPlayer1);
+        EliminateLoserUnit(_player2.Units, _currentUnitOfPlayer2, _currentUnitNumberOfPlayer2);
     }
 
-    private bool IsUnitDead(Unit unit)
+    private static void EliminateLoserUnit(UnitsList units, Unit unit, int unitNumber)
+    {
+        if (IsUnitDead(unit))
+            units.EliminateUnit(unitNumber);
+    }
+
+    private static bool IsUnitDead(Unit unit)
     {
         return unit.Hp == 0;
     }

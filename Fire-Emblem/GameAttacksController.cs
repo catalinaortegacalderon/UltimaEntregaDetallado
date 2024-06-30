@@ -208,13 +208,6 @@ public class GameAttacksController
         _currentAttackerId = _currentAttackerId == 0 ? 1 : 0;
     }
 
-    public void UpdateLastOpponents()
-    {
-        // todo: tal vez esto deberia ir en game
-        _currentAttackingUnit.LastOpponentName = _currentDefensiveUnit.Name;
-        _currentDefensiveUnit.LastOpponentName = _currentAttackingUnit.Name;
-    }
-
     public PlayersList GetPlayers() 
         => _players;
 }
