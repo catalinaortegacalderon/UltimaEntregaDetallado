@@ -47,15 +47,13 @@ public class PercentageDamageReductionDeterminedBySpdDifferenceEffect : Effect
         double myTotalSpd = TotalStatGetter.GetTotal(StatType.Spd, myUnit);
         double opponentsTotalSpd = TotalStatGetter.GetTotal(StatType.Spd, opponentsUnit);
         
-        var newMultiplier = _multiplier;
-
-        if (myUnit.DamageEffects.HasReductionOfPercentageReduction)
-            newMultiplier *= ReductionOfPercentageDamageReduction;
-        
-        var reductionPercentage = 1 - (myTotalSpd - opponentsTotalSpd) * newMultiplier / 100;
+        var reductionPercentage = 1 - (myTotalSpd - opponentsTotalSpd) * _multiplier / 100;
         
         if (reductionPercentage < _max) 
             reductionPercentage = _max;
+        
+        if (myUnit.DamageEffects.HasReductionOfPercentageReduction)
+            reductionPercentage = 1 - (1- reductionPercentage) * ReductionOfPercentageDamageReduction;
         
         return reductionPercentage;
     }

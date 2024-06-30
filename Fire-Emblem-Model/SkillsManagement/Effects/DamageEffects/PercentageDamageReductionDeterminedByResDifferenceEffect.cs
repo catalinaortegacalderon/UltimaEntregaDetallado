@@ -47,15 +47,13 @@ public class PercentageDamageReductionDeterminedByResDifferenceEffect : Effect
         double myTotalRes = TotalStatGetter.GetTotal(StatType.Res, myUnit);
         double opponentsTotalRes = TotalStatGetter.GetTotal(StatType.Res, opponentsUnit);
         
-        var newMultiplier = _multiplier;
-
-        if (myUnit.DamageEffects.HasReductionOfPercentageReduction)
-            newMultiplier *= ReductionOfPercentageDamageReduction;
-        
-        double reductionPercentage = 1 - (myTotalRes - opponentsTotalRes) * newMultiplier / 100;
+        double reductionPercentage = 1 - (myTotalRes - opponentsTotalRes) * _multiplier / 100;
         
         if (reductionPercentage < _max) 
             reductionPercentage = _max;
+        
+        if (myUnit.DamageEffects.HasReductionOfPercentageReduction)
+            reductionPercentage = 1 - (1- reductionPercentage) * ReductionOfPercentageDamageReduction;
         
         return reductionPercentage;
     }
