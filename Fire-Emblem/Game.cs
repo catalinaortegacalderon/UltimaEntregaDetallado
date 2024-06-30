@@ -3,8 +3,6 @@ using ConsoleApp1.Exceptions;
 using ConsoleApp1.GameDataStructures;
 using Fire_Emblem_View;
 using Fire_Emblem.Controllers;
-using System;
-using System.IO;
 
 namespace Fire_Emblem
 {
@@ -15,7 +13,6 @@ namespace Fire_Emblem
 
         private readonly string _teamsFolder;
         private readonly IView _view;
-        private int _currentRound;
 
         private Player _player1;
         private Player _player2;
@@ -26,7 +23,6 @@ namespace Fire_Emblem
         {
             _view = view;
             _teamsFolder = teamsFolder;
-            _currentRound = 1;
         }
 
         public void Play()
@@ -105,7 +101,6 @@ namespace Fire_Emblem
         {
             ExecuteRound();
             UpdateTeams();
-            IncrementRound();
         }
 
         private void ExecuteRound()
@@ -121,11 +116,6 @@ namespace Fire_Emblem
         private void UpdateTeams()
         {
             _view.UpdateTeams(_player1, _player2);
-        }
-
-        private void IncrementRound()
-        {
-            _currentRound++;
         }
     }
 }

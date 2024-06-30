@@ -35,13 +35,13 @@ public class GameAttacksController
         _outOfCombatDamageController = new OutOfCombatDamageController(view);
     }
 
-    public void GenerateAnAttackBetweenTwoUnits(AttackType typeOfCurrentAttack, Unit atackingUnit, 
+    public void GenerateAnAttackBetweenTwoUnits(AttackType typeOfCurrentAttack, Unit attackingUnit, 
         Unit defensiveUnit)
     {
         if (RoundIsTerminated()) 
             return;
 
-        SetAttackingAndDefensiveUnits(atackingUnit, defensiveUnit);
+        SetAttackingAndDefensiveUnits(attackingUnit, defensiveUnit);
         CalculateAndApplyDamage(typeOfCurrentAttack);
         ShowWhoAttacksWho();
         ManageHpRecuperationInEveryAttack();

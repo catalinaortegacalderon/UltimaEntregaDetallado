@@ -43,7 +43,6 @@ public class GuiView : IView
         _team2 = team2;
 
         _window.UpdateTeams(team1, team2);
-
     }
 
     public int[] AskBothPlayersForTheChosenUnit(PlayersList players, int currentAttacker)
@@ -116,12 +115,16 @@ public class GuiView : IView
         if (attackersName == _unitTeam1.Name)
         {
             _unitTeam2.Hp -= damage;
+            if (_unitTeam2.Hp < 0)
+                _unitTeam2.Hp = 0;
             _window.UpdateUnitsStatsDuringBattle(_unitTeam1, _unitTeam2);
             _window.ShowAttackFromTeam1(_unitTeam1, _unitTeam2);
         }
         else
         {
             _unitTeam1.Hp -= damage;
+            if (_unitTeam1.Hp < 0)
+                _unitTeam1.Hp = 0;
             _window.UpdateUnitsStatsDuringBattle(_unitTeam1, _unitTeam2);
             _window.ShowAttackFromTeam2(_unitTeam1, _unitTeam2);
         }
