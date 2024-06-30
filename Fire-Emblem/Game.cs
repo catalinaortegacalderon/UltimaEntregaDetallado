@@ -19,6 +19,7 @@ namespace Fire_Emblem
         private Player _player2;
         
         private GameAttacksController _attackController;
+        private RoundController _roundController;
 
         public Game(IView view, string teamsFolder)
         {
@@ -123,9 +124,9 @@ namespace Fire_Emblem
         {
             // todo: nose si es tan buena idea crearlo siempre, tal vez que solo tenga round controller
             // y no atack controller
-            var roundController = new RoundController(_view,_currentRound, _player1, _player2,
+            _roundController = new RoundController(_view,_currentRound, _player1, _player2,
                 _attackController);
-            roundController.ExecuteRound();
+            _roundController.ExecuteRound();
         }
 
         private bool IsPlayer1StartingRound()

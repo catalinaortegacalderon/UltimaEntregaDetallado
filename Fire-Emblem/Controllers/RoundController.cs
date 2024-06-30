@@ -12,7 +12,7 @@ public class RoundController
     private const int IdOfPlayer2 = 1;
 
     private readonly IView _view;
-    private readonly int _currentRound;
+    private int _currentRound;
 
     private readonly Player _player1;
     private readonly Player _player2;
@@ -51,6 +51,7 @@ public class RoundController
         DisplayRemainingHp();
         LogGameUpdates();
         EliminateDeadUnits();
+        IncrementRound();
     }
 
     private bool IsPlayer1StartingRound()
@@ -216,5 +217,10 @@ public class RoundController
     private static bool IsUnitDead(IUnit unit)
     {
         return unit.Hp == 0;
+    }
+    
+    private void IncrementRound()
+    {
+        _currentRound++;
     }
 }
