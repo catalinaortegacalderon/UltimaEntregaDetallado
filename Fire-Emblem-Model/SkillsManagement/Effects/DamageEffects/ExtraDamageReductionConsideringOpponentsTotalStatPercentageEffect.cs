@@ -1,6 +1,7 @@
 using ConsoleApp1.DataTypes;
 using ConsoleApp1.GameDataStructures;
 using ConsoleApp1.SkillsManagement.Effects.SpecificSkillEffects;
+using Fire_Emblem;
 
 namespace ConsoleApp1.SkillsManagement.Effects.DamageEffects;
 
@@ -21,25 +22,12 @@ public class ExtraDamageReductionConsideringOpponentsTotalStatPercentageEffect :
     
     public override void ApplyEffect(Unit myUnit, Unit opponentsUnit)
     {
-        var amount = _stat switch
-        {
-            StatType.Res => opponentsUnit.Res +
-                            opponentsUnit.ActiveBonus.Res * opponentsUnit.ActiveBonusNeutralizer.Res +
-                            opponentsUnit.ActivePenalties.Res * opponentsUnit.ActivePenaltiesNeutralizer.Res,
-            StatType.Atk => opponentsUnit.Atk +
-                            opponentsUnit.ActiveBonus.Atk * opponentsUnit.ActiveBonusNeutralizer.Atk +
-                            opponentsUnit.ActivePenalties.Atk * opponentsUnit.ActivePenaltiesNeutralizer.Atk,
-            StatType.Def => opponentsUnit.Def +
-                            opponentsUnit.ActiveBonus.Def * opponentsUnit.ActiveBonusNeutralizer.Def +
-                            opponentsUnit.ActivePenalties.Def * opponentsUnit.ActivePenaltiesNeutralizer.Def,
-            StatType.Spd => opponentsUnit.Spd +
-                            opponentsUnit.ActiveBonus.Spd * opponentsUnit.ActiveBonusNeutralizer.Spd +
-                            opponentsUnit.ActivePenalties.Spd * opponentsUnit.ActivePenaltiesNeutralizer.Spd,
-            _ => 0
-        };
-        
-        amount = Convert.ToInt32(Math.Truncate(amount * _percentage));
-        
+        var amount = CalculateAmount(opponentsUnit);
+        ApplyDamage(myUnit, amount);
+    }
+
+    private void ApplyDamage(Unit myUnit, int amount)
+    {
         switch (_type)
         {
             case DamageEffectCategory.All:
@@ -52,5 +40,21 @@ public class ExtraDamageReductionConsideringOpponentsTotalStatPercentageEffect :
                 myUnit.DamageEffects.ExtraDamageFollowup += amount;
                 break;
         }
+    }
+
+    private int CalculateAmount(Unit opponentsUnit)
+    {
+        var amount = _stat switch
+        {
+            StatType.Res => TotalStatGetter.GetTotal(StatType.Res, opponentsUnit),
+            StatType.Atk => TotalStatGetter.GetTotal(StatType.Atk, opponentsUnit),
+            StatType.Def => TotalStatGetter.GetTotal(StatType.Def, opponentsUnit),
+            StatType.Spd => TotalStatGetter.GetTotal(StatType.Spd, opponentsUnit),
+            _ => 0
+        };
+        
+        amount = Convert.ToInt32(Math.Truncate(amount * _percentage));
+        
+        return amount;
     }
 }

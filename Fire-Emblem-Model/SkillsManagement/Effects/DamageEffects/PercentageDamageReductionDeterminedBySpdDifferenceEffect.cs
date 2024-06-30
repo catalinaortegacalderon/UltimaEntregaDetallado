@@ -52,7 +52,7 @@ public class PercentageDamageReductionDeterminedBySpdDifferenceEffect : Effect
         if (myUnit.DamageEffects.HasReductionOfPercentageReduction)
             newMultiplier *= ReductionOfPercentageDamageReduction;
         
-        double reductionPercentage = 1 - (myTotalSpd - opponentsTotalSpd) * newMultiplier / 100;
+        var reductionPercentage = 1 - (myTotalSpd - opponentsTotalSpd) * newMultiplier / 100;
         
         if (reductionPercentage < _max) 
             reductionPercentage = _max;
