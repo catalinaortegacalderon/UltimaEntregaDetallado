@@ -4,25 +4,26 @@ using ConsoleApp1.EncapsulatedLists;
 using ConsoleApp1.GameDataStructures;
 using Fire_Emblem_View;
 
-namespace Fire_Emblem;
+namespace Fire_Emblem.Controllers;
 
 public class GameAttacksController
 {
-    // todo: tal vez tenga mas sentido que players este en game y no aca
     private readonly PlayersList _players = new();
     private readonly IView _view;
+    
     private DamageCalculator _damageCalculator;
-    private OutOfCombatDamageController _outOfCombatDamageController;
+    private readonly OutOfCombatDamageController _outOfCombatDamageController;
+    
     private Unit _currentAttackingUnit;
     private Unit _currentDefensiveUnit;
+    
     private int _attackValue;
     private int _currentAttackerId;
+    
     private bool _gameIsTerminated;
     private bool _roundIsTerminated;
-    private int _winner;
     
-    // TODO: ideaa, aca manejar los tres casos, ataque contraataque y followup de manera diferente
-    // no en el deesarollo sino en como se "autorizan"
+    private int _winner;
 
     public GameAttacksController(Player firstPlayer, Player secondPlayer, IView view)
     {
@@ -40,12 +41,6 @@ public class GameAttacksController
             return;
 
         SetAttackingAndDefensiveUnits(atackingUnit, defensiveUnit);
-
-        if (typeOfCurrentAttack == AttackType.FirstAttack)
-        {
-            //InitializeRound();
-        }
-
         CalculateAndApplyDamage(typeOfCurrentAttack);
         ShowWhoAttacksWho();
         ManageHpRecuperationInEveryAttack();

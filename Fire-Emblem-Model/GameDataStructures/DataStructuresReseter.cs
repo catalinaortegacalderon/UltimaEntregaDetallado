@@ -9,10 +9,12 @@ public static class DataStructuresReseter
         dataStructure.Spd = valueToResetTo;
         dataStructure.Def = valueToResetTo;
         dataStructure.Res = valueToResetTo;
-        dataStructure.AtkFollowup = valueToResetTo;
+        
         dataStructure.AtkFirstAttack = valueToResetTo;
         dataStructure.DefFirstAttack = valueToResetTo;
         dataStructure.ResFirstAttack = valueToResetTo;
+        
+        dataStructure.AtkFollowup = valueToResetTo;
     }
 
     public static void ResetDamageGameStructure(DataStructureDamageEffects dataStructure)
@@ -25,15 +27,8 @@ public static class DataStructuresReseter
         dataStructure.PercentageReductionOpponentsFirstAttack = 1;
         dataStructure.PercentageReductionOpponentsFollowup = 1;
         
-        
-        // todo: arreglar esto
-        //dataStructure.AmountOfEffectsOfPercentageReduction = 0;
-        //dataStructure.AmountOfEffectsOfPercentageReductionOpponentsFirstAttack = 0;
-        //dataStructure.AmountOfEffectsOfPercentageReductionOpponentsFollowup = 0;
-        
         dataStructure.AbsolutDamageReduction = 0;
-        
-        dataStructure.ReductionOfPercentageReduction = 1;
+
         dataStructure.HasReductionOfPercentageReduction = false;
     }
     

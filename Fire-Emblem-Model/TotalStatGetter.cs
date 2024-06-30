@@ -22,7 +22,7 @@ namespace Fire_Emblem
             };
         }
         
-        public static int GetFirstAttackStat( StatType stat,Unit unit)
+        public static int GetFirstAttackStat(StatType stat,Unit unit)
         {
             return stat switch
             {
@@ -36,7 +36,7 @@ namespace Fire_Emblem
             };
         }
         
-        public static int GetFollowUpStat( StatType stat,Unit unit)
+        public static int GetFollowUpStat(StatType stat,Unit unit)
         {
             if (stat == StatType.Atk)
                 return unit.ActiveBonus.AtkFollowup
@@ -45,6 +45,24 @@ namespace Fire_Emblem
                        * unit.ActivePenaltiesNeutralizer.Atk;
                 
             throw new UnsupportedStatTypeException();
+        }
+        
+        public static int GetTotalPenalties(Unit unit)
+        {
+            return unit.ActivePenalties.Atk 
+                   * unit.ActivePenaltiesNeutralizer.Atk
+                   + unit.ActivePenalties.Spd * unit.ActivePenaltiesNeutralizer.Spd
+                   + unit.ActivePenalties.Def * unit.ActivePenaltiesNeutralizer.Def
+                   + unit.ActivePenalties.Res * unit.ActivePenaltiesNeutralizer.Res;
+
+        }
+
+        public static int GetTotalBonus(Unit unit)
+        {
+            return unit.ActiveBonus.Atk * unit.ActiveBonusNeutralizer.Atk
+                   + unit.ActiveBonus.Spd * unit.ActiveBonusNeutralizer.Spd
+                   + unit.ActiveBonus.Def * unit.ActiveBonusNeutralizer.Def
+                   + unit.ActiveBonus.Res * unit.ActiveBonusNeutralizer.Res;
         }
     }
     

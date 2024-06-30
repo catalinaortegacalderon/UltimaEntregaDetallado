@@ -3,6 +3,7 @@ using ConsoleApp1.EncapsulatedLists;
 using ConsoleApp1.GameDataStructures;
 using Fire_Emblem_GUI;
 using Fire_Emblem_View;
+using Fire_Emblem.Controllers;
 
 namespace Fire_Emblem;
 
@@ -24,9 +25,6 @@ public class RoundController
     private readonly GameAttacksController _attackController;
     private readonly FollowUpController _followUpController;
     private readonly OutOfCombatDamageController _outOfCombatDamageController;
-    
-    // todo: revisar bien esta clase, si retorna tuplas o cosas raras
-
 
     public RoundController(IView view, int currentRound, Player player1,
         Player player2, GameAttacksController attackController)
@@ -65,8 +63,10 @@ public class RoundController
     {
         var chosenUnits = _view.AskBothPlayersForTheChosenUnit(_attackController.GetPlayers(),
             _attackController.GetCurrentAttacker());
+        
         _currentUnitNumberOfPlayer1 = chosenUnits[IdOfPlayer1];
         _currentUnitNumberOfPlayer2 = chosenUnits[IdOfPlayer2];
+        
         _currentUnitOfPlayer1 = _player1.Units.GetUnitByIndex(_currentUnitNumberOfPlayer1);
         _currentUnitOfPlayer2 = _player2.Units.GetUnitByIndex(_currentUnitNumberOfPlayer2);
     }
@@ -88,11 +88,15 @@ public class RoundController
         ApplyAllySkills(_player2, _currentUnitOfPlayer2);
     }
 
-    private void ApplyAllySkills(Player player, Unit currentUnit)
+    private static void ApplyAllySkills(Player player, Unit currentUnit)
     {
-        // todo: arreglar esta funcion, esta fea
         currentUnit.HasAnAllyWithMagic = player.Units.Any(unit =>
-            unit.Hp > 0 && unit.WeaponType == WeaponType.Magic && unit != currentUnit);
+            AliveAllyUnitHasMagic(currentUnit, unit));
+    }
+
+    private static bool AliveAllyUnitHasMagic(Unit currentUnit, Unit unit)
+    {
+        return unit.Hp > 0 && unit.WeaponType == WeaponType.Magic && unit != currentUnit;
     }
 
     private void InitializeRoundCombat()
@@ -116,9 +120,11 @@ public class RoundController
         var (attacker, defender) = IsPlayer1StartingRound()
             ? (_currentUnitOfPlayer1, _currentUnitOfPlayer2)
             : (_currentUnitOfPlayer2, _currentUnitOfPlayer1);
+        
         _attackController.GenerateAnAttackBetweenTwoUnits(AttackType.FirstAttack, attacker,
             defender);
         _attackController.ChangeAttacker();
+        
         if (CanDefenderCounterAttack(defender))
         {
             _attackController.GenerateAnAttackBetweenTwoUnits(AttackType.SecondAttack, defender,

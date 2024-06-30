@@ -1,4 +1,5 @@
 using ConsoleApp1.GameDataStructures;
+using Fire_Emblem;
 
 namespace ConsoleApp1.SkillsManagement.Effects.SpecificSkillEffects;
 
@@ -14,24 +15,19 @@ public class MastermindEffect : Effect
 
     private static int ObtainOpponentsTotalPenaltiesFraction(Unit opponentsUnit)
     {
-        var opponentsTotalPenalties = opponentsUnit.ActivePenalties.Atk 
-                                      * opponentsUnit.ActivePenaltiesNeutralizer.Atk
-                                      + opponentsUnit.ActivePenalties.Spd * opponentsUnit.ActivePenaltiesNeutralizer.Spd
-                                      + opponentsUnit.ActivePenalties.Def * opponentsUnit.ActivePenaltiesNeutralizer.Def
-                                      + opponentsUnit.ActivePenalties.Res * opponentsUnit.ActivePenaltiesNeutralizer.Res;
-
-        opponentsTotalPenalties = (int)(0.8 * opponentsTotalPenalties);
+        const double penaltiesMultiplier = 0.8;
+        
+        var opponentsTotalPenalties = TotalStatGetter.GetTotalPenalties(opponentsUnit);
+        opponentsTotalPenalties = (int)(penaltiesMultiplier * opponentsTotalPenalties);
         return opponentsTotalPenalties;
     }
 
     private static int ObtainMyTotalBonusFraction(Unit myUnit)
     {
-        var myTotalBonus = myUnit.ActiveBonus.Atk * myUnit.ActiveBonusNeutralizer.Atk
-                           + myUnit.ActiveBonus.Spd * myUnit.ActiveBonusNeutralizer.Spd
-                           + myUnit.ActiveBonus.Def * myUnit.ActiveBonusNeutralizer.Def
-                           + myUnit.ActiveBonus.Res * myUnit.ActiveBonusNeutralizer.Res;
-
-        myTotalBonus = (int)(0.8 * myTotalBonus);
+        const double bonusMultiplier = 0.8;
+        
+        var myTotalBonus = TotalStatGetter.GetTotalBonus(myUnit);
+        myTotalBonus = (int)(bonusMultiplier * myTotalBonus);
         return myTotalBonus;
     }
 }

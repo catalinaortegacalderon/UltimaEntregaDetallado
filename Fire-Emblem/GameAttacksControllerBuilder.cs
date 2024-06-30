@@ -3,6 +3,7 @@ using ConsoleApp1.EncapsulatedLists;
 using ConsoleApp1.GameDataStructures;
 using ConsoleApp1.SkillsManagement;
 using Fire_Emblem_View;
+using Fire_Emblem.Controllers;
 
 namespace Fire_Emblem;
 

@@ -21,7 +21,7 @@ public class GuiView : IView
 
     public GuiView(FireEmblemWindow window)
     {
-        this._window = window;
+        _window = window;
     }
     
     public int AskPlayerForTheChosenFile(string[] files)
@@ -31,7 +31,6 @@ public class GuiView : IView
 
     public void AnnounceTeamsAreNotValid()
     {
-        // todo: muestra el mensaje pero sigue el flujo, creo que es program
         _window.ShowInvalidTeamMessage();
     }
 
@@ -76,15 +75,11 @@ public class GuiView : IView
     {
         if (playerNumber==0)
             return _window.SelectUnitTeam1();
-        else
-        {
-            return _window.SelectUnitTeam2();
-        }
+        return _window.SelectUnitTeam2();
     }
 
     public void ShowRoundInformation(int currentRound, string attackersName, int playersNumber)
     {
-        // todo: tal vez esto no va aca pero ponerlo en algun lugar
         _window.UpdateUnitsStatsDuringBattle(_unitTeam1, _unitTeam2);
     }
 
@@ -98,7 +93,6 @@ public class GuiView : IView
 
     public void ShowAllSkills(Unit unit)
     {
-        // todo: pinto lo uso para actualizar units
     }
 
     public void AnnounceHpRecuperation(Unit unitThatRecuperatesHp, int amount, int finalHp)
@@ -115,14 +109,10 @@ public class GuiView : IView
 
     public void AnnounceDamageAfterCombat(Unit unitThatReceivesDamage, int damage)
     {
-        return;
     }
 
     public void ShowAttack(string attackersName, string defendersName, int damage)
     {
-        // todo: pensar en como actualizarlo, los teams y los units
-        // ojo, queda neggg el hp a veces
-
         if (attackersName == _unitTeam1.Name)
         {
             _unitTeam2.Hp -= damage;
@@ -139,7 +129,6 @@ public class GuiView : IView
 
     public void AnnounceUnitCannotFollowUp(string name)
     {
-        return;
     }
 
     public void AnnounceNoUnitCanFollowUp()
@@ -149,7 +138,6 @@ public class GuiView : IView
 
     public void ShowHp(Unit roundStarterUnit, Unit opponentsUnit)
     {
-        // todo: teams no se actualizannn ojito, tal vez llamar a update teams desde controller
         _window.UpdateTeams(_team1, _team2);
     }
 

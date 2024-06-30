@@ -1,40 +1,56 @@
 using ConsoleApp1.GameDataStructures;
 
-namespace ConsoleApp1.SkillsManagement.Effects.SpecificSkillEffects;
-
-public class GuardBearingEffect : Effect
+namespace ConsoleApp1.SkillsManagement.Effects.SpecificSkillEffects
 {
-    public override void ApplyEffect(Unit myUnit, Unit opponentsUnit)
+    public class GuardBearingEffect : Effect
     {
-        // todo: arreglar
-        // todo: encapsular constantes
-        var percentage = 0.7;
-        
-        if(myUnit.DamageEffects.HasReductionOfPercentageReduction)
+        public override void ApplyEffect(Unit myUnit, Unit opponentsUnit)
         {
-            percentage = 0.85;
+            var percentage = CalculatePercentage(myUnit, opponentsUnit);
+            ApplyPercentage(myUnit, percentage);
         }
 
-        if (IsTheFirstTimeMyUnitsStartsTheCombat(myUnit) ||
-            IsTheFirstTimeMyUnitIsInACombatStartedByTheOpponent(myUnit, opponentsUnit))
+        private static double CalculatePercentage(Unit myUnit, Unit opponentsUnit)
         {
-            percentage = 0.4;
-            if(myUnit.DamageEffects.HasReductionOfPercentageReduction)
+            const double defaultPercentage = 0.7;
+            const double specialCasePercentage = 0.4;
+            
+            var percentage = defaultPercentage;
+            
+            if (IsTheFirstTimeMyUnitsStartsTheCombat(myUnit) ||
+                IsTheFirstTimeMyUnitIsInACombatStartedByTheOpponent(myUnit, opponentsUnit))
             {
-                percentage = 0.7;
+                percentage = specialCasePercentage;
             }
+            
+            if (myUnit.DamageEffects.HasReductionOfPercentageReduction)
+            {
+                percentage = CalculateNewPercentage(percentage);
+            }
+
+            return percentage;
+        }
+
+        private static bool IsTheFirstTimeMyUnitsStartsTheCombat(Unit myUnit)
+        {
+            return !myUnit.HasStartedACombat && myUnit.IsAttacking;
         }
         
-        myUnit.DamageEffects.PercentageReduction *= percentage;
-    }
-
-    private static bool IsTheFirstTimeMyUnitsStartsTheCombat(Unit myUnit)
-    {
-        return !myUnit.HasStartedACombat && myUnit.IsAttacking;
-    }
-    
-    private static bool IsTheFirstTimeMyUnitIsInACombatStartedByTheOpponent(Unit myUnit, Unit opponentsUnit)
-    {
-        return !myUnit.HasBeenBeenInACombatStartedByTheOpponent && opponentsUnit.IsAttacking;
+        private static bool IsTheFirstTimeMyUnitIsInACombatStartedByTheOpponent(Unit myUnit, Unit opponentsUnit)
+        {
+            return !myUnit.HasBeenBeenInACombatStartedByTheOpponent && opponentsUnit.IsAttacking;
+        }
+        
+        private static double CalculateNewPercentage(double percentage)
+        {
+            const double reductionOfPercentageReduction = 0.5;
+            percentage = 1 - (1 - percentage) * reductionOfPercentageReduction;
+            return percentage;
+        }
+        
+        private static void ApplyPercentage(Unit myUnit, double percentage)
+        {
+            myUnit.DamageEffects.PercentageReduction *= percentage;
+        }
     }
 }
