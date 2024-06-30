@@ -15,9 +15,7 @@ public class ImpactSkill: Skill
     public ImpactSkill(StatType firstStat, StatType secondStat)
     {
         Conditions = new Condition[3];
-        Conditions[0] = new MyUnitStartsCombatCondition();
-        Conditions[1] = new MyUnitStartsCombatCondition();
-        Conditions[2] = new MyUnitStartsCombatCondition();
+        Conditions[0] = Conditions[1] = Conditions[2] = new MyUnitStartsCombatCondition();
 
         Effects = new Effect[3];
         Effects[0] = new ChangeStatsInEffect(firstStat, 6);

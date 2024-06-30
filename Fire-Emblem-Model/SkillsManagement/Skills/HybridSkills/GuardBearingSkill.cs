@@ -14,9 +14,8 @@ public class GuardBearingSkill : Skill
     public GuardBearingSkill()
     {
         Conditions = new Condition[3];
-        Conditions[0] = new AlwaysTrueCondition();
-        Conditions[1] = new AlwaysTrueCondition();
-        Conditions[2] = new AlwaysTrueCondition();
+        Conditions[0] = Conditions[1] = Conditions[2] = new AlwaysTrueCondition();
+        
         Effects = new Effect[3];
         Effects[0] = new ChangeOpponentsStatsInEffect(StatType.Spd, -4);
         Effects[1] = new ChangeOpponentsStatsInEffect(StatType.Def, -4);

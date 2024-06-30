@@ -15,11 +15,7 @@ public class FurySkill : Skill
     public FurySkill()
     {
         Conditions = new Condition[5];
-        Conditions[0] = new AlwaysTrueCondition();
-        Conditions[1] = new AlwaysTrueCondition();
-        Conditions[2] = new AlwaysTrueCondition();
-        Conditions[3] = new AlwaysTrueCondition();
-        Conditions[4] = new AlwaysTrueCondition();
+        Conditions[0] = Conditions[1] = Conditions[2] = Conditions[3] = Conditions[4] = new AlwaysTrueCondition();
 
         Effects = new Effect[5];
         Effects[0] = new ChangeStatsInEffect(StatType.Atk, 4);

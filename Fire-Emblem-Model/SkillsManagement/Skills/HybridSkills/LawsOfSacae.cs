@@ -16,10 +16,7 @@ public class LawsOfSacae : Skill
     public LawsOfSacae()
     {
         Conditions = new Condition[5];
-        Conditions[0] = new MyUnitStartsCombatCondition();
-        Conditions[1] = new MyUnitStartsCombatCondition();
-        Conditions[2] = new MyUnitStartsCombatCondition();
-        Conditions[3] = new MyUnitStartsCombatCondition();
+        Conditions[0] = Conditions[1] = Conditions[2] = Conditions[3] = new MyUnitStartsCombatCondition();
         Conditions[4] = new AndCondition([ new MyUnitStartsCombatCondition(),
             new CompareTotalSpdAddingSpdToTheOpponent(5), 
             new OpponentUsesCertainWeaponCondition([WeaponType.Sword, WeaponType.Axe, WeaponType.Lance])]); 

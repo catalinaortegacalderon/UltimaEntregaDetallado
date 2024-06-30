@@ -15,12 +15,8 @@ public class LightAndDarkSkill : Skill
     public LightAndDarkSkill()
     {
         Conditions = new Condition[6];
-        Conditions[0] = new AlwaysTrueCondition();
-        Conditions[1] = new AlwaysTrueCondition();
-        Conditions[2] = new AlwaysTrueCondition();
-        Conditions[3] = new AlwaysTrueCondition();
-        Conditions[4] = new AlwaysTrueCondition();
-        Conditions[5] = new AlwaysTrueCondition();
+        Conditions[0] = Conditions[1] = Conditions[2] = Conditions[3] = Conditions[4] = Conditions[5] = 
+            new AlwaysTrueCondition();
 
         Effects = new Effect[6];
         Effects[0] = new ChangeOpponentsStatsInEffect(StatType.Atk, -5);

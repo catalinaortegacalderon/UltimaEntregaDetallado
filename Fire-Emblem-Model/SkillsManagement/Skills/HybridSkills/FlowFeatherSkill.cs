@@ -16,9 +16,7 @@ public class FlowFeatherSkill : Skill
     {
         Conditions = new Condition[2];
         Conditions[0] = new MyUnitStartsCombatCondition();
-        Conditions[1] = new AndCondition([new MyUnitStartsCombatCondition(), 
-            new CompareTotalSpdAddingSpdToTheOpponent(-10)]);
-        Conditions[1] = new AndCondition([new MyUnitStartsCombatCondition(), 
+        Conditions[1] = Conditions[1] = new AndCondition([new MyUnitStartsCombatCondition(), 
             new CompareTotalSpdAddingSpdToTheOpponent(-10)]);
 
         Effects = new Effect[2];
