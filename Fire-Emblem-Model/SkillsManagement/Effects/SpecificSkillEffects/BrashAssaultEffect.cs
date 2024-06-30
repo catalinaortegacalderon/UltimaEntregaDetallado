@@ -27,6 +27,7 @@ public class BrashAssaultEffect : Effect
         else
             myUnit.DamageEffects.ExtraDamageFirstAttack += amount;
         
+        Console.WriteLine("brash assault");
         Console.WriteLine(amount);
     }
 }

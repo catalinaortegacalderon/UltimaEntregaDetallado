@@ -28,6 +28,7 @@ public class DivineRecreationEffect : Effect
         else
             myUnit.DamageEffects.ExtraDamageFirstAttack += amount;
         
+        Console.WriteLine("divine recreation");
         Console.WriteLine(amount);
     }
 }
