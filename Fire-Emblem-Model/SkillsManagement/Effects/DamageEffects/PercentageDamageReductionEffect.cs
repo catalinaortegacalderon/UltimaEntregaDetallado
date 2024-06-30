@@ -17,13 +17,12 @@ public class PercentageDamageReductionEffect : Effect
 
     public override void ApplyEffect(Unit myUnit, Unit opponentsUnit)
     {
-        var finalPercentage = _percentage;
-        
-        if (myUnit.DamageEffects.HasReductionOfPercentageReduction != 1)
-        {
-           finalPercentage = GetNewPercentage();
-        }
-        
+        var finalPercentage = GetNewPercentage(myUnit);
+        ApplyNewPercentage(myUnit, finalPercentage);
+    }
+
+    private void ApplyNewPercentage(Unit myUnit, double finalPercentage)
+    {
         switch (_type)
         {
             case DamageEffectCategory.All:
@@ -37,11 +36,11 @@ public class PercentageDamageReductionEffect : Effect
                 break;
         }
     }
-    
-    private double GetNewPercentage()
+
+    private double GetNewPercentage(Unit unit)
     {
         var initialReduction = 1 - _percentage;
-        var newReduction = initialReduction / 2;
+        var newReduction = initialReduction * unit.DamageEffects.ReductionOfPercentageReduction;
         var newPercentage = 1 - newReduction;
         return newPercentage;
     }

@@ -8,7 +8,7 @@ public class ReductionOfPercentageDamageReductionToHalfEffect : Effect
     public override void ApplyEffect(Unit myUnit, Unit opponentsUnit)
     {
         const double reductionOfPercentageDamageReduction = 0.5;
-        opponentsUnit.DamageEffects.HasReductionOfPercentageReduction *= reductionOfPercentageDamageReduction;
+        opponentsUnit.DamageEffects.ReductionOfPercentageReduction *= reductionOfPercentageDamageReduction;
     }
     
 }

@@ -7,7 +7,6 @@ namespace ConsoleApp1.SkillsManagement.Effects.DamageEffects;
 public class PercentageDamageReductionConsideringOpponentsHpEffect : Effect
 {
     private readonly DamageEffectCategory _type;
-    private const double ReductionOfPercentageDamageReduction = 0.5;
 
     public PercentageDamageReductionConsideringOpponentsHpEffect(DamageEffectCategory type)
     {
@@ -19,7 +18,7 @@ public class PercentageDamageReductionConsideringOpponentsHpEffect : Effect
         var percentageReduction = opponentsUnit.Hp / (double)opponentsUnit.MaxHp / 2;
         percentageReduction = Math.Truncate(100.0 * percentageReduction) / 100.0;
         
-        percentageReduction *= myUnit.DamageEffects.HasReductionOfPercentageReduction;
+        percentageReduction *= myUnit.DamageEffects.ReductionOfPercentageReduction;
         
         var finalPercentage = 1 - percentageReduction;
         

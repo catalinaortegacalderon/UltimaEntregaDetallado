@@ -51,7 +51,7 @@ public class PercentageDamageReductionDeterminedBySpdDifferenceEffect : Effect
         if (reductionPercentage < _max) 
             reductionPercentage = _max;
         
-        reductionPercentage = 1 - (1- reductionPercentage) * myUnit.DamageEffects.HasReductionOfPercentageReduction;
+        reductionPercentage = 1 - (1- reductionPercentage) * myUnit.DamageEffects.ReductionOfPercentageReduction;
         
         return reductionPercentage;
     }

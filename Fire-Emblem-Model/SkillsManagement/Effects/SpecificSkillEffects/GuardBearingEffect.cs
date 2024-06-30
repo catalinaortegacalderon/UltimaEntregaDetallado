@@ -23,10 +23,7 @@ namespace ConsoleApp1.SkillsManagement.Effects.SpecificSkillEffects
                 percentage = specialCasePercentage;
             }
             
-            if (myUnit.DamageEffects.HasReductionOfPercentageReduction != 1)
-            {
-                percentage = CalculateNewPercentage(percentage);
-            }
+            percentage = CalculateNewPercentage(percentage, myUnit);
 
             return percentage;
         }
@@ -41,10 +38,9 @@ namespace ConsoleApp1.SkillsManagement.Effects.SpecificSkillEffects
             return !myUnit.HasBeenBeenInACombatStartedByTheOpponent && opponentsUnit.IsAttacking;
         }
         
-        private static double CalculateNewPercentage(double percentage)
+        private static double CalculateNewPercentage(double percentage, Unit unit)
         {
-            const double reductionOfPercentageReduction = 0.5;
-            percentage = 1 - (1 - percentage) * reductionOfPercentageReduction;
+            percentage = 1 - (1 - percentage) * unit.DamageEffects.ReductionOfPercentageReduction;
             return percentage;
         }
         
