@@ -2,7 +2,7 @@ namespace ConsoleApp1;
 
 public static class FileChecker
 {
-    // todo: leer el archivo en otra parte, aca solo revisar si es valido (teamvalidator)
+    // todo: leer el archivo en otra parte, aca solo revisar si es valido (teamvalidator), file reader
     public static bool IsGameValid(string file)
     {
         if (!HasNoEmptyTeams(file))
