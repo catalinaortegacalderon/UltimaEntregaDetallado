@@ -13,8 +13,8 @@ public class ResolveSkill : Skill
     public ResolveSkill()
     {
         Conditions = new Condition[2];
-        Conditions[0] = new MyHpIsLessThanCondition(0.75);
-        Conditions[1] = new MyHpIsLessThanCondition(0.75);
+        Conditions[0] = Conditions[1] = new MyHpIsLessThanCondition(0.75);
+        
         Effects = new Effect[2];
         Effects[0] = new ChangeStatsInEffect(StatType.Def, 7);
         Effects[1] = new ChangeStatsInEffect(StatType.Res, 7);

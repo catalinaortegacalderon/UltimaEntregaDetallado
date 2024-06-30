@@ -15,9 +15,8 @@ public class AegisShieldSkill : Skill
     public AegisShieldSkill()
     {
         Conditions = new Condition[3];
-        Conditions[0] = new AlwaysTrueCondition();
-        Conditions[1] = new AlwaysTrueCondition();
-        Conditions[2] = new AlwaysTrueCondition();
+        Conditions[0] = Conditions[1] =  Conditions[2] = new AlwaysTrueCondition();
+        
         Effects = new Effect[3];
         Effects[0] = new ChangeStatsInEffect(StatType.Def, 6);
         Effects[1] = new ChangeStatsInEffect(StatType.Res, 3);

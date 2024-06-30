@@ -12,8 +12,10 @@ public class DefensePlus5Skill : Skill
 {
     public DefensePlus5Skill()
     {
-        Conditions = new Condition[] { new AlwaysTrueCondition() };
+        Conditions = new Condition[1];
+        Conditions[0] = new AlwaysTrueCondition();
 
-        Effects = new Effect[] { new ChangeStatsInEffect(StatType.Def, 5) };
+        Effects = new Effect[1];
+        Effects[0] = new ChangeStatsInEffect(StatType.Def, 5);
     }
 }

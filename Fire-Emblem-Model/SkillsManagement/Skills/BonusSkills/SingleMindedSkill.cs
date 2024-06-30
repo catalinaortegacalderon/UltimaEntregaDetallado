@@ -14,6 +14,7 @@ public class SingleMindedSkill : Skill
     {
         Conditions = new Condition[1];
         Conditions[0] = new MyCurrentOpponentIsAlsoTheLastOpponentCondition();
+        
         Effects = new Effect[1];
         Effects[0] = new ChangeStatsInEffect(StatType.Atk, 8);
     }

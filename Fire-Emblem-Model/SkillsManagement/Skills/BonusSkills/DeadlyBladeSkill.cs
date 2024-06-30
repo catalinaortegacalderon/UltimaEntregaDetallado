@@ -13,11 +13,7 @@ public class DeadlyBladeSkill : Skill
     public DeadlyBladeSkill()
     {
         Conditions = new Condition[2];
-        Conditions[0] = new AndCondition([
-            new MyUnitStartsCombatCondition(),
-            new MyUnitUsesCertainWeaponsCondition([WeaponType.Sword])
-        ]);
-        Conditions[1] = new AndCondition([
+        Conditions[0] = Conditions[1] = new AndCondition([
             new MyUnitStartsCombatCondition(),
             new MyUnitUsesCertainWeaponsCondition([WeaponType.Sword])
         ]);

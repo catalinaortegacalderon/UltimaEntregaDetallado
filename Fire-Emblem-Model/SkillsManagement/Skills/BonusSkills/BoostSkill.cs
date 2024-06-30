@@ -8,7 +8,7 @@ namespace ConsoleApp1.SkillsManagement.Skills.BonusSkills;
 
 public class BoostSkill : Skill
 {
-    public BoostSkill()
+    protected BoostSkill()
     {
         Conditions = new Condition[1];
         Conditions[0] = new MyHpIsLessThanOpponentsHpPlusCondition(3);

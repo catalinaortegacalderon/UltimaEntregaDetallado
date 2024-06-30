@@ -12,8 +12,7 @@ public class BrazenSkill : Skill
     public BrazenSkill(StatType firstStat, StatType secondStat)
     {
         Conditions = new Condition[2];
-        Conditions[0] = new MyHpIsLessThanCondition(0.8);
-        Conditions[1] = new MyHpIsLessThanCondition(0.8);
+        Conditions[0] = Conditions[1] = new MyHpIsLessThanCondition(0.8);
 
         Effects = new Effect[2];
         Effects[0] = new ChangeStatsInEffect(firstStat, 10);

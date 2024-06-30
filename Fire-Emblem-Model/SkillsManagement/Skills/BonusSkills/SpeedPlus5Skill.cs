@@ -12,7 +12,10 @@ public class SpeedPlus5Skill : Skill
 {
     public SpeedPlus5Skill()
     {
-        Conditions = new Condition[] { new AlwaysTrueCondition() };
-        Effects = new Effect[] { new ChangeStatsInEffect(StatType.Spd, 5) };
+        Conditions = new Condition[1];
+        Conditions[0] = new AlwaysTrueCondition();
+
+        Effects = new Effect[1];
+        Effects[0] = new ChangeStatsInEffect(StatType.Spd, 5);
     }
 }

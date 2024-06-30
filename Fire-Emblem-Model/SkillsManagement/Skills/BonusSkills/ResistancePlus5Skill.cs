@@ -12,8 +12,10 @@ public class ResistancePlus5Skill : Skill
 {
     public ResistancePlus5Skill()
     {
-        Conditions = new Condition[] { new AlwaysTrueCondition() };
+        Conditions = new Condition[1];
+        Conditions[0] = new AlwaysTrueCondition();
 
-        Effects = new Effect[] { new ChangeStatsInEffect(StatType.Res, 5) };
+        Effects = new Effect[1];
+        Effects[0] = new ChangeStatsInEffect(StatType.Res, 5);
     }
 }

@@ -13,8 +13,7 @@ public class TomePrecisionSkill : Skill
     public TomePrecisionSkill()
     {
         Conditions = new Condition[2];
-        Conditions[0] = new MyUnitUsesCertainWeaponsCondition([WeaponType.Magic]);
-        Conditions[1] = new MyUnitUsesCertainWeaponsCondition([WeaponType.Magic]);
+        Conditions[0] = Conditions[1] = new MyUnitUsesCertainWeaponsCondition([WeaponType.Magic]);
 
         Effects = new Effect[2];
         Effects[0] = new ChangeStatsInEffect(StatType.Atk, 6);
