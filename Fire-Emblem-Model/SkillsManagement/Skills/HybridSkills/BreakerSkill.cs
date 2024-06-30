@@ -14,9 +14,7 @@ public class BreakerSkill : Skill
     public BreakerSkill(WeaponType[] weapons)
     {
         Conditions = new Condition[2];
-        Conditions[0] = new AndCondition([new MyHpIsBiggerThanCondition(0.5), 
-            new OpponentUsesCertainWeaponCondition(weapons)]);
-        Conditions[1] = new AndCondition([new MyHpIsBiggerThanCondition(0.5), 
+        Conditions[0] = Conditions[1] = new AndCondition([new MyHpIsBiggerThanCondition(0.5), 
             new OpponentUsesCertainWeaponCondition(weapons)]);
         
         Effects = new Effect[2];

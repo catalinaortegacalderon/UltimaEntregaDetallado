@@ -16,22 +16,17 @@ public class BrashAssaultSkill : Skill
     public BrashAssaultSkill()
     {
         Conditions = new Condition[5];
-        Conditions[0] = new OrCondition([
+        Conditions[0] = Conditions[1] = Conditions[2] = Conditions[3] = Conditions[4] = 
+            new OrCondition([
             new AndCondition([
                 new MyHpIsLessThanCondition(0.99),
                 new MyUnitStartsCombatCondition()
             ]),
-
             new AndCondition([
                 new MyUnitStartsCombatCondition(),
                 new OpponentHasFullHpCondition()
             ])
         ]);
-        Conditions[4] = 
-            Conditions[3] =
-            Conditions[2] =
-            Conditions[1] = 
-                Conditions[0];
         
         Effects = new Effect[5];
         Effects[0] = new ChangeOpponentsStatsInEffect(StatType.Def, -4);

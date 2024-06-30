@@ -15,10 +15,7 @@ public class DistantDefSkill : Skill
     public DistantDefSkill()
     {
         Conditions = new Condition[3];
-        Conditions[0] = 
-            Conditions[1] = 
-                    Conditions[2] =
-                        new AndCondition([
+        Conditions[0] = Conditions[1] = Conditions[2] = new AndCondition([
                             new OpponentUsesCertainWeaponCondition([
                                 WeaponType.Magic, 
                                 WeaponType.Bow

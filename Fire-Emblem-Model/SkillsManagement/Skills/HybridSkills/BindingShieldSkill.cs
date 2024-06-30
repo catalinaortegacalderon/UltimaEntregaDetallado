@@ -12,8 +12,7 @@ public class BindingShieldSkill : Skill
     public BindingShieldSkill()
     {
         Conditions = new Condition[3];
-        Conditions[0] = new CompareTotalSpdAddingSpdToTheOpponent(5);
-        Conditions[1] = new CompareTotalSpdAddingSpdToTheOpponent(5);
+        Conditions[0] = Conditions[1] = new CompareTotalSpdAddingSpdToTheOpponent(5);
         Conditions[2] = new AndCondition([
             new MyUnitStartsCombatCondition(),
             new CompareTotalSpdAddingSpdToTheOpponent(5)

@@ -15,14 +15,12 @@ public class CloseDefSkill : Skill
     public CloseDefSkill()
     {
         Conditions = new Condition[3];
-        Conditions[0] = 
-            Conditions[1] =
-                Conditions[2] =
-                        new AndCondition([
-                            new OpponentUsesCertainWeaponCondition([
+        Conditions[0] = Conditions[1] = Conditions[2] = 
+            new AndCondition([
+                new OpponentUsesCertainWeaponCondition([
                                 WeaponType.Sword, 
-                                WeaponType.Lance, WeaponType.Axe
-                            ]), new OpponentStartsCombatCondition()]);
+                                WeaponType.Lance, WeaponType.Axe]), 
+                new OpponentStartsCombatCondition()]);
 
         Effects = new Effect[3];
         Effects[0] = new ChangeStatsInEffect(StatType.Def, 8);

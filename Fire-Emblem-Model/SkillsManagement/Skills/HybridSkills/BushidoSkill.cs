@@ -17,6 +17,7 @@ public class BushidoSkill : Skill
         Conditions = new Condition[2];
         Conditions[0] = new AlwaysTrueCondition();
         Conditions[1] = new CompareTotalStatCondition(StatType.Spd);
+        
         Effects = new Effect[2];
         Effects[0] = new ExtraDamageEffect(7, DamageEffectCategory.All);
         Effects[1] = new PercentageDamageReductionDeterminedBySpdDifferenceEffect(
