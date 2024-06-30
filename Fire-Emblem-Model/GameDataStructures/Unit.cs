@@ -11,14 +11,14 @@ public class Unit : IUnit
     public readonly WeaponType WeaponType;
 
     public string Name { get; }
-    public string Weapon { get; } = "hOLA";
-    public int MaxHp { get; set; } = 0;
+    public string Weapon { get; } 
+    public int MaxHp { get; set; } 
 
-    public int Hp { get; set; } = 0;
-    public int Atk { get; } = 0;
-    public int Spd { get; } = 0;
-    public int Def { get; } = 0;
-    public int Res { get; } = 0;
+    public int Hp { get; set; } 
+    public int Atk { get; } 
+    public int Spd { get; } 
+    public int Def { get; } 
+    public int Res { get; } 
 
     public string[] Skills { get; set; } = [];
     
@@ -49,10 +49,7 @@ public class Unit : IUnit
     {
         Name = name;
         WeaponType = ConvertWeaponStringToWeaponType(weapon);
-        if (gender == "Male")
-            GenderType = GenderType.Male;
-        else
-            GenderType = GenderType.Female;
+        GenderType = gender == "Male" ? GenderType.Male : GenderType.Female;
         Weapon = weapon;
         MaxHp = maxHp;
         MaxHp = maxHp;
@@ -74,11 +71,6 @@ public class Unit : IUnit
             "Sword" => WeaponType.Sword,
             _ => WeaponType.Empty
         };
-    }
-
-    private void ChangeBaseHp(int amount)
-    {
-        MaxHp += amount;
     }
     
 }

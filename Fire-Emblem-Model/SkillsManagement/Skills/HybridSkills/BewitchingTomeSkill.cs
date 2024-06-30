@@ -45,7 +45,7 @@ public class BewitchingTomeSkill : Skill
         Effects[3] = new ChangeStatsInEffect(StatType.Def, 5);
         Effects[4] = new ChangeStatsInEffect(StatType.Res, 5);
         Effects[5] = new ChangeStatsInBasePercentageEffect(StatType.Spd, 0.2);
-        Effects[6] = new ChangeStatInAnotherStatsBasePercentajeEffect(
+        Effects[6] = new ChangeStatInAnotherStatsBasePercentageEffect(
             StatType.Atk, 0.2, StatType.Spd);
         Effects[7] = new PercentageDamageReductionEffect(0.7, 
             DamageEffectCategory.FirstAttack);

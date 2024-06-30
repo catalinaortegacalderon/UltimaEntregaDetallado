@@ -1,15 +1,13 @@
-using ConsoleApp1.DataTypes;
 using ConsoleApp1.GameDataStructures;
 using ConsoleApp1.SkillsManagement.Effects.BaseEffects;
-using ConsoleApp1.SkillsManagement.Effects.SpecificSkillEffects;
 
 namespace ConsoleApp1.SkillsManagement.Effects.BonusAndPenaltiesEffects;
 
-public class ChangeOpponentsResInPercentajeEffect : Effect
+public class ChangeOpponentsResInPercentageEffect : Effect
 {
     private readonly double _percentage;
 
-    public ChangeOpponentsResInPercentajeEffect(double percentage)
+    public ChangeOpponentsResInPercentageEffect(double percentage)
     {
         _percentage = percentage;
     }

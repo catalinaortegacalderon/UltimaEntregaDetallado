@@ -16,18 +16,19 @@ public class FlightSkillCondition : SecondCategoryCondition
         var myTotalSpd = TotalStatGetter.GetTotal(StatType.Spd, myUnit);
         var opponentsTotalSpd = TotalStatGetter.GetTotal(StatType.Spd, opponentsUnit);
 
-        int myAmountToAdd = 0;
-        int opponentsAmountToAdd = 0;
+        var myAmountToAdd = 0;
+        var opponentsAmountToAdd = 0;
 
-        if (_referenceStat == StatType.Def)
+        switch (_referenceStat)
         {
-            myAmountToAdd = TotalStatGetter.GetTotal(StatType.Def, myUnit);
-            opponentsAmountToAdd = TotalStatGetter.GetTotal(StatType.Def, opponentsUnit);
-        }
-        if (_referenceStat == StatType.Res)
-        {
-            myAmountToAdd = TotalStatGetter.GetTotal(StatType.Res, myUnit);
-            opponentsAmountToAdd = TotalStatGetter.GetTotal(StatType.Res, opponentsUnit);
+            case StatType.Def:
+                myAmountToAdd = TotalStatGetter.GetTotal(StatType.Def, myUnit);
+                opponentsAmountToAdd = TotalStatGetter.GetTotal(StatType.Def, opponentsUnit);
+                break;
+            case StatType.Res:
+                myAmountToAdd = TotalStatGetter.GetTotal(StatType.Res, myUnit);
+                opponentsAmountToAdd = TotalStatGetter.GetTotal(StatType.Res, opponentsUnit);
+                break;
         }
 
         return (myTotalSpd + myAmountToAdd > opponentsTotalSpd + opponentsAmountToAdd);

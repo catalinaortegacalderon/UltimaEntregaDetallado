@@ -1,7 +1,6 @@
 using ConsoleApp1.DataTypes;
 using ConsoleApp1.GameDataStructures;
 using ConsoleApp1.SkillsManagement.Effects.BaseEffects;
-using ConsoleApp1.SkillsManagement.Effects.SpecificSkillEffects;
 
 namespace ConsoleApp1.SkillsManagement.Effects.DamageEffects;
 
@@ -46,7 +45,7 @@ public class PercentageDamageReductionDeterminedByResDifferenceEffect : Effect
         double myTotalRes = TotalStatGetter.GetTotal(StatType.Res, myUnit);
         double opponentsTotalRes = TotalStatGetter.GetTotal(StatType.Res, opponentsUnit);
         
-        double reductionPercentage = 1 - (myTotalRes - opponentsTotalRes) * _multiplier / 100;
+        var reductionPercentage = 1 - (myTotalRes - opponentsTotalRes) * _multiplier / 100;
         
         if (reductionPercentage < _max) 
             reductionPercentage = _max;

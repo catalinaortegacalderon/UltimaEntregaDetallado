@@ -25,7 +25,7 @@ public class FlowEffect : Effect
 
     private static int CalculateAmount(int myTotalStat, int opponentsTotalStat)
     {
-        int amount = (int)((myTotalStat - opponentsTotalStat) * 0.7);
+        var amount = (int)((myTotalStat - opponentsTotalStat) * 0.7);
         if (amount < 0)
             amount = 0;
         if (amount > 7)

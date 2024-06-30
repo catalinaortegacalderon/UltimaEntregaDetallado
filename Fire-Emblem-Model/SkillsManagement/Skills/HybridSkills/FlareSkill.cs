@@ -19,7 +19,7 @@ public class FlareSkill : Skill
         Conditions[1] = new MyUnitUsesCertainWeaponsCondition([WeaponType.Magic]);
 
         Effects = new Effect[2];
-        Effects[0] = new ChangeOpponentsResInPercentajeEffect(0.2);
+        Effects[0] = new ChangeOpponentsResInPercentageEffect(0.2);
         Effects[1] = new HealingEffect(0.5);
     }
 }

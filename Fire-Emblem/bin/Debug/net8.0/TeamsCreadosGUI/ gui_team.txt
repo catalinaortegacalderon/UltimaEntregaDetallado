@@ -1,4 +1,7 @@
 Player 1 Team
-Alear 
-Player 2 Team
 Alear
+Chrom
+Roy 
+Player 2 Team
+Soren
+Shez

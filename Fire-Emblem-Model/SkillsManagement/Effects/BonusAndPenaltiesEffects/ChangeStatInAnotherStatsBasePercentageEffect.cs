@@ -5,13 +5,13 @@ using ConsoleApp1.SkillsManagement.Effects.SpecificSkillEffects;
 
 namespace ConsoleApp1.SkillsManagement.Effects.BonusAndPenaltiesEffects;
 
-public class ChangeStatInAnotherStatsBasePercentajeEffect : Effect
+public class ChangeStatInAnotherStatsBasePercentageEffect : Effect
 {
 private readonly double _percentage;
 private readonly StatType _stat;
 private readonly StatType _referenceStat;
 
-public ChangeStatInAnotherStatsBasePercentajeEffect(StatType stat, double percentage, 
+public ChangeStatInAnotherStatsBasePercentageEffect(StatType stat, double percentage, 
     StatType referenceStat)
 {
     _percentage = percentage;

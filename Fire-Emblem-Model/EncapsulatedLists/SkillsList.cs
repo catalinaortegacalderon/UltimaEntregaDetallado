@@ -19,11 +19,6 @@ public class SkillsList : IEnumerable<Skill>
         return _skills.GetEnumerator();
     }
 
-    public Skill GetSkillByIndex(int index)
-    {
-        return _skills[index];
-    }
-
     public void AddSkill(int index, Skill skill)
     {
         _skills[index] = skill;

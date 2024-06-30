@@ -9,8 +9,8 @@ public class AndCondition : Condition
 
     public AndCondition(Condition[] conditions)
     {
-        this._conditions = conditions;
-        this.Priority = GetMaxPriority(conditions);
+        _conditions = conditions;
+        Priority = GetMaxPriority(conditions);
     }
 
     private ConditionPriority GetMaxPriority(Condition[] conditions)

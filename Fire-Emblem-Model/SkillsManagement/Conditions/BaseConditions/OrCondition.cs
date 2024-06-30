@@ -9,11 +9,11 @@ public class OrCondition : Condition
 
     public OrCondition(Condition[] conditions)
     {
-        this._conditions = conditions;
-        this.Priority = GetMaxPriority(conditions);
+        _conditions = conditions;
+        Priority = GetMaxPriority(conditions);
     }
 
-    private ConditionPriority GetMaxPriority(Condition[] conditions)
+    private static ConditionPriority GetMaxPriority(Condition[] conditions)
     {
         var maxPriority = ConditionPriority.PriorityOfBonusAndPenalties; 
         foreach (var condition in conditions)

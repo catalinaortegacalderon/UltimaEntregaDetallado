@@ -10,7 +10,7 @@ public class HealingEffect: Effect
     
     public HealingEffect(double percentage)
     {
-        this._percentage = percentage;
+        _percentage = percentage;
     }
     public override void ApplyEffect(Unit myUnit, Unit opponentsUnit)
     {

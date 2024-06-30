@@ -16,8 +16,6 @@ public class GuiView : IView
 
     private Unit _unitTeam1;
     private Unit _unitTeam2;
-    
-    // todo: arreglar hp neg
 
     public GuiView(FireEmblemWindow window)
     {
