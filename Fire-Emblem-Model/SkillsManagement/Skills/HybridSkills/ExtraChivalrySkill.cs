@@ -15,10 +15,9 @@ public class ExtraChivalrySkill : Skill
     public ExtraChivalrySkill()
     {
         Conditions = new Condition[4];
-        Conditions[0] = new OpponentHasHpGreaterThanCondition(0.5);
-        Conditions[1] = new OpponentHasHpGreaterThanCondition(0.5);
-        Conditions[2] = new OpponentHasHpGreaterThanCondition(0.5);
+        Conditions[0] = Conditions[1] = Conditions[2] = new OpponentHasHpGreaterThanCondition(0.5);
         Conditions[3] = new AlwaysTrueCondition();
+        
         Effects = new Effect[4];
         Effects[0] = new ChangeOpponentsStatsInEffect(StatType.Atk, -5);
         Effects[1] = new ChangeOpponentsStatsInEffect(StatType.Def, -5);

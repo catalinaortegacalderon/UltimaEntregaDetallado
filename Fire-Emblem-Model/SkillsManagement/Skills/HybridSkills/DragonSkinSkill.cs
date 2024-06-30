@@ -15,15 +15,11 @@ public class DragonSkinSkill : Skill
     public DragonSkinSkill()
     {
        
-        Conditions = new Condition[5];
-        Conditions[0] = 
-            Conditions[1] = 
-                Conditions[2] =
-                    Conditions[3] =
-                        Conditions[4] = 
-                            new OrCondition([
-                                new OpponentHasHpGreaterThanCondition(0.75), 
-                                new OpponentStartsCombatCondition()]);
+        Conditions = new Condition[5]; 
+        Conditions[0] = Conditions[1] = Conditions[2] = Conditions[3] = Conditions[4] = 
+            new OrCondition([
+                new OpponentHasHpGreaterThanCondition(0.75), 
+                new OpponentStartsCombatCondition()]);
         
         Effects = new Effect[5];
         Effects[0] = new ChangeStatsInEffect(StatType.Atk, 6);

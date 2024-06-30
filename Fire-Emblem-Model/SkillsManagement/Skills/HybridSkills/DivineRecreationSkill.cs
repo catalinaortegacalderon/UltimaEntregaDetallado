@@ -15,11 +15,8 @@ public class DivineRecreationSkill : Skill
     public DivineRecreationSkill()
     {
         Conditions = new Condition[6];
-        Conditions[0] = new OpponentHasHpGreaterThanCondition(0.5);
-        Conditions[1] = new OpponentHasHpGreaterThanCondition(0.5);
-        Conditions[2] = new OpponentHasHpGreaterThanCondition(0.5);
-        Conditions[3] = new OpponentHasHpGreaterThanCondition(0.5);
-        Conditions[4] = new OpponentHasHpGreaterThanCondition(0.5);
+        Conditions[0] = Conditions[0] = Conditions[1] = Conditions[2] = Conditions[3] = Conditions[4] =
+            new OpponentHasHpGreaterThanCondition(0.5);
         Conditions[5] = new OpponentHasHpGreaterThanCondition(0.5);
 
         Effects = new Effect[6];

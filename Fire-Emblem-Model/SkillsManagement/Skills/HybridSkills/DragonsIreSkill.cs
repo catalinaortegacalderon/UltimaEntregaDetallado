@@ -15,9 +15,7 @@ public class DragonsIreSkill : Skill
     public DragonsIreSkill()
     {
         Conditions = new Condition[4];
-        Conditions[0] = new MyHpIsBiggerThanCondition(0.25);
-        Conditions[1] = new MyHpIsBiggerThanCondition(0.25);
-        Conditions[2] = new MyHpIsBiggerThanCondition(0.25);
+        Conditions[0] = Conditions[1] = Conditions[2] = new MyHpIsBiggerThanCondition(0.25);
         Conditions[3] = new AndCondition([
             new MyHpIsBiggerThanCondition(0.25),
             new OpponentStartsCombatCondition()
