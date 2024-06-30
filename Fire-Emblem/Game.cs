@@ -60,6 +60,8 @@ namespace Fire_Emblem
                 new PlayersConstructor().BuildPlayers(File.ReadAllLines(teamFile));
             SetPlayers(players);
             _attackController = new GameAttacksController(_player1, _player2, _view);
+            
+            _roundController = new RoundController(_view, _currentRound, _player1, _player2, _attackController);
         }
 
         private string GetValidTeamFile()
@@ -98,7 +100,7 @@ namespace Fire_Emblem
 
         private bool IsGameTerminated()
         {
-            return _attackController.IsGameTerminated();
+            return _roundController.IsGameTerminated();
         }
 
         private void PlayOneRound()
@@ -124,8 +126,6 @@ namespace Fire_Emblem
         {
             // todo: nose si es tan buena idea crearlo siempre, tal vez que solo tenga round controller
             // y no atack controller
-            _roundController = new RoundController(_view,_currentRound, _player1, _player2,
-                _attackController);
             _roundController.ExecuteRound();
         }
 
@@ -136,7 +136,7 @@ namespace Fire_Emblem
 
         private void AnnounceWinner()
         {
-            _view.AnnounceWinner(_attackController.GetWinner());
+            _view.AnnounceWinner(_roundController.GetWinner());
         }
 
         private void UpdateTeams()

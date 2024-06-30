@@ -7,7 +7,7 @@ namespace ConsoleApp1.SkillsManagement.Effects.SpecificSkillEffects;
 
 public class DivineRecreationEffect : Effect
 {
-    private double _percentage;
+    private readonly double _percentage;
     public DivineRecreationEffect(double percentage)
     {
         _percentage = percentage;

@@ -223,4 +223,14 @@ public class RoundController
     {
         _currentRound++;
     }
+    
+    public bool IsGameTerminated()
+    {
+        return _attackController.IsGameTerminated();
+    }
+    
+    public int GetWinner()
+    {
+        return _attackController.GetWinner();
+    }
 }
