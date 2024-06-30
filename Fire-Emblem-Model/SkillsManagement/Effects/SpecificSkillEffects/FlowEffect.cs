@@ -20,7 +20,7 @@ public class FlowEffect : Effect
         var amount = CalculateAmount(myTotalStat, opponentsTotalStat);
 
         myUnit.DamageEffects.ExtraDamage += amount; 
-        myUnit.DamageEffects.AbsolutDamageReduction -= amount; 
+        myUnit.DamageEffects.AbsoluteDamageReduction -= amount; 
     }
 
     private static int CalculateAmount(int myTotalStat, int opponentsTotalStat)

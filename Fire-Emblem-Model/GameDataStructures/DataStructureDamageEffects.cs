@@ -2,7 +2,7 @@ namespace ConsoleApp1.GameDataStructures;
 
 public class DataStructureDamageEffects
 {
-    public int AbsolutDamageReduction = 0;
+    public int AbsoluteDamageReduction = 0;
     
     public int ExtraDamage = 0;
     public int ExtraDamageFirstAttack = 0;

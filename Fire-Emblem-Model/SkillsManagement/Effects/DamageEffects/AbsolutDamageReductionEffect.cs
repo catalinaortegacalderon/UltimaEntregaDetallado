@@ -13,6 +13,6 @@ public class AbsolutDamageReductionEffect : Effect
 
     public override void ApplyEffect(Unit myUnit, Unit opponentsUnit)
     {
-        myUnit.DamageEffects.AbsolutDamageReduction -= Amount;
+        myUnit.DamageEffects.AbsoluteDamageReduction -= Amount;
     }
 }

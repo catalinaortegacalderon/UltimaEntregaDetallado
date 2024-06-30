@@ -27,7 +27,7 @@ public static class DataStructuresReseter
         dataStructure.PercentageReductionOpponentsFirstAttack = 1;
         dataStructure.PercentageReductionOpponentsFollowup = 1;
         
-        dataStructure.AbsolutDamageReduction = 0;
+        dataStructure.AbsoluteDamageReduction = 0;
 
         dataStructure.ReductionOfPercentageReduction = 1;
     }

@@ -109,7 +109,7 @@ public class DamageCalculator
                               + _attackingUnit.DamageEffects.ExtraDamageFirstAttack)
                * _defensiveUnit.DamageEffects.PercentageReduction
                * _defensiveUnit.DamageEffects.PercentageReductionOpponentsFirstAttack
-               + _defensiveUnit.DamageEffects.AbsolutDamageReduction;
+               + _defensiveUnit.DamageEffects.AbsoluteDamageReduction;
     }
 
     private double CalculateFinalDamageForFollowUp(double initialDamage)
@@ -118,7 +118,7 @@ public class DamageCalculator
                               + _attackingUnit.DamageEffects.ExtraDamageFollowup)
                * _defensiveUnit.DamageEffects.PercentageReduction
                * _defensiveUnit.DamageEffects.PercentageReductionOpponentsFollowup
-               + _defensiveUnit.DamageEffects.AbsolutDamageReduction;
+               + _defensiveUnit.DamageEffects.AbsoluteDamageReduction;
     }
 
     private double CalculateFinalDamageForDivineRecreationOrBrashAssault(double initialDamage)
