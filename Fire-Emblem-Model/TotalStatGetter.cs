@@ -2,7 +2,7 @@ using ConsoleApp1.DataTypes;
 using ConsoleApp1.Exceptions;
 using ConsoleApp1.GameDataStructures;
 
-namespace Fire_Emblem
+namespace ConsoleApp1
 {
     public static class TotalStatGetter
     {

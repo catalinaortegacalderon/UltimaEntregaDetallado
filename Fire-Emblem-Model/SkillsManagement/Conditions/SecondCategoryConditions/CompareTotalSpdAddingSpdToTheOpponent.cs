@@ -1,6 +1,5 @@
 using ConsoleApp1.DataTypes;
 using ConsoleApp1.GameDataStructures;
-using Fire_Emblem;
 
 namespace ConsoleApp1.SkillsManagement.Conditions.SecondCategoryConditions;
 

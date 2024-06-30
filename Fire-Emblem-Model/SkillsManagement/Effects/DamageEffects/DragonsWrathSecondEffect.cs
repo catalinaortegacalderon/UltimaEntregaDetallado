@@ -1,7 +1,7 @@
 using ConsoleApp1.DataTypes;
 using ConsoleApp1.GameDataStructures;
+using ConsoleApp1.SkillsManagement.Effects.BaseEffects;
 using ConsoleApp1.SkillsManagement.Effects.SpecificSkillEffects;
-using Fire_Emblem;
 
 namespace ConsoleApp1.SkillsManagement.Effects.DamageEffects;
 

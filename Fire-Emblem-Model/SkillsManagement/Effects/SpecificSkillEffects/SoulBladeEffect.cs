@@ -1,5 +1,6 @@
 using ConsoleApp1.DataTypes;
 using ConsoleApp1.GameDataStructures;
+using ConsoleApp1.SkillsManagement.Effects.BaseEffects;
 
 namespace ConsoleApp1.SkillsManagement.Effects.SpecificSkillEffects
 {

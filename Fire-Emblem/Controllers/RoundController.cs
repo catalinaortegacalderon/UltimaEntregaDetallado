@@ -3,9 +3,8 @@ using ConsoleApp1.EncapsulatedLists;
 using ConsoleApp1.GameDataStructures;
 using Fire_Emblem_GUI;
 using Fire_Emblem_View;
-using Fire_Emblem.Controllers;
 
-namespace Fire_Emblem;
+namespace Fire_Emblem.Controllers;
 
 public class RoundController
 {

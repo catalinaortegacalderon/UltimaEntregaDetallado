@@ -1,7 +1,7 @@
 using ConsoleApp1.SkillsManagement.Conditions.BaseConditions;
-using ConsoleApp1.SkillsManagement.Effects.SpecificSkillEffects;
+using ConsoleApp1.SkillsManagement.Effects.BaseEffects;
 
-namespace ConsoleApp1.SkillsManagement.Skills.BonusSkills;
+namespace ConsoleApp1.SkillsManagement.Skills.BaseSkills;
 
 public abstract class Skill
 {

@@ -2,12 +2,10 @@ using System.Text.Json;
 using ConsoleApp1.EncapsulatedLists;
 using ConsoleApp1.GameDataStructures;
 using ConsoleApp1.SkillsManagement;
-using Fire_Emblem_View;
-using Fire_Emblem.Controllers;
 
-namespace Fire_Emblem;
+namespace ConsoleApp1;
 
-public class GameAttacksControllerBuilder
+public class PlayersConstructor
 {
     private const int PlayerCount = 2;
     private readonly int[] _unitCounters = new int[PlayerCount];
@@ -17,7 +15,7 @@ public class GameAttacksControllerBuilder
     private const int IdOfPlayer1 = 0;
     private const int IdOfPlayer2 = 1;
 
-    public GameAttacksControllerBuilder() 
+    public PlayersConstructor() 
         => InitializeUnits();
 
     private void InitializeUnits()
@@ -28,13 +26,11 @@ public class GameAttacksControllerBuilder
         }
     }
 
-    public GameAttacksController BuildGameController(string[] fileLines, IView view)
+    public Player[] BuildPlayers(string[] fileLines)
     {
         ProcessFileToCreateUnitsAndSkills(fileLines);
-
         var players = CreatePlayers();
-
-        return new GameAttacksController(players[0], players[1], view);
+        return players;
     }
 
     private void ProcessFileToCreateUnitsAndSkills(string[] fileLines)

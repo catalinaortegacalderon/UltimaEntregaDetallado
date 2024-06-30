@@ -1,6 +1,7 @@
 using System.Runtime.CompilerServices;
 using ConsoleApp1.DataTypes;
 using ConsoleApp1.GameDataStructures;
+using ConsoleApp1.SkillsManagement.Effects.BaseEffects;
 
 namespace ConsoleApp1.SkillsManagement.Effects.SpecificSkillEffects;
 
@@ -17,7 +18,7 @@ public class BrashAssaultEffect : Effect
         var calculator = new DamageCalculator(opponentsUnit, myUnit,
             AttackType.FirstAttack);
 
-        double initialDamage = calculator.CalculateAttackForDivineRecreation();
+        double initialDamage = calculator.CalculateAttackForDivineRecreationOrBrashAssault();
 
         var amount = (int)((initialDamage) * _percentage);
 
@@ -25,5 +26,7 @@ public class BrashAssaultEffect : Effect
             myUnit.DamageEffects.ExtraDamageFollowup += amount;
         else
             myUnit.DamageEffects.ExtraDamageFirstAttack += amount;
+        
+        Console.WriteLine(amount);
     }
 }

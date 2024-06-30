@@ -1,9 +1,9 @@
+using ConsoleApp1;
 using ConsoleApp1.DataTypes;
 using ConsoleApp1.GameDataStructures;
 using Fire_Emblem_View;
-using Fire_Emblem.Controllers;
 
-namespace Fire_Emblem;
+namespace Fire_Emblem.Controllers;
 
 public class FollowUpController
 {

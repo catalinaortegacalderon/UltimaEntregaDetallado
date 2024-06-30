@@ -13,7 +13,8 @@ using ConsoleApp1.SkillsManagement.Skills.SkillsThatAffectCombat;
 using ConsoleApp1.SkillsManagement.Skills.SkillsThatAffectCombat.CounterattackDenialSkills;
 using ConsoleApp1.SkillsManagement.Skills.SkillsThatAffectCombat.DenialOfFollowUpDenialSkills;
 using ConsoleApp1.SkillsManagement.Skills.SkillsThatAffectCombat.DenialOfFollowUpGarantizationSkills;
-using ConsoleApp1.SkillsManagement.Skills.SkillsThatAffectCombat.FollowUpDenial;
+using ConsoleApp1.SkillsManagement.Skills.SkillsThatAffectCombat.FollowUpDenialSkills;
+using ConsoleApp1.SkillsManagement.Skills.SkillsThatAffectCombat.FollowUpGantizationSkills;
 using ConsoleApp1.SkillsManagement.Skills.SkillsThatAffectCombat.HealingSkills;
 
 namespace ConsoleApp1.SkillsManagement;

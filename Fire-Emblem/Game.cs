@@ -48,16 +48,17 @@ namespace Fire_Emblem
 
         private void InitializeGame()
         {
-            BuildControllers();
-            SetPlayers();
+            BuildAndSetPlayers();
             UpdateTeams();
         }
 
-        private void BuildControllers()
+        private void BuildAndSetPlayers()
         {
             var teamFile = GetValidTeamFile();
-            _attackController =
-                new GameAttacksControllerBuilder().BuildGameController(File.ReadAllLines(teamFile), _view);
+            var players =
+                new PlayersConstructor().BuildPlayers(File.ReadAllLines(teamFile));
+            SetPlayers(players);
+            _attackController = new GameAttacksController(_player1, _player2, _view);
         }
 
         private string GetValidTeamFile()
@@ -80,11 +81,10 @@ namespace Fire_Emblem
             return files;
         }
 
-        private void SetPlayers()
+        private void SetPlayers(Player[] players)
         {
-            var players = _attackController.GetPlayers();
-            _player1 = players.GetPlayerById(IdOfPlayer1);
-            _player2 = players.GetPlayerById(IdOfPlayer2);
+            _player1 = players[IdOfPlayer1];
+            _player2 = players[IdOfPlayer2];
         }
 
         private void PlayRounds()

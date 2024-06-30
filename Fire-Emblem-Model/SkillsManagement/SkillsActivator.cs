@@ -1,7 +1,7 @@
 using ConsoleApp1.EncapsulatedLists;
 using ConsoleApp1.GameDataStructures;
 
-namespace Fire_Emblem;
+namespace ConsoleApp1.SkillsManagement;
 
 public static class SkillsActivator
 {

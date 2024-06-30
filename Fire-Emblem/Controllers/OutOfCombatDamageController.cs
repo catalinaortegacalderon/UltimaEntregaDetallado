@@ -1,7 +1,7 @@
 using ConsoleApp1.GameDataStructures;
 using Fire_Emblem_View;
 
-namespace Fire_Emblem;
+namespace Fire_Emblem.Controllers;
 
 public class OutOfCombatDamageController
 {
