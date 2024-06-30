@@ -10,8 +10,10 @@ public class EmptySkill : Skill
 {
     public EmptySkill()
     {
-        Conditions = [new AlwaysTrueCondition()];
+        Conditions = new Condition[1];
+        Conditions[0] = new AlwaysTrueCondition();
 
-        Effects = [new EmptyEffect()];
+        Effects = new Effect[1];
+        Effects[0] = new EmptyEffect();
     }
 }

@@ -69,18 +69,8 @@ public abstract class SkillConstructor
             skills.AddSkill(skillsCounter, new SteadyBlowSkill());
         else if (skillString == "Swift Strike")
             skills.AddSkill(skillsCounter, new SwiftStrikeSkill());
-        else if (skillString == "Brazen Atk/Spd")
-            skills.AddSkill(skillsCounter, new BrazenAtkSpdSkill());
-        else if (skillString == "Brazen Atk/Def")
-            skills.AddSkill(skillsCounter, new BrazenAtkDefSkill());
-        else if (skillString == "Brazen Atk/Res")
-            skills.AddSkill(skillsCounter, new BrazenAtkResSkill());
-        else if (skillString == "Brazen Spd/Def")
-            skills.AddSkill(skillsCounter, new BrazenSpdDefSkill());
-        else if (skillString == "Brazen Spd/Res")
-            skills.AddSkill(skillsCounter, new BrazenSpdResSkill());
-        else if (skillString == "Brazen Def/Res")
-            skills.AddSkill(skillsCounter, new BrazenDefResSkill());
+        else if (DoesStringContain(skillString,"Brazen"))
+            CreateBrazen(skillString, skillsCounter, skills);
         else if (skillString == "Fire Boost")
             skills.AddSkill(skillsCounter, new FireBoostSkill());
         else if (skillString == "Wind Boost")
@@ -301,6 +291,13 @@ public abstract class SkillConstructor
         else if (skillString == "Flow Feather")
             skills.AddSkill(skillsCounter, new FlowFeatherSkill());
         
+    }
+    
+    private static void CreateBrazen(string skillString, int skillsCounter, SkillsList skills)
+    {
+        var firstStat = GetStatFromString(skillString, 1);
+        var secondStat = GetStatFromString(skillString, 2);
+        skills.AddSkill(skillsCounter, new BrazenSkill(firstStat, secondStat));
     }
 
     private static bool SkillStringContainsCertainSkillType(string skillString, string name)

@@ -12,8 +12,10 @@ public class ArmoredBlowSkill : Skill
 {
     public ArmoredBlowSkill()
     {
-        Conditions = [new MyUnitStartsCombatCondition()];
+        Conditions = new Condition[1];
+        Conditions[0] = new MyUnitStartsCombatCondition();
 
-        Effects = [new ChangeStatsInEffect(StatType.Def, 8)];
+        Effects = new Effect[1];
+        Effects[0] = new ChangeStatsInEffect(StatType.Def, 8);
     }
 }

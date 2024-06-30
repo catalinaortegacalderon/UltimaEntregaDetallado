@@ -12,8 +12,8 @@ public class AttackPlus6Skill : Skill
 {
     public AttackPlus6Skill()
     {
-        Conditions = new Condition[] { new AlwaysTrueCondition() };
+        Conditions = [new AlwaysTrueCondition()];
 
-        Effects = new Effect[] { new ChangeStatsInEffect(StatType.Atk, 6) };
+        Effects = [new ChangeStatsInEffect(StatType.Atk, 6)];
     }
 }
