@@ -68,7 +68,7 @@ public static class FileChecker
             {
                 var arrayWithUnitsInfo = line.Split(new[] { '(', ')' },
                     StringSplitOptions.RemoveEmptyEntries);
-                var unitName = arrayWithUnitsInfo[0];
+                var unitName = arrayWithUnitsInfo[0].Replace(" ", "");
                 if (unitsNameList[currentPlayer].Contains(unitName))
                     return false;
                 unitsNameList[currentPlayer][unitCounter[currentPlayer]] = unitName;
