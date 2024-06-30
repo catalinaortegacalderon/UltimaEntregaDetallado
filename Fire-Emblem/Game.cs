@@ -18,15 +18,12 @@ namespace Fire_Emblem
         private Player _player2;
         
         private GameAttacksController _attackController;
-        private FollowUpController _followUpController;
-        private readonly OutOfCombatDamageController _outOfCombatDamageController;
 
         public Game(IView view, string teamsFolder)
         {
             _view = view;
             _teamsFolder = teamsFolder;
             _currentRound = 1;
-            _outOfCombatDamageController = new OutOfCombatDamageController(view);
         }
 
         public void Play()
@@ -60,7 +57,6 @@ namespace Fire_Emblem
             var teamFile = GetValidTeamFile();
             _attackController =
                 new GameAttacksControllerBuilder().BuildGameController(File.ReadAllLines(teamFile), _view);
-            _followUpController = new FollowUpController(_attackController, _view);
         }
 
         private string GetValidTeamFile()
@@ -124,9 +120,10 @@ namespace Fire_Emblem
 
         private void ExecuteRound()
         {
-            // todo: nose si es tan buena idea crearlo siempre
+            // todo: nose si es tan buena idea crearlo siempre, tal vez que solo tenga round controller
+            // y no atack controller
             var roundController = new RoundController(_view,_currentRound, _player1, _player2,
-                _attackController, _followUpController, _outOfCombatDamageController);
+                _attackController);
             roundController.ExecuteRound();
         }
 

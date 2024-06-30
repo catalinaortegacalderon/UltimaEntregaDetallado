@@ -1,6 +1,7 @@
 using ConsoleApp1.DataTypes;
 using ConsoleApp1.EncapsulatedLists;
 using ConsoleApp1.GameDataStructures;
+using Fire_Emblem_GUI;
 using Fire_Emblem_View;
 
 namespace Fire_Emblem;
@@ -26,16 +27,15 @@ public class RoundController
 
 
     public RoundController(IView view, int currentRound, Player player1,
-        Player player2, GameAttacksController attackController,
-        FollowUpController followUpController, OutOfCombatDamageController outOfCombatDamageController)
+        Player player2, GameAttacksController attackController)
     {
         _view = view;
         _currentRound = currentRound;
         _player1 = player1;
         _player2 = player2;
         _attackController = attackController;
-        _followUpController = followUpController;
-        _outOfCombatDamageController = outOfCombatDamageController;
+        _followUpController = new FollowUpController(_attackController, _view);
+        _outOfCombatDamageController = new OutOfCombatDamageController(_view);
     }
 
     public void ExecuteRound()
@@ -205,7 +205,7 @@ public class RoundController
         }
     }
 
-    private static bool IsUnitDead(Unit unit)
+    private static bool IsUnitDead(IUnit unit)
     {
         return unit.Hp == 0;
     }
