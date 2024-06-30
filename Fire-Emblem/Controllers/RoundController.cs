@@ -9,37 +9,30 @@ public class RoundController
 {
     private const int IdOfPlayer1 = 0;
     private const int IdOfPlayer2 = 1;
-        
-    private readonly string _teamsFolder;
+    
     private readonly IView _view;
     private readonly int _currentRound;
         
-    private Player _player1;
-    private Player _player2;
+    private readonly Player _player1;
+    private readonly Player _player2;
     private int _currentUnitNumberOfPlayer1;
     private int _currentUnitNumberOfPlayer2;
     private Unit _currentUnitOfPlayer1;
     private Unit _currentUnitOfPlayer2;
         
-    private GameAttacksController _attackController;
-    private FollowUpController _followUpController;
+    private readonly GameAttacksController _attackController;
+    private readonly FollowUpController _followUpController;
     private readonly OutOfCombatDamageController _outOfCombatDamageController;
 
 
-    public RoundController(string teamsFolder, IView view, int currentRound, Player player1, 
-        Player player2, int currentUnitNumberOfPlayer1, int currentUnitNumberOfPlayer2, 
-        Unit currentUnitOfPlayer1, Unit currentUnitOfPlayer2, GameAttacksController attackController, 
+    public RoundController(IView view, int currentRound, Player player1, 
+        Player player2, GameAttacksController attackController, 
         FollowUpController followUpController, OutOfCombatDamageController outOfCombatDamageController)
     {
-        _teamsFolder = teamsFolder;
         _view = view;
         _currentRound = currentRound;
         _player1 = player1;
         _player2 = player2;
-        _currentUnitNumberOfPlayer1 = currentUnitNumberOfPlayer1;
-        _currentUnitNumberOfPlayer2 = currentUnitNumberOfPlayer2;
-        _currentUnitOfPlayer1 = currentUnitOfPlayer1;
-        _currentUnitOfPlayer2 = currentUnitOfPlayer2;
         _attackController = attackController;
         _followUpController = followUpController;
         _outOfCombatDamageController = outOfCombatDamageController;
@@ -217,4 +210,4 @@ public class RoundController
             return unit.Hp == 0;
         }
     
-    }
+}

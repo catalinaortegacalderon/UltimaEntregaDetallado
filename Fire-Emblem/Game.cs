@@ -1,6 +1,4 @@
 ﻿using ConsoleApp1;
-using ConsoleApp1.DataTypes;
-using ConsoleApp1.EncapsulatedLists;
 using ConsoleApp1.Exceptions;
 using ConsoleApp1.GameDataStructures;
 using Fire_Emblem_View;
@@ -131,11 +129,8 @@ namespace Fire_Emblem
         private void ExecuteRound()
         {
             // todo: nose si es tan buena idea crearlo siempre
-            var roundController = new RoundController(_teamsFolder, _view,_currentRound, _player1, _player2,
-                _currentUnitNumberOfPlayer1, _currentUnitNumberOfPlayer2, 
-                _currentUnitOfPlayer1, 
-                _currentUnitOfPlayer2, _attackController,
-                _followUpController, _outOfCombatDamageController);
+            var roundController = new RoundController(_view,_currentRound, _player1, _player2,
+                _attackController, _followUpController, _outOfCombatDamageController);
             roundController.ExecuteRound();
         }
 
