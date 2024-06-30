@@ -15,9 +15,6 @@ public class GameAttacksControllerBuilder
 
     private const int IdOfPlayer1 = 0;
     private const int IdOfPlayer2 = 1;
-    
-    private string[] _skillsStringPlayer1 = [];
-    private string[] _skillsStringPlayer2 = [];
 
     public GameAttacksControllerBuilder() 
         => InitializeUnits();
@@ -43,12 +40,18 @@ public class GameAttacksControllerBuilder
     {
         foreach (var line in fileLines)
         {
-            if (line == "Player 1 Team")
-                SetCurrentPlayerNumber(IdOfPlayer1);
-            else if (line == "Player 2 Team")
-                SetCurrentPlayerNumber(IdOfPlayer2);
-            else
-                CreateUnitsAndSkills(line);
+            switch (line)
+            {
+                case "Player 1 Team":
+                    SetCurrentPlayerNumber(IdOfPlayer1);
+                    break;
+                case "Player 2 Team":
+                    SetCurrentPlayerNumber(IdOfPlayer2);
+                    break;
+                default:
+                    CreateUnitsAndSkills(line);
+                    break;
+            }
         }
     }
 
