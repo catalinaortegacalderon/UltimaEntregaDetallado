@@ -4,9 +4,13 @@ namespace Fire_Emblem_View;
 
 public class SkillsPrinter
 {
+    private static Unit _unit;
+    private static View _view;
     // todo: mucho codigo repetido
     public static void PrintAll(View view, Unit unit)
     {
+        _unit = unit;
+        _view = view;
         PrintBonus(view, unit);
         PrintPenalties(view, unit);
         PrintBonusNetralization(view, unit);
@@ -17,8 +21,7 @@ public class SkillsPrinter
 
     private static void PrintBonus(View view, Unit unit)
     {
-        if (unit.ActiveBonus.Atk > 0)
-            view.WriteLine(unit.Name + " obtiene Atk+" + unit.ActiveBonus.Atk);
+        PrintOneBonus(unit.ActiveBonus.Atk, "Atk", "");
         if (unit.ActiveBonus.Spd > 0)
             view.WriteLine(unit.Name + " obtiene Spd+" + unit.ActiveBonus.Spd);
         if (unit.ActiveBonus.Def > 0)
@@ -37,6 +40,12 @@ public class SkillsPrinter
         if (unit.ActiveBonus.AtkFollowup > 0)
             view.WriteLine(unit.Name + " obtiene Atk+" + unit.ActiveBonus.AtkFollowup
                            + " en su Follow-Up");
+    }
+
+    private static void PrintOneBonus(int bonus, string skill, string extraInformation)
+    {
+        if (bonus > 0)
+            _view.WriteLine(_unit.Name + " obtiene " + skill + "+" + bonus + extraInformation);
     }
 
     private static void PrintPenalties(View view, Unit unit)
@@ -65,14 +74,16 @@ public class SkillsPrinter
 
     private static void PrintBonusNetralization(View view, Unit unit)
     {
-        if (unit.ActiveBonusNeutralizer.Atk == 0)
-            view.WriteLine("Los bonus de Atk de " + unit.Name + " fueron neutralizados");
-        if (unit.ActiveBonusNeutralizer.Spd == 0)
-            view.WriteLine("Los bonus de Spd de " + unit.Name + " fueron neutralizados");
-        if (unit.ActiveBonusNeutralizer.Def == 0)
-            view.WriteLine("Los bonus de Def de " + unit.Name + " fueron neutralizados");
-        if (unit.ActiveBonusNeutralizer.Res == 0)
-            view.WriteLine("Los bonus de Res de " + unit.Name + " fueron neutralizados");
+        PrintOneBonusNeutralization(unit.ActiveBonusNeutralizer.Atk, "Atk");
+        PrintOneBonusNeutralization(unit.ActiveBonusNeutralizer.Spd, "Spd");
+        PrintOneBonusNeutralization(unit.ActiveBonusNeutralizer.Def, "Def");
+        PrintOneBonusNeutralization(unit.ActiveBonusNeutralizer.Res, "Res");
+    }
+
+    private static void PrintOneBonusNeutralization(int neutralizer, string stat)
+    {
+        if (neutralizer == 0)
+            _view.WriteLine("Los bonus de " + stat + " de " + _unit.Name + " fueron neutralizados");
     }
 
     private static void PrintPenaltyNetralization(View view, Unit unit)
@@ -136,6 +147,5 @@ public class SkillsPrinter
             view.WriteLine(unit.Name + " es inmune a los efectos que neutralizan su follow up");
         if (unit.CombatEffects.HasDenialOfGuaranteedFollowUp)
             view.WriteLine(unit.Name + " es inmune a los efectos que garantizan su follow up");
-        
     }
 }
