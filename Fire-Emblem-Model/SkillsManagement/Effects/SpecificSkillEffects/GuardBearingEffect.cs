@@ -23,7 +23,7 @@ namespace ConsoleApp1.SkillsManagement.Effects.SpecificSkillEffects
                 percentage = specialCasePercentage;
             }
             
-            if (myUnit.DamageEffects.HasReductionOfPercentageReduction)
+            if (myUnit.DamageEffects.HasReductionOfPercentageReduction != 1)
             {
                 percentage = CalculateNewPercentage(percentage);
             }

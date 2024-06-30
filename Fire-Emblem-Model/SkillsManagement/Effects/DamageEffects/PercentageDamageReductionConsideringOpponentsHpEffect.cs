@@ -19,8 +19,7 @@ public class PercentageDamageReductionConsideringOpponentsHpEffect : Effect
         var percentageReduction = opponentsUnit.Hp / (double)opponentsUnit.MaxHp / 2;
         percentageReduction = Math.Truncate(100.0 * percentageReduction) / 100.0;
         
-        if (myUnit.DamageEffects.HasReductionOfPercentageReduction)
-            percentageReduction *= ReductionOfPercentageDamageReduction;
+        percentageReduction *= myUnit.DamageEffects.HasReductionOfPercentageReduction;
         
         var finalPercentage = 1 - percentageReduction;
         

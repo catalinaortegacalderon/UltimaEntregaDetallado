@@ -12,5 +12,5 @@ public class DataStructureDamageEffects
     public double PercentageReductionOpponentsFirstAttack = 1;
     public double PercentageReductionOpponentsFollowup = 1;
     
-    public bool HasReductionOfPercentageReduction = false;
+    public double HasReductionOfPercentageReduction = 1;
 }

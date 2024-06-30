@@ -27,6 +27,6 @@ public class MagNullFollowSkill : Skill
         Effects[1] = new ChangeOpponentsStatsInEffect(StatType.Res, -4);
         Effects[2] = new NeutralizationOfFollowUpDenialEffect();
         Effects[3] = new OpponentDenialOfGuaranteedFollowUpEffect();
-        Effects[4] = new ReductionOfPercentageDamageReductionEffect();
+        Effects[4] = new ReductionOfPercentageDamageReductionToHalfEffect();
     }
 }

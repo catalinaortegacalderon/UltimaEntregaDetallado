@@ -19,7 +19,7 @@ public class PercentageDamageReductionEffect : Effect
     {
         var finalPercentage = _percentage;
         
-        if (myUnit.DamageEffects.HasReductionOfPercentageReduction)
+        if (myUnit.DamageEffects.HasReductionOfPercentageReduction != 1)
         {
            finalPercentage = GetNewPercentage();
         }

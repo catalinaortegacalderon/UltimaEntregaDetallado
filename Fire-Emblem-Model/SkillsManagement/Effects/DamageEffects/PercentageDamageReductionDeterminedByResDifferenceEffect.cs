@@ -52,7 +52,7 @@ public class PercentageDamageReductionDeterminedByResDifferenceEffect : Effect
         if (reductionPercentage < _max) 
             reductionPercentage = _max;
         
-        if (myUnit.DamageEffects.HasReductionOfPercentageReduction)
+        if (myUnit.DamageEffects.HasReductionOfPercentageReduction != 1)
             reductionPercentage = 1 - (1- reductionPercentage) * ReductionOfPercentageDamageReduction;
         
         return reductionPercentage;

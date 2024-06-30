@@ -10,7 +10,6 @@ public class PercentageDamageReductionDeterminedByDefDifferenceEffect : Effect
     private readonly double _multiplier;
     private readonly double _max;
     private readonly DamageEffectCategory _category;
-    private const double ReductionOfPercentageDamageReduction = 0.5;
     
     public PercentageDamageReductionDeterminedByDefDifferenceEffect( int multiplier, 
         double max, DamageEffectCategory category)
@@ -52,8 +51,7 @@ public class PercentageDamageReductionDeterminedByDefDifferenceEffect : Effect
         if (reductionPercentage < _max) 
             reductionPercentage = _max;
         
-        if (myUnit.DamageEffects.HasReductionOfPercentageReduction)
-            reductionPercentage = 1 - (1- reductionPercentage) * ReductionOfPercentageDamageReduction;
+        reductionPercentage = 1 - (1- reductionPercentage) * myUnit.DamageEffects.HasReductionOfPercentageReduction;
         
         return reductionPercentage;
     }

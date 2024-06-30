@@ -29,7 +29,7 @@ public static class DataStructuresReseter
         
         dataStructure.AbsolutDamageReduction = 0;
 
-        dataStructure.HasReductionOfPercentageReduction = false;
+        dataStructure.HasReductionOfPercentageReduction = 1;
     }
     
     public static void ResetCombatEffects(CombatEffects dataStructure)
