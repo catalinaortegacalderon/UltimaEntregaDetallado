@@ -15,8 +15,7 @@ public class PrescienceSkill : Skill
     public PrescienceSkill()
     {
         Conditions = new Condition[3];
-        Conditions[0] = new AlwaysTrueCondition();
-        Conditions[1] = new AlwaysTrueCondition();
+        Conditions[0] = Conditions[1] = new AlwaysTrueCondition();
         Conditions[2] = new OrCondition([
             new MyUnitStartsCombatCondition(), 
             new OpponentUsesCertainWeaponCondition([WeaponType.Magic, WeaponType.Bow])

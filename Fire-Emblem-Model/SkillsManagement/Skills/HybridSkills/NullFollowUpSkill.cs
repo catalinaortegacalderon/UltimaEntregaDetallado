@@ -13,8 +13,7 @@ public class NullFollowUpSkill : Skill
     public NullFollowUpSkill()
     {
         Conditions = new Condition[2];
-        Conditions[0] = new AlwaysTrueCondition();
-        Conditions[1] = new AlwaysTrueCondition();
+        Conditions[0] = Conditions[1] = new AlwaysTrueCondition();
         
         Effects = new Effect[2];
         Effects[0] = new NeutralizationOfFollowUpDenialEffect();

@@ -17,8 +17,7 @@ public class NewDivinitySkill : Skill
     public NewDivinitySkill()
     {
         Conditions = new Condition[4];
-        Conditions[0] = new MyHpIsBiggerThanCondition(0.25);
-        Conditions[1] = new MyHpIsBiggerThanCondition(0.25);
+        Conditions[0] = Conditions[1] = new MyHpIsBiggerThanCondition(0.25);
         Conditions[2] = new AndCondition([
             new MyHpIsBiggerThanCondition(0.25),
             new CompareTotalStatCondition(StatType.Res)]);

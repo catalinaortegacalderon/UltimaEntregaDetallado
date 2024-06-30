@@ -17,10 +17,7 @@ public class PhysNullFollowSkill : Skill
     public PhysNullFollowSkill()
     {
         Conditions = new Condition[5];
-        Conditions[0] = new AlwaysTrueCondition();
-        Conditions[1] = new AlwaysTrueCondition();
-        Conditions[2] = new AlwaysTrueCondition();
-        Conditions[3] = new AlwaysTrueCondition();
+        Conditions[0] = Conditions[1] = Conditions[2] = Conditions[3] = new AlwaysTrueCondition();
         Conditions[4] = new AlwaysTrueCondition();
         Conditions[4].ChangePriorityBecauseEffectPriorityIsBigger(
             ConditionPriority.PriorityOfConditionsThatRequireDamageReductionInformation);

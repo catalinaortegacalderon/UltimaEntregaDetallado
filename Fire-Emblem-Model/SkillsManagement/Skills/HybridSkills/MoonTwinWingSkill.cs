@@ -16,8 +16,7 @@ public class MoonTwinWingSkill : Skill
     public MoonTwinWingSkill()
     {
         Conditions = new Condition[3];
-        Conditions[0] = new MyHpIsBiggerThanCondition(0.25);
-        Conditions[1] = new MyHpIsBiggerThanCondition(0.25);
+        Conditions[0] = Conditions[1] = new MyHpIsBiggerThanCondition(0.25);
         Conditions[2] = new AndCondition([
             new CompareTotalStatCondition(StatType.Spd),
             new MyHpIsBiggerThanCondition(0.25)

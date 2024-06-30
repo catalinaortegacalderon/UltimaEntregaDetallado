@@ -16,8 +16,7 @@ public class MastermindSkill : Skill
     {
         Conditions = new Condition[4];
         Conditions[0] = new MyHpIsBiggerThanConstantCondition(2);
-        Conditions[1] = new MyUnitStartsCombatCondition();
-        Conditions[2] = new MyUnitStartsCombatCondition();
+        Conditions[1] = Conditions[2] = new MyUnitStartsCombatCondition();
         Conditions[3] = new MyUnitStartsCombatCondition();
         Conditions[3].ChangePriorityBecauseEffectPriorityIsBigger(
             ConditionPriority.PriorityOfConditionsThatRequireBonusAndPenaltiesInformation);

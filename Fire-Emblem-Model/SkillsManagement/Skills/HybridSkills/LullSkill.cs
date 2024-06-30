@@ -15,10 +15,7 @@ public class LullSkill : Skill
     public LullSkill(StatType firstStat, StatType secondStat)
     {
         Conditions = new Condition[4];
-        Conditions[0] = new AlwaysTrueCondition();
-        Conditions[1] = new AlwaysTrueCondition();
-        Conditions[2] = new AlwaysTrueCondition();
-        Conditions[3] = new AlwaysTrueCondition();
+        Conditions[0] = Conditions[1] = Conditions[2] = Conditions[3] = new AlwaysTrueCondition();
 
         Effects = new Effect[4];
         Effects[0] = new ChangeOpponentsStatsInEffect(firstStat, -3);
