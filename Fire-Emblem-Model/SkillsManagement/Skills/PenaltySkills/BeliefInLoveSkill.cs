@@ -14,11 +14,7 @@ public class BeliefInLoveSkill : Skill
     public BeliefInLoveSkill()
     {
         Conditions = new Condition[2];
-        Conditions[0] = new OrCondition([
-            new OpponentHasFullHpCondition(),
-            new OpponentStartsCombatCondition()
-        ]);
-        Conditions[1] = new OrCondition([
+        Conditions[0] = Conditions[1] = new OrCondition([
             new OpponentHasFullHpCondition(),
             new OpponentStartsCombatCondition()
         ]);

@@ -146,7 +146,7 @@ public abstract class SkillConstructor
         else if (skillString == "Wrath")
             skills.AddSkill(skillsCounter, new WrathSkill());
         else if (skillString == "Soulblade")
-            skills.AddSkill(skillsCounter, new SoulbladeSkill());
+            skills.AddSkill(skillsCounter, new SoulBladeSkill());
         else if (skillString == "Sandstorm")
             skills.AddSkill(skillsCounter, new SandstormSkill());
         else if (skillString == "Gentility")

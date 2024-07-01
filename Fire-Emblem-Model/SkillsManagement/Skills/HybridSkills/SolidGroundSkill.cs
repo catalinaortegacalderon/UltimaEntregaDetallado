@@ -14,9 +14,7 @@ public class SolidGroundSkill : Skill
     public SolidGroundSkill()
     {
         Conditions = new Condition[3];
-        Conditions[0] = new AlwaysTrueCondition();
-        Conditions[1] = new AlwaysTrueCondition();
-        Conditions[2] = new AlwaysTrueCondition();
+        Conditions[0] = Conditions[1] = Conditions[2] = new AlwaysTrueCondition();
 
         Effects = new Effect[3];
         Effects[0] = new ChangeStatsInEffect(StatType.Atk, 6);

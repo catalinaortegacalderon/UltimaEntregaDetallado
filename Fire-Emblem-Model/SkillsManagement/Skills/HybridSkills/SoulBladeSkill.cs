@@ -8,9 +8,9 @@ using ConsoleApp1.SkillsManagement.Skills.BonusSkills;
 
 namespace ConsoleApp1.SkillsManagement.Skills.HybridSkills;
 
-public class SoulbladeSkill : Skill
+public class SoulBladeSkill : Skill
 {
-    public SoulbladeSkill()
+    public SoulBladeSkill()
     {
         Conditions = new Condition[1];
         Conditions[0] = new MyUnitUsesCertainWeaponsCondition([WeaponType.Sword]);

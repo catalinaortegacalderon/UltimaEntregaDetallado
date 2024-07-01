@@ -16,10 +16,7 @@ public class ResonanceSkill : Skill
     public ResonanceSkill()
     {
         Conditions = new Condition[2];
-        Conditions[0] = new AndCondition([
-            new MyUnitUsesCertainWeaponsCondition([WeaponType.Magic]),
-            new MyHpIsBiggerThanConstantCondition(2)]);
-        Conditions[1] = new AndCondition([
+        Conditions[0] =  Conditions[1] = new AndCondition([
             new MyUnitUsesCertainWeaponsCondition([WeaponType.Magic]),
             new MyHpIsBiggerThanConstantCondition(2)]);
 

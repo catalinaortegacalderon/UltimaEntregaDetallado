@@ -14,8 +14,7 @@ public class CharmerSkill : Skill
     public CharmerSkill()
     {
         Conditions = new Condition[2];
-        Conditions[0] = new MyCurrentOpponentIsAlsoTheLastOpponentCondition();
-        Conditions[1] = new MyCurrentOpponentIsAlsoTheLastOpponentCondition();
+        Conditions[0] =  Conditions[1] = new MyCurrentOpponentIsAlsoTheLastOpponentCondition();
 
         Effects = new Effect[2];
         Effects[0] = new ChangeOpponentsStatsInEffect(StatType.Atk, -3);

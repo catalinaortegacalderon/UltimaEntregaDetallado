@@ -15,9 +15,7 @@ public class PushSkill : Skill
     public PushSkill(StatType firstStat, StatType secondStat)
     {
         Conditions = new Condition[3];
-        Conditions[0] = new MyHpIsBiggerThanCondition(0.25);
-        Conditions[1] = new MyHpIsBiggerThanCondition(0.25);
-        Conditions[2] = new MyHpIsBiggerThanCondition(0.25);
+        Conditions[0] = Conditions[1] = Conditions[2] = new MyHpIsBiggerThanCondition(0.25);
         
         Effects = new Effect[3];
         Effects[0] = new ChangeStatsInEffect(firstStat, 7);

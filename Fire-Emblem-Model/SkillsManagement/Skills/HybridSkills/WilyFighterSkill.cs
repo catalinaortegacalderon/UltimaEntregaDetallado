@@ -14,11 +14,7 @@ public class WilyFighterSkill : Skill
     public WilyFighterSkill()
     {
         Conditions = new Condition[2];
-        Conditions[0] = new AndCondition([
-            new MyHpIsBiggerThanCondition(0.25),
-            new OpponentStartsCombatCondition()
-        ]);
-        Conditions[1] = new AndCondition([
+        Conditions[0] = Conditions[1] = new AndCondition([
             new MyHpIsBiggerThanCondition(0.25),
             new OpponentStartsCombatCondition()
         ]);

@@ -16,8 +16,7 @@ public class TrueDragonWallSkill : Skill
     public TrueDragonWallSkill()
     {
         Conditions = new Condition[3];
-        Conditions[0] = new CompareTotalStatCondition(StatType.Res);
-        Conditions[1] = new CompareTotalStatCondition(StatType.Res);
+        Conditions[0] = Conditions[1] = new CompareTotalStatCondition(StatType.Res);
         Conditions[2] = new MyUnitHasAllyWithMagicCondition();
 
         Effects = new Effect[3];
