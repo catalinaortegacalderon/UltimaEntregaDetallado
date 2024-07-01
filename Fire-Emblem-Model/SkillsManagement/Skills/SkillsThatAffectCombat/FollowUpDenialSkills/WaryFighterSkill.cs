@@ -11,8 +11,7 @@ public class WaryFighterSkill : Skill
     public WaryFighterSkill()
     {
         Conditions = new Condition[2];
-        Conditions[0] = new MyHpIsBiggerThanCondition(0.5);
-        Conditions[1] = new MyHpIsBiggerThanCondition(0.5);
+        Conditions[0] = Conditions[1] = new MyHpIsBiggerThanCondition(0.5);
 
         Effects = new Effect[2];
         Effects[0] = new OpponentFollowUpDenialEffect();

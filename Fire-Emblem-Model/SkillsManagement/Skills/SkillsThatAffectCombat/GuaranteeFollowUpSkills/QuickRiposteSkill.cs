@@ -4,14 +4,15 @@ using ConsoleApp1.SkillsManagement.Effects.BaseEffects;
 using ConsoleApp1.SkillsManagement.Effects.CombatEffects;
 using ConsoleApp1.SkillsManagement.Skills.BaseSkills;
 
-namespace ConsoleApp1.SkillsManagement.Skills.SkillsThatAffectCombat.FollowUpGantizationSkills;
+namespace ConsoleApp1.SkillsManagement.Skills.SkillsThatAffectCombat.GuaranteeFollowUpSkills;
 
-public class FollowUpRingSkill: Skill
+public class QuickRiposteSkill: Skill
 {
-    public FollowUpRingSkill()
+    public QuickRiposteSkill()
     {
         Conditions = new Condition[1];
-        Conditions[0] = new MyHpIsBiggerThanCondition(0.5);
+        Conditions[0] = new AndCondition([new MyHpIsBiggerThanCondition(0.6), 
+            new OpponentStartsCombatCondition()]);
 
         Effects = new Effect[1];
         Effects[0] = new GuaranteeFollowUpEffect();
