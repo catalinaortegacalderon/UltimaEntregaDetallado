@@ -1,7 +1,7 @@
 Player 1 Team
-Alear
-Chrom
-Roy 
+Celica
+Alm 
 Player 2 Team
+Lucina
 Soren
 Shez

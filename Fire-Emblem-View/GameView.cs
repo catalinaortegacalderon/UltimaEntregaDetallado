@@ -116,6 +116,10 @@ public class GameView : IView
         _view.WriteLine($"{attackersName} ataca a {defendersName} con {damage} de daño");
     }
 
+    public void UpdateUnitsStatsDuringBattle(Unit unit1, Unit unit2)
+    {
+    }
+
     public void AnnounceUnitCannotFollowUp(string name)
     {
         _view.WriteLine($"{name} no puede hacer un follow up");

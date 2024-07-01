@@ -159,6 +159,7 @@ public class GameAttacksController
     private void ShowWhoAttacksWho()
     {
         _view.ShowAttack(_currentAttackingUnit.Name, _currentDefensiveUnit.Name, _attackValue);
+        _view.UpdateUnitsStatsDuringBattle(_currentAttackingUnit, _currentDefensiveUnit);
     }
     
     public void ResetAllSkills()

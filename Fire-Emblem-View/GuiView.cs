@@ -110,21 +110,19 @@ public class GuiView : IView
 
     public void ShowAttack(string attackersName, string defendersName, int damage)
     {
-        if (attackersName == _unitTeam1.Name)
+    }
+    
+    public void UpdateUnitsStatsDuringBattle(Unit unit1, Unit unit2)
+    {
+        if (unit1.Name == _unitTeam1.Name)
         {
-            _unitTeam2.Hp -= damage;
-            if (_unitTeam2.Hp < 0)
-                _unitTeam2.Hp = 0;
-            _window.UpdateUnitsStatsDuringBattle(_unitTeam1, _unitTeam2);
-            _window.ShowAttackFromTeam1(_unitTeam1, _unitTeam2);
+            _window.ShowAttackFromTeam1(unit1, unit2);
+            _window.UpdateUnitsStatsDuringBattle(unit1, unit2);
         }
         else
         {
-            _unitTeam1.Hp -= damage;
-            if (_unitTeam1.Hp < 0)
-                _unitTeam1.Hp = 0;
-            _window.UpdateUnitsStatsDuringBattle(_unitTeam1, _unitTeam2);
             _window.ShowAttackFromTeam2(_unitTeam1, _unitTeam2);
+            _window.UpdateUnitsStatsDuringBattle(unit2, unit1);
         }
     }
 
@@ -134,7 +132,6 @@ public class GuiView : IView
 
     public void AnnounceNoUnitCanFollowUp()
     {
-        return;
     }
 
     public void ShowHp(Unit roundStarterUnit, Unit opponentsUnit)

@@ -18,6 +18,7 @@ public interface IView
     public void AnnounceCurationAfterCombat(Unit unitThatReceivesCuration, int recuperatedAmount);
     public void AnnounceDamageAfterCombat(Unit unitThatReceivesDamage, int damage);
     public void ShowAttack(string attackersName, string defendersName, int damage);
+    public void UpdateUnitsStatsDuringBattle(Unit unit1, Unit unit2);
     public void AnnounceUnitCannotFollowUp(String name);
     public void AnnounceNoUnitCanFollowUp();
     public void ShowHp(Unit roundStarterUnit, Unit opponentsUnit);

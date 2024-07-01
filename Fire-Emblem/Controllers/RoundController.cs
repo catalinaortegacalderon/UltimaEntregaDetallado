@@ -176,6 +176,7 @@ public class RoundController
             ? (_currentUnitOfPlayer1, _currentUnitOfPlayer2)
             : (_currentUnitOfPlayer2, _currentUnitOfPlayer1);
         _view.ShowHp(unit1, unit2);
+        _view.UpdateTeams(_player1, _player2);
     }
 
     private void LogGameUpdates()
